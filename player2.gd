@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Member variables
@@ -8,6 +7,7 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
+var health = 100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -204,3 +204,22 @@ func _integrate_forces(s):
 
 func _ready():
 	enemy = ResourceLoader.load("res://enemy.tscn")
+	set_fixed_process(true)
+	set_process_input(true)
+
+#func _input(event):
+#	if event.is_action_pressed("ui_accept"):
+#		health -= 10
+
+func _fixed_process(delta):
+	get_node("Control/HealthBar").set_value(health)
+	health += delta * 2
+
+func damage(dmg):
+	print("damage player2")
+	health -= dmg
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()

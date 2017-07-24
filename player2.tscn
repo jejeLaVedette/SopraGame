@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=21 format=1]
 
 [ext_resource path="res://player2.gd" type="Script" id=1]
 [ext_resource path="res://robot_demo.png" type="Texture" id=2]
@@ -27,12 +27,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 22 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 22 ] }
 
 [sub_resource type="Animation" id=4]
 
@@ -44,12 +39,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 21 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 21 ] }
 
 [sub_resource type="Animation" id=5]
 
@@ -61,12 +51,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 26 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 26 ] }
 
 [sub_resource type="Animation" id=6]
 
@@ -77,12 +62,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 16, 17, 18, 16, 19, 20, 19, 16 ] }
 
 [sub_resource type="Animation" id=7]
 
@@ -93,12 +73,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 25 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 25 ] }
 
 [sub_resource type="Animation" id=8]
 
@@ -109,12 +84,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5 ),
-"transitions": FloatArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 23, 24, 23 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 23, 24, 23 ] }
 
 [sub_resource type="Animation" id=9]
 
@@ -125,12 +95,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 26 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 26 ] }
 
 [sub_resource type="Animation" id=10]
 
@@ -141,12 +106,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 4, 0 ] }
 
 [sub_resource type="Animation" id=11]
 
@@ -157,12 +117,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7, 8, 9, 5 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 5, 6, 7, 8, 9, 5 ] }
 
 [sub_resource type="Animation" id=12]
 
@@ -173,12 +128,33 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 10, 11, 12, 13, 14, 5 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 10, 11, 12, 13, 14, 5 ] }
+
+[sub_resource type="StyleBoxFlat" id=13]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 0, 0.015625, 1, 1 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
+
+[sub_resource type="StyleBoxFlat" id=14]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 0.258613, 0.256897, 0.476563, 1 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
 
 [node name="player" type="RigidBody2D"]
 
@@ -290,9 +266,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 3 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = true
 action = "move_left"
 visibility_mode = 1
@@ -304,9 +277,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 4 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = true
 action = "move_right"
 visibility_mode = 1
@@ -318,9 +288,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 5 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = false
 action = "jump"
 visibility_mode = 1
@@ -332,11 +299,40 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 6 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = false
 action = "shoot"
 visibility_mode = 1
+
+[node name="Control" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -50.0
+margin/top = -50.0
+margin/right = 50.0
+margin/bottom = -30.0
+custom_styles/fg = SubResource( 13 )
+custom_styles/bg = SubResource( 14 )
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+percent/visible = true
 
 

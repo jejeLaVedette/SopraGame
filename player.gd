@@ -8,6 +8,7 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
+var health = 100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -38,12 +39,12 @@ func _integrate_forces(s):
 	var new_siding_left = siding_left
 	
 	# Get the controls
-	var move_left = Input.is_action_pressed("move_left")
-	var move_right = Input.is_action_pressed("move_right")
-	var jump = Input.is_action_pressed("jump")
-	var shoot = Input.is_action_pressed("shoot")
-	var spawn = Input.is_action_pressed("spawn")
-	var crouch = Input.is_action_pressed("crouch")
+	var move_left = Input.is_action_pressed("move_left2")
+	var move_right = Input.is_action_pressed("move_right2")
+	var jump = Input.is_action_pressed("jump2")
+	var shoot = Input.is_action_pressed("shoot2")
+	var spawn = Input.is_action_pressed("spawn2")
+	var crouch = Input.is_action_pressed("crouch2")
 	
 	if spawn:
 		var e = enemy.instance()
@@ -204,3 +205,22 @@ func _integrate_forces(s):
 
 func _ready():
 	enemy = ResourceLoader.load("res://enemy.tscn")
+	set_fixed_process(true)
+	set_process_input(true)
+
+#func _input(event):
+#	if event.is_action_pressed("ui_accept"):
+#		health -= 10
+
+func _fixed_process(delta):
+	get_node("Control/HealthBar").set_value(health)
+	health += delta * 2
+
+func damage(dmg):
+	print("damage player1")
+	health -= dmg
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()
