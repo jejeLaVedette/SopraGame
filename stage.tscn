@@ -7,9 +7,9 @@
 [ext_resource path="res://one_way_platform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://parallax_bg.tscn" type="PackedScene" id=7]
-[ext_resource path="res://player2.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Player3.tscn" type="PackedScene" id=9]
-[ext_resource path="res://player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Player3.tscn" type="PackedScene" id=10]
 
 [node name="stage" type="Node"]
 
@@ -68,16 +68,16 @@ transform/pos = Vector2( 834.664, 1309.6 )
 
 [node name="parallax_bg" parent="." instance=ExtResource( 7 )]
 
-[node name="player 2" parent="." instance=ExtResource( 8 )]
+[node name="Player1" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 408.229, 1060.27 )
+transform/pos = Vector2( 217.642, 1057.04 )
 
-[node name="Player" parent="." instance=ExtResource( 9 )]
+[node name="Player2" parent="." instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 123.803, 1050.11 )
+transform/pos = Vector2( 510.728, 1055.75 )
 
-[node name="player" parent="." instance=ExtResource( 10 )]
+[node name="Player3" parent="." instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 279.443, 1058.55 )
+transform/pos = Vector2( 343.875, 1039.56 )
 
 

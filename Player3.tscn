@@ -2,10 +2,11 @@
 
 [ext_resource path="res://AnimPlayer.tres" type="SpriteFrames" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+radius = 10.0
+height = 80.0
 
 [sub_resource type="Animation" id=2]
 
@@ -27,7 +28,7 @@ tracks/0/keys = {
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 2.50534, 0, 0, 1, 12.951, 40.0516 )
+shapes/0/transform = Matrix32( 2.50534, 0, 0, 1, 14.7472, -0.66251 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -67,7 +68,7 @@ frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 12.951, 40.0516 )
+transform/pos = Vector2( 14.7472, -0.66251 )
 transform/scale = Vector2( 2.50534, 1 )
 shape = SubResource( 1 )
 trigger = false

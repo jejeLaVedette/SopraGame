@@ -6,10 +6,8 @@ var bodyEnnemi = false
 
 func _ready():
 	isAlreadyColliding = false
-	print("ready bullet")
 
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
-	print("toto")
 #	set_linear_damp(Angle)
 #	if (body.get_name()=="Player"):
 #		if Game.munitions < Game.munitions_total:
@@ -21,10 +19,6 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 			bodyEnnemi = true
 			#On retire la colission
 			add_collision_exception_with(body)
-			print("titi")
-			
-#			#get_node("CollisionShape2D").set_trigger(true)
 
 func _on_bullet_body_exit_shape( body_id, body, body_shape, local_shape ):
 	isAlreadyColliding = true;
-	print("tutu")
