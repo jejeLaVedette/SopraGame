@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://enemy.gd" type="Script" id=1]
 [ext_resource path="res://enemy.png" type="Texture" id=2]
-[ext_resource path="res://sound_explode.wav" type="Sample" id=3]
-[ext_resource path="res://sound_hit.wav" type="Sample" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -83,21 +81,6 @@ tracks/0/keys = {
 "transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 0 ]
-}
-
-[sub_resource type="SampleLibrary" id=5]
-
-samples/explode = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 3 )
-}
-samples/hit = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 4 )
 }
 
 [node name="enemy" type="RigidBody2D"]
@@ -198,16 +181,5 @@ enabled = true
 cast_to = Vector2( 0, 45 )
 layer_mask = 1
 type_mask = 15
-
-[node name="sound" type="SamplePlayer2D" parent="."]
-
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
-config/polyphony = 3
-config/samples = SubResource( 5 )
-config/pitch_random = 0.0
 
 
