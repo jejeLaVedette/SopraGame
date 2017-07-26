@@ -7,7 +7,7 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
-var health = 100
+onready var health = 100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -207,12 +207,8 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
-#func _input(event):
-#	if event.is_action_pressed("ui_accept"):
-#		health -= 10
-
 func _fixed_process(delta):
-	get_node("Control/HealthBar").set_value(health)
+	get_node("/root/Game/HUD/Control/HealthPlayer2").set_value(health)
 	health += delta * 2
 
 func damage(dmg):

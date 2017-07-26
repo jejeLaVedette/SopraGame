@@ -8,7 +8,7 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
-var health = 100
+onready var health = 100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -28,7 +28,7 @@ var MAX_SHOOT_POSE_TIME = 0.3
 var bullet = preload("res://bullet.tscn")
 
 var floor_h_velocity = 0.0
-var enemy
+var player
 
 
 func _integrate_forces(s):
@@ -47,7 +47,7 @@ func _integrate_forces(s):
 	var crouch = Input.is_action_pressed("crouch2")
 	
 	if spawn:
-		var e = enemy.instance()
+		var e = player.instance()
 		var p = get_pos()
 		p.y = p.y - 100
 		e.set_pos(p)
@@ -204,16 +204,12 @@ func _integrate_forces(s):
 
 
 func _ready():
-	enemy = ResourceLoader.load("res://enemy.tscn")
+	player = ResourceLoader.load("res://player.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
 
-#func _input(event):
-#	if event.is_action_pressed("ui_accept"):
-#		health -= 10
-
 func _fixed_process(delta):
-	get_node("Control/HealthBar").set_value(health)
+	get_node("/root/Game/HUD/Control/HealthPlayer1").set_value(health)
 	health += delta * 2
 
 func damage(dmg):
