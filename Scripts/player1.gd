@@ -205,7 +205,7 @@ func _integrate_forces(s):
 
 
 func _ready():
-	player = ResourceLoader.load("res://player.tscn")
+	player = ResourceLoader.load("res://player1.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
 
