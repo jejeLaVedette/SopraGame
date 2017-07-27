@@ -1,3 +1,0 @@
-# SopraGame
-
-DAVID NIK TOUT
