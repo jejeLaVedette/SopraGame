@@ -44,7 +44,7 @@ transform/pos = Vector2( 601.584, 927.901 )
 
 [node name="moving_platform 2" parent="props" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 359.996, 985.074 )
+transform/pos = Vector2( 384.77, 936.473 )
 motion = Vector2( 300, 0 )
 cycle = 10.0
 
@@ -66,7 +66,7 @@ transform/pos = Vector2( 834.664, 1309.6 )
 
 [node name="Player1" parent="." instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 213.364, 1059.49 )
+transform/pos = Vector2( 213.804, 1041.44 )
 
 [node name="Player2" parent="." instance=ExtResource( 9 )]
 

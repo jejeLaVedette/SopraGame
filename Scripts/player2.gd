@@ -6,6 +6,7 @@ var siding_left = false
 var jumping = false
 var stopping_jump = false
 var shooting = false
+var spawning = false
 var birot = 0
 onready var health = 100
 
@@ -45,12 +46,14 @@ func _integrate_forces(s):
 	var spawn = Input.is_action_pressed("spawn")
 	var crouch = Input.is_action_pressed("crouch")
 	
-	if spawn:
+	if (spawn and not spawning):
+		spawning = spawn
 		var e = enemy.instance()
 		var p = get_pos()
 		p.y = p.y - 100
 		e.set_pos(p)
 		get_parent().add_child(e)
+		print(get_node(".").get_children())
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity

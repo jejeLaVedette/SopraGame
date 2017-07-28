@@ -8,6 +8,8 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
+var direction = 1
+var hauteur_tir = 0
 onready var health = 100
 
 var WALK_ACCEL = 800.0
@@ -46,8 +48,12 @@ func _integrate_forces(s):
 	var shoot = Input.is_action_pressed("shoot2")
 	var spawn = Input.is_action_pressed("spawn2")
 	var crouch = Input.is_action_pressed("crouch2")
-	
-	if spawn:
+	var retry = Input.is_action_pressed("retry")
+
+	if (retry):
+		get_tree().reload_current_scene()
+
+	if (spawn):
 		var e = player.instance()
 		var p = get_pos()
 		p.y = p.y - 100
@@ -80,12 +86,12 @@ func _integrate_forces(s):
 		else:
 			ss = 1.0
 			birot = 0
-		var pos = get_pos() + get_node("bullet_shoot").get_pos()*Vector2(ss, 1.0)
+		var pos = get_pos() + Vector2(15, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 		
 		bi.set_pos(pos)
 		get_parent().add_child(bi)
 		bi.get_node("sprite").set_rotd(birot)
-		bi.set_linear_velocity(Vector2(800.0*ss, -200))
+		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 	else:
 		shoot_time += step
@@ -128,12 +134,15 @@ func _integrate_forces(s):
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
+			hauteur_tir = 20
 		
 		# Check siding
 		if (lv.x < 0 and move_left):
 			new_siding_left = true
+			direction = -1
 		elif (lv.x > 0 and move_right):
 			new_siding_left = false
+			direction = 1
 		if (jumping):
 			new_anim = "jumping"
 		elif (abs(lv.x) < 0.1):
@@ -149,9 +158,13 @@ func _integrate_forces(s):
 		# Check crouch
 		if (crouch):
 			new_anim = "crouch"
-			get_node("CollisionPolygon2D").set_pos(Vector2(0, 20))
+			get_node("CollisionPlayer").set_scale(Vector2(2, 0.8))
+			get_node("CollisionPlayer").set_pos(Vector2(15*direction, 10))
+			hauteur_tir = 30
 		else:
-			get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))
+			get_node("CollisionPlayer").set_scale(Vector2(1, 1))
+			get_node("CollisionPlayer").set_pos(Vector2(0, 0))
+			hauteur_tir = 0
 	else:
 		# Process logic when the character is in the air
 		if (move_left and not move_right):
@@ -181,9 +194,9 @@ func _integrate_forces(s):
 	# Update siding
 	if (new_siding_left != siding_left):
 		if (new_siding_left):
-			get_node("sprite").set_scale(Vector2(-1, 1))
+			get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 		else:
-			get_node("sprite").set_scale(Vector2(1, 1))
+			get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
 		
 		siding_left = new_siding_left
 	
