@@ -46,19 +46,15 @@ func _integrate_forces(s):
 	var move_right = Input.is_action_pressed("move_right2")
 	var jump = Input.is_action_pressed("jump2")
 	var shoot = Input.is_action_pressed("shoot2")
-	var spawn = Input.is_action_pressed("spawn2")
+	var special = Input.is_action_pressed("special2")
 	var crouch = Input.is_action_pressed("crouch2")
 	var retry = Input.is_action_pressed("retry")
 
 	if (retry):
 		get_tree().reload_current_scene()
 
-	if (spawn):
-		var e = player.instance()
-		var p = get_pos()
-		p.y = p.y - 100
-		e.set_pos(p)
-		get_parent().add_child(e)
+	if (special):
+		lv.y -= 100
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -86,7 +82,7 @@ func _integrate_forces(s):
 		else:
 			ss = 1.0
 			birot = 0
-		var pos = get_pos() + Vector2(15, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
+		var pos = get_pos() + Vector2(15*direction, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 		
 		bi.set_pos(pos)
 		get_parent().add_child(bi)
@@ -105,6 +101,7 @@ func _integrate_forces(s):
 
 	# Process jump
 	if (jumping):
+		hauteur_tir = 15
 		if (lv.y > 0):
 			# Set off the jumping flag if going down
 			jumping = false
@@ -134,7 +131,6 @@ func _integrate_forces(s):
 			lv.y = -JUMP_VELOCITY
 			jumping = true
 			stopping_jump = false
-			hauteur_tir = 20
 		
 		# Check siding
 		if (lv.x < 0 and move_left):

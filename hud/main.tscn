@@ -2,7 +2,27 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "# Copyright (c) 2016 Calinou and contributors\n# Licensed under the MIT license, see `LICENSE.md` for more information.\n\nextends CanvasLayer\n\nfunc _ready():\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\t# Inventory\n\tget_node(\"Control/HealthPlayer1\").set_value(Game.healthPlayer1)\n\tget_node(\"Control/HealthPlayer2\").set_value(Game.healthPlayer2)\n\t\n# Spawn a notice at center of screen\n# Currently used by shops\nfunc notice(bbcode):\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"[center]\" + bbcode + \"[/center]\")\n\n# Clears the notice by setting empty text to it\nfunc clear_notice():\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"\")"
+script/source = "# Copyright (c) 2016 Calinou and contributors
+# Licensed under the MIT license, see `LICENSE.md` for more information.
+
+extends CanvasLayer
+
+func _ready():
+	set_fixed_process(true)
+
+func _fixed_process(delta):
+	# Inventory
+	get_node(\"Control/HealthPlayer1\").set_value(Game.healthPlayer1)
+	get_node(\"Control/HealthPlayer2\").set_value(Game.healthPlayer2)
+	
+# Spawn a notice at center of screen
+# Currently used by shops
+func notice(bbcode):
+	get_node(\"Notices/NoticesLabel\").set_bbcode(\"[center]\" + bbcode + \"[/center]\")
+
+# Clears the notice by setting empty text to it
+func clear_notice():
+	get_node(\"Notices/NoticesLabel\").set_bbcode(\"\")"
 
 [sub_resource type="StyleBoxFlat" id=2]
 
@@ -63,7 +83,9 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = SubResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
 
 [node name="Notices" type="Control" parent="."]
 
@@ -102,9 +124,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 2.0
 margin/top = 0.0
-margin/right = 224.0
+margin/right = 226.0
 margin/bottom = 64.0
 
 [node name="FPSLabel" type="Label" parent="FPS"]
@@ -113,10 +135,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 366.0
-margin/top = 28.0
-margin/right = 419.0
-margin/bottom = 57.0
+margin/left = 6.0
+margin/top = 4.0
+margin/right = 59.0
+margin/bottom = 33.0
 text = "FPS:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -143,10 +165,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 656.0
-margin/top = 253.0
-margin/right = 1029.0
-margin/bottom = 301.0
+margin/left = 724.0
+margin/top = 92.0
+margin/right = 1097.0
+margin/bottom = 140.0
 custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
 range/min = 0.0
@@ -164,10 +186,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 251.0
-margin/top = 254.0
-margin/right = 600.0
-margin/bottom = 305.0
+margin/left = 210.0
+margin/top = 92.0
+margin/right = 559.0
+margin/bottom = 143.0
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 range/min = 0.0
