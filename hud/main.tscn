@@ -1,80 +1,13 @@
 [gd_scene load_steps=6 format=1]
 
+[ext_resource path="res://Images/life_bar_empty_left.png" type="Texture" id=1]
+[ext_resource path="res://Images/life_bar_full_left.png" type="Texture" id=2]
+[ext_resource path="res://Images/life_bar_empty.png" type="Texture" id=3]
+[ext_resource path="res://Images/FT_Lifebar_full.PNG" type="Texture" id=4]
+
 [sub_resource type="GDScript" id=1]
 
-script/source = "# Copyright (c) 2016 Calinou and contributors
-# Licensed under the MIT license, see `LICENSE.md` for more information.
-
-extends CanvasLayer
-
-func _ready():
-	set_fixed_process(true)
-
-func _fixed_process(delta):
-	# Inventory
-	get_node(\"Control/HealthPlayer1\").set_value(Game.healthPlayer1)
-	get_node(\"Control/HealthPlayer2\").set_value(Game.healthPlayer2)
-	
-# Spawn a notice at center of screen
-# Currently used by shops
-func notice(bbcode):
-	get_node(\"Notices/NoticesLabel\").set_bbcode(\"[center]\" + bbcode + \"[/center]\")
-
-# Clears the notice by setting empty text to it
-func clear_notice():
-	get_node(\"Notices/NoticesLabel\").set_bbcode(\"\")"
-
-[sub_resource type="StyleBoxFlat" id=2]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.145098, 0.145098, 0.164706, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=3]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 1, 0.25098, 0.25098, 0.25098 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.752941, 0.752941, 0.752941, 0.752941 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
+script/source = "# Copyright (c) 2016 Calinou and contributors\n# Licensed under the MIT license, see `LICENSE.md` for more information.\n\nextends CanvasLayer\n\nfunc _ready():\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\t# Inventory\n\tget_node(\"Control/HealthPlayer1\").set_value(Game.healthPlayer1)\n\tget_node(\"Control/HealthPlayer2\").set_value(Game.healthPlayer2)\n\t\n# Spawn a notice at center of screen\n# Currently used by shops\nfunc notice(bbcode):\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"[center]\" + bbcode + \"[/center]\")\n\n# Clears the notice by setting empty text to it\nfunc clear_notice():\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"\")"
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -83,9 +16,7 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = SubResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Notices" type="Control" parent="."]
 
@@ -129,21 +60,6 @@ margin/top = 0.0
 margin/right = 226.0
 margin/bottom = 64.0
 
-[node name="FPSLabel" type="Label" parent="FPS"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 6.0
-margin/top = 4.0
-margin/right = 59.0
-margin/bottom = 33.0
-text = "FPS:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
 [node name="Control" type="Control" parent="."]
 
 anchor/left = 3
@@ -159,39 +75,16 @@ margin/top = 720.0
 margin/right = 640.0
 margin/bottom = 720.0
 
-[node name="HealthPlayer2" type="ProgressBar" parent="Control"]
+[node name="HealthPlayer2" type="TextureProgress" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 724.0
-margin/top = 92.0
-margin/right = 1097.0
-margin/bottom = 140.0
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = true
-
-[node name="HealthPlayer1" type="ProgressBar" parent="Control"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 210.0
-margin/top = 92.0
-margin/right = 559.0
+size_flags/vertical = 2
+margin/left = 800.0
+margin/top = 95.0
+margin/right = 1059.0
 margin/bottom = 143.0
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -199,6 +92,34 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-percent/visible = true
+texture/under = ExtResource( 1 )
+texture/over = null
+texture/progress = ExtResource( 2 )
+mode = 1
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+
+[node name="HealthPlayer1" type="TextureProgress" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 249.0
+margin/top = 98.0
+margin/right = 508.0
+margin/bottom = 146.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 3 )
+texture/over = null
+texture/progress = ExtResource( 4 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
 
 
