@@ -1,13 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://Images/life_bar_empty_left.png" type="Texture" id=1]
-[ext_resource path="res://Images/life_bar_full_left.png" type="Texture" id=2]
-[ext_resource path="res://Images/life_bar_empty.png" type="Texture" id=3]
-[ext_resource path="res://Images/FT_Lifebar_full.PNG" type="Texture" id=4]
-
-[sub_resource type="GDScript" id=1]
-
-script/source = "# Copyright (c) 2016 Calinou and contributors\n# Licensed under the MIT license, see `LICENSE.md` for more information.\n\nextends CanvasLayer\n\nfunc _ready():\n\tset_fixed_process(true)\n\nfunc _fixed_process(delta):\n\t# Inventory\n\tget_node(\"Control/HealthPlayer1\").set_value(Game.healthPlayer1)\n\tget_node(\"Control/HealthPlayer2\").set_value(Game.healthPlayer2)\n\t\n# Spawn a notice at center of screen\n# Currently used by shops\nfunc notice(bbcode):\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"[center]\" + bbcode + \"[/center]\")\n\n# Clears the notice by setting empty text to it\nfunc clear_notice():\n\tget_node(\"Notices/NoticesLabel\").set_bbcode(\"\")"
+[ext_resource path="res://Scripts/Hud.gd" type="Script" id=1]
+[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=2]
+[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=3]
+[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=4]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -15,8 +11,10 @@ layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
-script/script = SubResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+script/script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
 
 [node name="Notices" type="Control" parent="."]
 
@@ -81,10 +79,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 800.0
-margin/top = 95.0
-margin/right = 1059.0
-margin/bottom = 143.0
+margin/left = 887.0
+margin/top = 90.0
+margin/right = 1147.0
+margin/bottom = 138.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -92,9 +90,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 1 )
+texture/under = ExtResource( 2 )
 texture/over = null
-texture/progress = ExtResource( 2 )
+texture/progress = ExtResource( 3 )
 mode = 1
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
@@ -105,10 +103,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 249.0
-margin/top = 98.0
-margin/right = 508.0
-margin/bottom = 146.0
+margin/left = 134.0
+margin/top = 90.0
+margin/right = 394.0
+margin/bottom = 138.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -116,7 +114,7 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 3 )
+texture/under = ExtResource( 2 )
 texture/over = null
 texture/progress = ExtResource( 4 )
 radial_fill/fill_degrees = 360.0
