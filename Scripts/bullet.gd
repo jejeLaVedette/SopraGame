@@ -15,7 +15,7 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 #		get_node(".").queue_free()
 	
 	if body.has_method("damage") and isAlreadyColliding == false:
-			body.damage(25)
+			body.damage(40)
 			bodyEnnemi = true
 			#On retire la colission
 			add_collision_exception_with(body)
