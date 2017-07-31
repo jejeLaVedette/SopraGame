@@ -120,4 +120,8 @@ texture/progress = ExtResource( 4 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
+[connection signal="value_changed" from="Control/HealthPlayer2" to="." method="_on_HealthPlayer2_value_changed"]
+
+[connection signal="value_changed" from="Control/HealthPlayer1" to="." method="_on_HealthPlayer1_value_changed"]
+
 

@@ -19,3 +19,11 @@ func notice(bbcode):
 # Clears the notice by setting empty text to it
 func clear_notice():
 	get_node("Notices/NoticesLabel").set_bbcode("")
+
+func _on_HealthPlayer2_value_changed( value ):
+	if(value <= 0):
+		get_node("Control/HealthPlayer2").set_self_opacity(0)
+
+func _on_HealthPlayer1_value_changed( value ):
+	if(value <= 0):
+		get_node("Control/HealthPlayer1").set_self_opacity(0)
