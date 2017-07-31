@@ -45,10 +45,6 @@ func _integrate_forces(s):
 	var shoot = Input.is_action_pressed("shoot")
 	var spawn = Input.is_action_pressed("spawn")
 	var crouch = Input.is_action_pressed("crouch")
-	var retry = Input.is_action_pressed("retry")
-
-	if (retry):
-		get_tree().reload_current_scene()
 
 	if (spawn and not spawning):
 		spawning = spawn

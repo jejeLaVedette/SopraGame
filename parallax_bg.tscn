@@ -19,7 +19,7 @@ scroll/ignore_camera_zoom = false
 
 motion/scale = Vector2( 1, 1 )
 motion/offset = Vector2( 0, 0 )
-motion/mirroring = Vector2( 800, 0 )
+motion/mirroring = Vector2( 600, 0 )
 
 [node name="Sprite" type="Sprite" parent="sky"]
 

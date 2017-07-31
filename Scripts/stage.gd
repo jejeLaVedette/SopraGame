@@ -6,8 +6,10 @@ extends Node
 # var b="textvar"
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	set_process_input(true)
 
+func _input(event):
+	var retry = Input.is_action_pressed("retry")
 
+	if (retry):
+		get_tree().reload_current_scene()

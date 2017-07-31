@@ -48,10 +48,6 @@ func _integrate_forces(s):
 	var shoot = Input.is_action_pressed("shoot2")
 	var special = Input.is_action_pressed("special2")
 	var crouch = Input.is_action_pressed("crouch2")
-	var retry = Input.is_action_pressed("retry")
-
-	if (retry):
-		get_tree().reload_current_scene()
 
 	if (special):
 		lv.y -= 100
@@ -154,12 +150,12 @@ func _integrate_forces(s):
 		# Check crouch
 		if (crouch):
 			new_anim = "crouch"
-			get_node("CollisionPlayer").set_scale(Vector2(2, 0.8))
-			get_node("CollisionPlayer").set_pos(Vector2(15*direction, 10))
+			get_node("CollisionPolygon2D").set_scale(Vector2(2, 0.8))
+			get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
 			hauteur_tir = 30
 		else:
-			get_node("CollisionPlayer").set_scale(Vector2(1, 1))
-			get_node("CollisionPlayer").set_pos(Vector2(0, 0))
+			get_node("CollisionPolygon2D").set_scale(Vector2(1, 1))
+			get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))
 			hauteur_tir = 0
 	else:
 		# Process logic when the character is in the air
