@@ -27,12 +27,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 22 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 22 ] }
 
 [sub_resource type="Animation" id=4]
 
@@ -44,12 +39,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 21 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 21 ] }
 
 [sub_resource type="Animation" id=5]
 
@@ -61,12 +51,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 26 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 26 ] }
 
 [sub_resource type="Animation" id=6]
 
@@ -77,12 +62,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 16, 17, 18, 16, 19, 20, 19, 16 ] }
 
 [sub_resource type="Animation" id=7]
 
@@ -93,12 +73,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 25 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 25 ] }
 
 [sub_resource type="Animation" id=8]
 
@@ -109,12 +84,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5 ),
-"transitions": FloatArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 23, 24, 23 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 23, 24, 23 ] }
 
 [sub_resource type="Animation" id=9]
 
@@ -125,12 +95,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 26 ]
-}
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 26 ] }
 
 [sub_resource type="Animation" id=10]
 
@@ -141,12 +106,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 4, 0 ] }
 
 [sub_resource type="Animation" id=11]
 
@@ -157,12 +117,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7, 8, 9, 5 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 5, 6, 7, 8, 9, 5 ] }
 
 [sub_resource type="Animation" id=12]
 
@@ -173,12 +128,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 10, 11, 12, 13, 14, 5 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 10, 11, 12, 13, 14, 5 ] }
 
 [node name="player" type="RigidBody2D"]
 
@@ -235,27 +185,6 @@ playback/speed = 2.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="camera" type="Camera2D" parent="."]
-
-transform/pos = Vector2( 2.81538, -31.9487 )
-transform/scale = Vector2( 4.0089, 1.9984 )
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit/left = 0
-limit/top = 0
-limit/right = 10000000
-limit/bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.2
-drag_margin/top = 0.2
-drag_margin/right = 0.2
-drag_margin/bottom = 0.2
-
 [node name="bullet_shoot" type="Position2D" parent="."]
 
 transform/pos = Vector2( 31.2428, 4.08784 )
@@ -277,6 +206,7 @@ trigger = false
 
 [node name="ui" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 0
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -289,9 +219,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 3 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = true
 action = "move_left"
 visibility_mode = 1
@@ -303,9 +230,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 4 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = true
 action = "move_right"
 visibility_mode = 1
@@ -317,9 +241,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 5 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = false
 action = "jump"
 visibility_mode = 1
@@ -331,9 +252,6 @@ transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 6 )
 pressed = null
 bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
 passby_press = false
 action = "shoot"
 visibility_mode = 1
