@@ -153,6 +153,7 @@ func _integrate_forces(s):
 			get_node("CollisionPolygon2D").set_scale(Vector2(2, 0.8))
 			get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
 			hauteur_tir = 30
+			lv.x = 0
 		else:
 			get_node("CollisionPolygon2D").set_scale(Vector2(1, 1))
 			get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))

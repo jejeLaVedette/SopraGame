@@ -26,3 +26,11 @@ func _fixed_process(delta):
 		var zoom = Vector2(1,1) * zoom_factor / 4
 		if (Vector2(1,1) < zoom):
 			set_zoom(zoom)
+	elif (player1IsFreed):
+		var newpos = (p1.get_global_pos())
+		set_global_pos(newpos)
+		set_zoom(Vector2(1,1))
+	elif (player2IsFreed):
+		var newpos = (p2.get_global_pos())
+		set_global_pos(newpos)
+		set_zoom(Vector2(1,1))

@@ -3,13 +3,6 @@
 
 extends CanvasLayer
 
-func _ready():
-	set_fixed_process(true)
-
-func _fixed_process(delta):
-	# Inventory
-	get_node("Control/HealthPlayer1").set_value(Game.healthPlayer1)
-	get_node("Control/HealthPlayer2").set_value(Game.healthPlayer2)
 	
 # Spawn a notice at center of screen
 # Currently used by shops
@@ -22,8 +15,8 @@ func clear_notice():
 
 func _on_HealthPlayer2_value_changed( value ):
 	if(value <= 0):
-		get_node("Control/HealthPlayer2").set_self_opacity(0)
+		get_node("Control/HealthPlayer2").set_value(0)
 
 func _on_HealthPlayer1_value_changed( value ):
 	if(value <= 0):
-		get_node("Control/HealthPlayer1").set_self_opacity(0)
+		get_node("Control/HealthPlayer1").set_value(0)
