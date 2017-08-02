@@ -42,12 +42,12 @@ func _integrate_forces(s):
 	var new_siding_left = siding_left
 	
 	# Get the controls
-	var move_left = Input.is_action_pressed("move_left2")
-	var move_right = Input.is_action_pressed("move_right2")
-	var jump = Input.is_action_pressed("jump2")
-	var shoot = Input.is_action_pressed("shoot2")
-	var special = Input.is_action_pressed("special2")
-	var crouch = Input.is_action_pressed("crouch2")
+	var move_left = Input.is_action_pressed("move_left_p1")
+	var move_right = Input.is_action_pressed("move_right_p1")
+	var jump = Input.is_action_pressed("jump_p1")
+	var shoot = Input.is_action_pressed("shoot_p1")
+	var special = Input.is_action_pressed("special_p1")
+	var crouch = Input.is_action_pressed("crouch_p1")
 
 	if (special):
 		lv.y -= 100
@@ -150,12 +150,12 @@ func _integrate_forces(s):
 		# Check crouch
 		if (crouch):
 			new_anim = "crouch"
-			get_node("CollisionPolygon2D").set_scale(Vector2(2, 0.8))
+			get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.8))
 			get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
 			hauteur_tir = 30
 			lv.x = 0
 		else:
-			get_node("CollisionPolygon2D").set_scale(Vector2(1, 1))
+			get_node("CollisionPolygon2D").set_scale(Vector2(direction, 1))
 			get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))
 			hauteur_tir = 0
 	else:
@@ -220,7 +220,6 @@ func _fixed_process(delta):
 	health += delta * 2
 
 func damage(dmg):
-	print("damage player1")
 	health -= dmg
 	if health <= 0:
 		die()

@@ -39,12 +39,12 @@ func _integrate_forces(s):
 	var new_siding_left = siding_left
 	
 	# Get the controls
-	var move_left = Input.is_action_pressed("move_left")
-	var move_right = Input.is_action_pressed("move_right")
-	var jump = Input.is_action_pressed("jump")
-	var shoot = Input.is_action_pressed("shoot")
-	var spawn = Input.is_action_pressed("spawn")
-	var crouch = Input.is_action_pressed("crouch")
+	var move_left = Input.is_action_pressed("move_left_p2")
+	var move_right = Input.is_action_pressed("move_right_p2")
+	var jump = Input.is_action_pressed("jump_p2")
+	var shoot = Input.is_action_pressed("shoot_p2")
+	var spawn = Input.is_action_pressed("spawn_p2")
+	var crouch = Input.is_action_pressed("crouch_p2")
 
 	if (spawn and not spawning):
 		spawning = spawn
@@ -214,7 +214,6 @@ func _fixed_process(delta):
 	health += delta * 2
 
 func damage(dmg):
-	print("damage player2")
 	health -= dmg
 	if health <= 0:
 		die()
