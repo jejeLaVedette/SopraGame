@@ -15,7 +15,9 @@ func _ready():
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
-	if (str(p1) != "[Deleted Object]" && str(p2) != "[Deleted Object]"):
+	var wr1 = weakref(p1);
+	var wr2 = weakref(p2);
+	if (wr1.get_ref() and wr2.get_ref()):
 		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
 		set_global_pos(newpos)
 		var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
@@ -23,11 +25,11 @@ func _fixed_process(delta):
 		var zoom = Vector2(1,1) * zoom_factor / 4
 		if (Vector2(1,1) < zoom):
 			set_zoom(zoom)
-	elif (str(p1) != "[Deleted Object]"):
+	elif (wr1.get_ref()):
 		var newpos = (p1.get_global_pos())
 		set_global_pos(newpos)
 		set_zoom(Vector2(1,1))
-	elif (str(p2) != "[Deleted Object]"):
+	elif (wr2.get_ref()):
 		var newpos = (p2.get_global_pos())
 		set_global_pos(newpos)
 		set_zoom(Vector2(1,1))
