@@ -1,13 +1,15 @@
+
 extends RigidBody2D
 
 # Member variables
 var anim = ""
-var siding_left = false
+var siding_right = false
 var jumping = false
 var stopping_jump = false
 var shooting = false
-var spawning = false
 var birot = 0
+var direction = -1
+var hauteur_tir = 0
 onready var health = 100
 
 var WALK_ACCEL = 800.0
@@ -28,7 +30,8 @@ var MAX_SHOOT_POSE_TIME = 0.3
 var bullet = preload("res://bullet.tscn")
 
 var floor_h_velocity = 0.0
-var enemy
+var player
+
 
 
 func _integrate_forces(s):
@@ -36,24 +39,19 @@ func _integrate_forces(s):
 	var step = s.get_step()
 	
 	var new_anim = anim
-	var new_siding_left = siding_left
+	var new_siding_right = siding_right
 	
 	# Get the controls
 	var move_left = Input.is_action_pressed("move_left_p2")
 	var move_right = Input.is_action_pressed("move_right_p2")
 	var jump = Input.is_action_pressed("jump_p2")
 	var shoot = Input.is_action_pressed("shoot_p2")
-	var spawn = Input.is_action_pressed("spawn_p2")
+	var special = Input.is_action_pressed("special_p2")
 	var crouch = Input.is_action_pressed("crouch_p2")
 
-	if (spawn and not spawning):
-		spawning = spawn
-		var e = enemy.instance()
-		var p = get_pos()
-		p.y = p.y - 100
-		e.set_pos(p)
-		get_parent().add_child(e)
-
+	if (special):
+		lv.y -= 100
+	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
 	floor_h_velocity = 0.0
@@ -74,18 +72,18 @@ func _integrate_forces(s):
 		shoot_time = 0
 		var bi = bullet.instance()
 		var ss
-		if (siding_left):
-			ss = -1.0
-			birot = 180
-		else:
+		if (siding_right):
 			ss = 1.0
 			birot = 0
-		var pos = get_pos() + get_node("bullet_shoot").get_pos()*Vector2(ss, 1.0)
+		else:
+			ss = -1.0
+			birot = 180
+		var pos = get_pos() + Vector2(15*direction, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 		
 		bi.set_pos(pos)
 		get_parent().add_child(bi)
 		bi.get_node("sprite").set_rotd(birot)
-		bi.set_linear_velocity(Vector2(800.0*ss, -200))
+		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 	else:
 		shoot_time += step
@@ -99,6 +97,7 @@ func _integrate_forces(s):
 
 	# Process jump
 	if (jumping):
+		hauteur_tir = 15
 		if (lv.y > 0):
 			# Set off the jumping flag if going down
 			jumping = false
@@ -131,9 +130,11 @@ func _integrate_forces(s):
 		
 		# Check siding
 		if (lv.x < 0 and move_left):
-			new_siding_left = true
+			new_siding_right = false
+			direction = -1
 		elif (lv.x > 0 and move_right):
-			new_siding_left = false
+			new_siding_right = true
+			direction = 1
 		if (jumping):
 			new_anim = "jumping"
 		elif (abs(lv.x) < 0.1):
@@ -149,9 +150,14 @@ func _integrate_forces(s):
 		# Check crouch
 		if (crouch):
 			new_anim = "crouch"
-			get_node("CollisionPolygon2D").set_pos(Vector2(0, 20))
+			get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.8))
+			get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
+			hauteur_tir = 30
+			lv.x = 0
 		else:
+			get_node("CollisionPolygon2D").set_scale(Vector2(direction, 1))
 			get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))
+			hauteur_tir = 0
 	else:
 		# Process logic when the character is in the air
 		if (move_left and not move_right):
@@ -179,13 +185,13 @@ func _integrate_forces(s):
 				new_anim = "falling"
 	
 	# Update siding
-	if (new_siding_left != siding_left):
-		if (new_siding_left):
-			get_node("sprite").set_scale(Vector2(-1, 1))
+	if (new_siding_right != siding_right):
+		if (new_siding_right):
+			get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 		else:
-			get_node("sprite").set_scale(Vector2(1, 1))
+			get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
 		
-		siding_left = new_siding_left
+		siding_right = new_siding_right
 	
 	# Change animation
 	if (new_anim != anim):
@@ -205,7 +211,7 @@ func _integrate_forces(s):
 
 
 func _ready():
-	enemy = ResourceLoader.load("res://enemy.tscn")
+	player = ResourceLoader.load("res://player2.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
 

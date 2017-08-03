@@ -76,7 +76,7 @@ transform/pos = Vector2( 207.129, 780.662 )
 
 [node name="Player2" parent="." instance=ExtResource( 11 )]
 
-transform/pos = Vector2( 832.609, 800.756 )
+transform/pos = Vector2( 823.029, 780.399 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

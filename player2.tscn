@@ -1,194 +1,229 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=36 format=1]
 
 [ext_resource path="res://Scripts/player2.gd" type="Script" id=1]
-[ext_resource path="res://Images/robot_demo.png" type="Texture" id=2]
-[ext_resource path="res://Images/osb_left.png" type="Texture" id=3]
-[ext_resource path="res://Images/osb_right.png" type="Texture" id=4]
-[ext_resource path="res://Images/osb_jump.png" type="Texture" id=5]
-[ext_resource path="res://Images/osb_fire.png" type="Texture" id=6]
+[ext_resource path="res://Images/Player2/PlayerIdle.png" type="Texture" id=2]
+[ext_resource path="res://Images/Player2/PlayerCrouch.png" type="Texture" id=3]
+[ext_resource path="res://Images/Player2/PlayerJump.png" type="Texture" id=4]
+[ext_resource path="res://Images/Player2/PlayerShoot.png" type="Texture" id=5]
+[ext_resource path="res://Images/Player2/PlayerWalk1.png" type="Texture" id=6]
+[ext_resource path="res://Images/Player2/PlayerWalk2.png" type="Texture" id=7]
+[ext_resource path="res://Images/Player2/PlayerWalk3.png" type="Texture" id=8]
+[ext_resource path="res://Images/Player2/PlayerWalk4.png" type="Texture" id=9]
+[ext_resource path="res://Images/Player2/PlayerWalk5.png" type="Texture" id=10]
+[ext_resource path="res://Images/Player2/PlayerWalk6.png" type="Texture" id=11]
+[ext_resource path="res://Images/Player2/PlayerWalk7.png" type="Texture" id=12]
+[ext_resource path="res://Images/Player2/PlayerWalk8.png" type="Texture" id=13]
+[ext_resource path="res://Images/Player2/PlayerFalling.png" type="Texture" id=14]
+[ext_resource path="res://player2.tres" type="Animation" id=15]
+[ext_resource path="res://Images/osb_left.png" type="Texture" id=16]
+[ext_resource path="res://Images/osb_right.png" type="Texture" id=17]
+[ext_resource path="res://Images/osb_jump.png" type="Texture" id=18]
+[ext_resource path="res://Images/osb_fire.png" type="Texture" id=19]
 
 [sub_resource type="RayShape2D" id=1]
 
 custom_solver_bias = 0.5
-length = 20.0
+length = 29.1485
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
+[sub_resource type="ConvexPolygonShape2D" id=17]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -19.902, -24.8691, 19.3625, -24.6056, -0.138023, 16.5036 )
+points = Vector2Array( 7.90147, 31.1472, 0.757507, 47.6127, -6.78384, 35.6927, -4.51112, 21.7066, 5.97839, 4.92343 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=18]
 
-resource/name = "crouch"
+custom_solver_bias = 0.0
+points = Vector2Array( 3.65623, -30.3895, 7.72665, -14.657, 5.97839, 4.92343, -4.51112, 21.7066, -4.24939, 7.55747, -3.28735, -19.7269, -0.490143, -31.615 )
+
+[sub_resource type="ConvexPolygonShape2D" id=19]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -6.60902, -44.0276, 3.70567, -35.9857, 3.65623, -30.3895, -0.490143, -31.615, -8.88175, -36.3353 )
+
+[sub_resource type="ConvexPolygonShape2D" id=20]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.490143, -31.615, -4.68594, -27.9437, -8.88175, -36.3353 )
+
+[sub_resource type="ConvexPolygonShape2D" id=21]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 5.45392, -43.3283, 3.70567, -35.9857, -6.60902, -44.0276, -2.76287, -48.2234, 4.57979, -46.8248 )
+
+[sub_resource type="SpriteFrames" id=7]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "Player2",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=8]
+
 length = 0.01
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ 22 ]
+"values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=9]
 
-resource/name = "falling"
 length = 0.01
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ 21 ]
+"values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=10]
 
-resource/name = "falling_weapon"
 length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ 26 ]
+"values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=11]
 
 length = 7.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 1.25, 1.5, 2, 4.5, 4.75, 5, 5.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 16, 17, 18, 16, 19, 20, 19, 16 ]
-}
-
-[sub_resource type="Animation" id=7]
-
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
 "times": FloatArray( 0 ),
 "transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ 25 ]
-}
-
-[sub_resource type="Animation" id=8]
-
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5 ),
-"transitions": FloatArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 23, 24, 23 ]
-}
-
-[sub_resource type="Animation" id=9]
-
-length = 0.5
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 1,
-"values": [ 26 ]
-}
-
-[sub_resource type="Animation" id=10]
-
-length = 1.25
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
-
-[sub_resource type="Animation" id=11]
-
-length = 1.25
-loop = true
-step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 7, 8, 9, 5 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=12]
 
-length = 1.25
+length = 0.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("AnimatedSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
 "update": 1,
-"values": [ 10, 11, 12, 13, 14, 5 ]
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=13]
+
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=14]
+
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=15]
+
+length = 1.75
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=16]
+
+length = 1.75
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
 [node name="player" type="RigidBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1.76469, 0.291992, -12.1587 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.672, 0.618995, -8.88293 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
+shapes/1/shape = SubResource( 17 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
+shapes/2/shape = SubResource( 18 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 19 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 20 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 21 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 2
@@ -208,32 +243,32 @@ damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-texture = ExtResource( 2 )
-vframes = 2
-hframes = 16
-frame = 1
+transform/pos = Vector2( -0.237823, 0 )
+transform/scale = Vector2( 0.2, 0.2 )
+frames = SubResource( 7 )
+animation = "Player2"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/crouch = SubResource( 3 )
-anims/falling = SubResource( 4 )
-anims/falling_weapon = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/idle_weapon = SubResource( 7 )
-anims/jumping = SubResource( 8 )
-anims/jumping_weapon = SubResource( 9 )
-anims/run = SubResource( 10 )
-anims/run_weapon = SubResource( 11 )
-anims/standing_weapon_ready = SubResource( 12 )
+anims/crouch = SubResource( 8 )
+anims/falling = SubResource( 9 )
+anims/falling_weapon = SubResource( 10 )
+anims/idle = SubResource( 11 )
+anims/idle_weapon = SubResource( 12 )
+anims/jumping = SubResource( 13 )
+anims/jumping_weapon = SubResource( 14 )
+anims/run = SubResource( 15 )
+anims/run_weapon = SubResource( 16 )
+anims/standing_weapon_ready = ExtResource( 15 )
 playback/active = true
 playback/speed = 2.0
 blend_times = [  ]
-autoplay = ""
+autoplay = "idle"
 
 [node name="bullet_shoot" type="Position2D" parent="."]
 
@@ -241,17 +276,17 @@ transform/pos = Vector2( 31.2428, 4.08784 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 0.291992, -12.1587 )
-transform/scale = Vector2( 1, 1.76469 )
+transform/pos = Vector2( 0.618995, -8.88293 )
+transform/scale = Vector2( 1, 1.672 )
 shape = SubResource( 1 )
 trigger = false
-_update_shape_index = -1
+_update_shape_index = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( -0.138023, 16.5036, -19.902, -24.8691, 19.3625, -24.6056 )
-shape_range = Vector2( -1, -1 )
+polygon = Vector2Array( -6.60902, -44.0276, -8.88175, -36.3353, -4.68594, -27.9437, -0.490143, -31.615, -3.28735, -19.7269, -4.24939, 7.55747, -4.51112, 21.7066, -6.78384, 35.6927, 0.757507, 47.6127, 7.90147, 31.1472, 5.97839, 4.92343, 7.72665, -14.657, 3.65623, -30.3895, 3.70567, -35.9857, 5.45392, -43.3283, 4.57979, -46.8248, -2.76287, -48.2234 )
+shape_range = Vector2( 1, 5 )
 trigger = false
 
 [node name="ui" type="CanvasLayer" parent="."]
@@ -266,7 +301,7 @@ scale = Vector2( 1, 1 )
 
 transform/pos = Vector2( 27.7593, 360.87 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 3 )
+normal = ExtResource( 16 )
 pressed = null
 bitmask = null
 shape = null
@@ -280,7 +315,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 121.542, 361.415 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 4 )
+normal = ExtResource( 17 )
 pressed = null
 bitmask = null
 shape = null
@@ -294,7 +329,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 666.224, 359.02 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 5 )
+normal = ExtResource( 18 )
 pressed = null
 bitmask = null
 shape = null
@@ -308,7 +343,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 668.073, 262.788 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 6 )
+normal = ExtResource( 19 )
 pressed = null
 bitmask = null
 shape = null
