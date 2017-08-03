@@ -5,6 +5,9 @@ extends Node
 # var a=2
 # var b="textvar"
 var zoom_factor=1
+var zoomx = 1
+var zoomy = 1
+var coeffzoomfinal = 0.5
 
 func _ready():
 	set_fixed_process(true)
@@ -29,12 +32,18 @@ func _fixed_process(delta):
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
 	elif (get_node(".").has_node("Player1")):
-		var p1 = get_node("Player1")
-		var newpos = (p1.get_global_pos())
+		var newpos = (get_node("Player1").get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
-		get_node("Camera2D").set_zoom(Vector2(1,1))
+		if (get_node("Camera2D").get_zoom().x > 1):
+			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+		if (get_node("Camera2D").get_zoom().y > 1):
+			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 	elif (get_node(".").has_node("Player2")):
-		var p2 = get_node("Player2")
-		var newpos = (p2.get_global_pos())
+		var newpos = (get_node("Player2").get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
-		get_node("Camera2D").set_zoom(Vector2(1,1))
+		if (get_node("Camera2D").get_zoom().x > 1):
+			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+		if (get_node("Camera2D").get_zoom().y > 1):
+			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))

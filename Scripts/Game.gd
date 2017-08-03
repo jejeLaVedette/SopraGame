@@ -3,7 +3,7 @@
 
 extends Node
 
-onready var hud_scene = preload("res://hud/main.tscn")
+onready var hud_scene = preload("res://Hud/main.tscn")
 
 # Consts for status
 const STATUS_ALIVE = 0

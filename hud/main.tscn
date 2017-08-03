@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
-[ext_resource path="res://Scripts/Hud.gd" type="Script" id=1]
-[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=2]
-[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=3]
-[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
+[ext_resource path="res://Polices/Timer.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://Scripts/timer.gd" type="Script" id=3]
+[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=4]
+[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=5]
+[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -15,6 +17,24 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
+
+[node name="Timer" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 484.0
+margin/top = -22.0
+margin/right = 524.0
+margin/bottom = 78.0
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 3 )
 
 [node name="Notices" type="Control" parent="."]
 
@@ -39,9 +59,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 1.0
-margin/top = 112.0
+margin/top = 114.0
 margin/right = 1281.0
-margin/bottom = 432.0
+margin/bottom = 434.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = 1
@@ -90,9 +110,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 2 )
+texture/under = ExtResource( 4 )
 texture/over = null
-texture/progress = ExtResource( 3 )
+texture/progress = ExtResource( 5 )
 mode = 1
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
@@ -114,9 +134,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 2 )
+texture/under = ExtResource( 4 )
 texture/over = null
-texture/progress = ExtResource( 4 )
+texture/progress = ExtResource( 6 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
