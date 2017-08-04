@@ -1,9 +1,5 @@
-
 extends Node
 
-# member variables here, example:
-# var a=2
-# var b="textvar"
 var zoom_factor=1
 var zoomx = 1
 var zoomy = 1
@@ -18,6 +14,8 @@ func _input(event):
 
 	if (retry):
 		get_tree().reload_current_scene()
+		Game.round_current += 1
+		Game.timer = 0
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position

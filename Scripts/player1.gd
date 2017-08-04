@@ -1,4 +1,3 @@
-
 extends RigidBody2D
 
 # Member variables
@@ -225,4 +224,5 @@ func damage(dmg):
 		die()
 
 func die():
+	Game.number_player2_victory += 1 
 	queue_free()
