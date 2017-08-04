@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://Polices/Timer.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=3]
-[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=4]
-[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=5]
+[ext_resource path="res://Polices/Victory.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=4]
+[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=5]
+[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -41,10 +42,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 401.0
-margin/top = 264.0
-margin/right = 600.0
-margin/bottom = 467.0
+margin/left = 399.0
+margin/top = 29.0
+margin/right = 598.0
+margin/bottom = 232.0
 custom_fonts/font = ExtResource( 2 )
 text = "Round"
 align = 1
@@ -59,12 +60,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 2.0
-margin/top = 30.0
-margin/right = 42.0
-margin/bottom = 130.0
-custom_fonts/font = ExtResource( 2 )
-text = "1"
+margin/left = -5.0
+margin/top = -10.0
+margin/right = 57.0
+margin/bottom = 90.0
+custom_fonts/font = ExtResource( 3 )
+text = "W:1"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -77,12 +78,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 977.0
-margin/top = 30.0
-margin/right = 1017.0
-margin/bottom = 130.0
-custom_fonts/font = ExtResource( 2 )
-text = "1"
+margin/left = 952.0
+margin/top = -10.0
+margin/right = 1019.0
+margin/bottom = 90.0
+custom_fonts/font = ExtResource( 3 )
+text = "W:1"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -166,9 +167,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 3 )
+texture/under = ExtResource( 4 )
 texture/over = null
-texture/progress = ExtResource( 4 )
+texture/progress = ExtResource( 5 )
 mode = 1
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
@@ -190,9 +191,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 3 )
+texture/under = ExtResource( 4 )
 texture/over = null
-texture/progress = ExtResource( 5 )
+texture/progress = ExtResource( 6 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 

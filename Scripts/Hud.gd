@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var rounded_timer = 0
-
+var round_initial_pos
 # Spawn a notice at center of screen
 # Currently used by shops
 func notice(bbcode):
@@ -25,12 +25,23 @@ func _ready():
 func _process(delta):
 	Game.timer += delta
 	rounded_timer = round(Game.timer)
-	get_node("Timer").set_text(str(rounded_timer))
-	get_node("NbVictoryP1").set_text(str(Game.number_player1_victory))
-	get_node("NbVictoryP2").set_text(str(Game.number_player2_victory))
+
+	if (Game.number_player1_victory > 0):
+		get_node("NbVictoryP1").show()
+		get_node("NbVictoryP1").set_text(str("W:", Game.number_player1_victory))
+	else:
+		get_node("NbVictoryP1").hide()
+	if (Game.number_player2_victory > 0):
+		get_node("NbVictoryP2").show()
+		get_node("NbVictoryP2").set_text(str("W:", Game.number_player2_victory))
+	else:
+		get_node("NbVictoryP2").hide()
+
 	get_node("Round").set_text(str("ROUND ", Game.round_current))
-	if (rounded_timer < 3):
+	if (rounded_timer < 2):
+		get_node("Timer").hide()
 		get_node("Round").show()
-		get_node("Round").set_size(Vector2(rounded_timer, rounded_timer))
 	else:
 		get_node("Round").hide()
+		get_node("Timer").show()
+		get_node("Timer").set_text(str(rounded_timer-1))
