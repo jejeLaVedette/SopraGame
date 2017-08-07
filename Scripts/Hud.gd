@@ -44,4 +44,5 @@ func _process(delta):
 	else:
 		get_node("Round").hide()
 		get_node("Timer").show()
-		get_node("Timer").set_text(str(rounded_timer-1))
+		if (get_node("/root/stage").has_node("Player1") && get_node("/root/stage").has_node("Player2")):
+			get_node("Timer").set_text(str(rounded_timer-1))
