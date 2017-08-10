@@ -2,8 +2,9 @@ extends CanvasLayer
 
 var rounded_timer = 0
 var round_initial_pos
-var ultimate_timer = 0
-var tex_ultimate_ready = preload("res://Images/HealthBar.png")
+var ultimate_timer_p1 = 0
+var ultimate_timer_p2 = 0
+var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 
 
@@ -58,11 +59,16 @@ func _process(delta):
 			get_node("Timer").set_text(str(rounded_timer-1))
 
 	if(Game.ultimate_player1 >= 100):
-		ultimate_timer += delta
-		if(ultimate_timer > 3):
+		ultimate_timer_p1 += delta
+		if(ultimate_timer_p1 > 3):
 			Game.ultimate_player1 = 0
-			ultimate_timer = 0
+			ultimate_timer_p1 = 0
 
+	if(Game.ultimate_player2 >= 100):
+		ultimate_timer_p2 += delta
+		if(ultimate_timer_p2 > 3):
+			Game.ultimate_player2 = 0
+			ultimate_timer_p2 = 0
 
 func _on_UltimatePlayer1_value_changed( value ):
 	if(value >= 100):
@@ -74,4 +80,7 @@ func _on_UltimatePlayer1_value_changed( value ):
 
 func _on_UltimatePlayer2_value_changed( value ):
 	if(value >= 100):
-		get_node("Control/UltimatePlayer1").set_value(100)
+		get_node("Control/UltimatePlayer2").set_value(100)
+		get_node("Control/UltimatePlayer2").set_progress_texture(tex_ultimate_ready)
+	else:
+		get_node("Control/UltimatePlayer2").set_progress_texture(tex_loading_ultimate)

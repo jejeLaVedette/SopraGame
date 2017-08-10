@@ -17,7 +17,7 @@ func _ready():
 
 func _fixed_process(delta):
 	time_explode += delta
-	if(Game.ultimate_player1 > 100):
+	if(Game.ultimate_player2 >= 100):
 		if(time_explode > 0.48 and time_explode < 0.5):
 			for i in range(8):
 				rotation-=45

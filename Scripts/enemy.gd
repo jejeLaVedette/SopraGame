@@ -14,7 +14,7 @@ var rc_left = null
 var rc_right = null
 var WALK_SPEED = 50
 
-var bullet_class = preload("res://Scripts/bullet.gd")
+var bullet_class = preload("res://Scripts/bullet1.gd")
 
 
 func _die():

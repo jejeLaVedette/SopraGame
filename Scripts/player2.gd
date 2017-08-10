@@ -26,7 +26,7 @@ var shoot_time = 1e20
 
 var MAX_SHOOT_POSE_TIME = 0.3
 
-var bullet = preload("res://bullet.tscn")
+var bullet = preload("res://bullet2.tscn")
 
 var floor_h_velocity = 0.0
 var player
@@ -215,6 +215,7 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
+
 func _fixed_process(delta):
 	get_node("/root/Game/HUD/Control/HealthPlayer2").set_value(health)
 	get_node("/root/Game/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_player2)
@@ -222,10 +223,12 @@ func _fixed_process(delta):
 	if (get_parent().has_node("Player1")):
 		Game.ultimate_player2 += delta*5
 
+
 func damage(dmg):
 	health -= dmg
 	if health <= 0:
 		die()
+
 
 func die():
 	Game.number_player1_victory += 1

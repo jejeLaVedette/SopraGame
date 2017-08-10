@@ -5,17 +5,19 @@ var zoomx = 1
 var zoomy = 1
 var coeffzoomfinal = 0.5
 
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
+
 func _input(event):
 	var retry = Input.is_action_pressed("retry")
-
 	if (retry):
 		get_tree().reload_current_scene()
 		Game.round_current += 1
 		Game.timer = 0
+
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
