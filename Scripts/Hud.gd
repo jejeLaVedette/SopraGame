@@ -2,25 +2,35 @@ extends CanvasLayer
 
 var rounded_timer = 0
 var round_initial_pos
+var ultimate_timer = 0
+var tex_ultimate_ready = preload("res://Images/HealthBar.png")
+var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
+
+
 # Spawn a notice at center of screen
 # Currently used by shops
 func notice(bbcode):
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
 
+
 # Clears the notice by setting empty text to it
 func clear_notice():
 	get_node("Notices/NoticesLabel").set_bbcode("")
+
 
 func _on_HealthPlayer2_value_changed( value ):
 	if(value <= 0):
 		get_node("Control/HealthPlayer2").set_value(0)
 
+
 func _on_HealthPlayer1_value_changed( value ):
 	if(value <= 0):
 		get_node("Control/HealthPlayer1").set_value(0)
 
+
 func _ready():
 	set_process(true)
+
 
 func _process(delta):
 	Game.timer += delta
@@ -44,5 +54,24 @@ func _process(delta):
 	else:
 		get_node("Round").hide()
 		get_node("Timer").show()
-		if (get_node("/root/stage").has_node("Player1") && get_node("/root/stage").has_node("Player2")):
+		if (get_node("/root/stage").has_node("Player1") and get_node("/root/stage").has_node("Player2")):
 			get_node("Timer").set_text(str(rounded_timer-1))
+
+	if(Game.ultimate_player1 >= 100):
+		ultimate_timer += delta
+		if(ultimate_timer > 3):
+			Game.ultimate_player1 = 0
+			ultimate_timer = 0
+
+
+func _on_UltimatePlayer1_value_changed( value ):
+	if(value >= 100):
+		get_node("Control/UltimatePlayer1").set_value(100)
+		get_node("Control/UltimatePlayer1").set_progress_texture(tex_ultimate_ready)
+	else:
+		get_node("Control/UltimatePlayer1").set_progress_texture(tex_loading_ultimate)
+
+
+func _on_UltimatePlayer2_value_changed( value ):
+	if(value >= 100):
+		get_node("Control/UltimatePlayer1").set_value(100)

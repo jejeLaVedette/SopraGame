@@ -4,8 +4,8 @@
 [ext_resource path="res://Polices/Timer.fnt" type="BitmapFont" id=2]
 [ext_resource path="res://Polices/Victory.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=4]
-[ext_resource path="res://Images/HealthBarRight.PNG" type="Texture" id=5]
-[ext_resource path="res://Images/HealthBarLeft.png" type="Texture" id=6]
+[ext_resource path="res://Images/HealthBar.png" type="Texture" id=5]
+[ext_resource path="res://Images/UltimateBar.png" type="Texture" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -60,10 +60,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = -5.0
-margin/top = -10.0
-margin/right = 57.0
-margin/bottom = 90.0
+margin/left = 0.0
+margin/top = 20.0
+margin/right = 62.0
+margin/bottom = 120.0
 custom_fonts/font = ExtResource( 3 )
 text = "W:1"
 align = 1
@@ -79,9 +79,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 952.0
-margin/top = -10.0
+margin/top = 20.0
 margin/right = 1019.0
-margin/bottom = 90.0
+margin/bottom = 120.0
 custom_fonts/font = ExtResource( 3 )
 text = "W:1"
 align = 1
@@ -145,21 +145,21 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 640.0
-margin/top = 720.0
-margin/right = 640.0
-margin/bottom = 720.0
+margin/left = 512.0
+margin/top = 640.0
+margin/right = 512.0
+margin/bottom = 640.0
 
-[node name="HealthPlayer2" type="TextureProgress" parent="Control"]
+[node name="HealthPlayer1" type="TextureProgress" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 887.0
-margin/top = 90.0
-margin/right = 1147.0
-margin/bottom = 138.0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 270.0
+margin/bottom = 58.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -170,20 +170,43 @@ range/rounded = false
 texture/under = ExtResource( 4 )
 texture/over = null
 texture/progress = ExtResource( 5 )
-mode = 1
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
-[node name="HealthPlayer1" type="TextureProgress" parent="Control"]
+[node name="HealthPlayer2" type="TextureProgress" parent="Control"]
+
+rect/scale = Vector2( -1, 1 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1017.0
+margin/top = 10.0
+margin/right = 1277.0
+margin/bottom = 58.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 4 )
+texture/over = null
+texture/progress = ExtResource( 5 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+
+[node name="UltimatePlayer1" type="TextureProgress" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 134.0
-margin/top = 90.0
-margin/right = 394.0
-margin/bottom = 138.0
+margin/left = 10.0
+margin/top = 27.0
+margin/right = 270.0
+margin/bottom = 67.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -197,8 +220,36 @@ texture/progress = ExtResource( 6 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
-[connection signal="value_changed" from="Control/HealthPlayer2" to="." method="_on_HealthPlayer2_value_changed"]
+[node name="UltimatePlayer2" type="TextureProgress" parent="Control"]
+
+rect/scale = Vector2( -1, 1 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1017.0
+margin/top = 28.0
+margin/right = 1277.0
+margin/bottom = 68.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 4 )
+texture/over = null
+texture/progress = ExtResource( 6 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
 
 [connection signal="value_changed" from="Control/HealthPlayer1" to="." method="_on_HealthPlayer1_value_changed"]
+
+[connection signal="value_changed" from="Control/HealthPlayer2" to="." method="_on_HealthPlayer2_value_changed"]
+
+[connection signal="value_changed" from="Control/UltimatePlayer1" to="." method="_on_UltimatePlayer1_value_changed"]
+
+[connection signal="value_changed" from="Control/UltimatePlayer2" to="." method="_on_UltimatePlayer2_value_changed"]
 
 

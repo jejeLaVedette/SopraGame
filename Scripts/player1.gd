@@ -32,7 +32,6 @@ var floor_h_velocity = 0.0
 var player
 
 
-
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -84,6 +83,8 @@ func _integrate_forces(s):
 		bi.get_node("sprite").set_rotd(birot)
 		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
+		if (get_parent().has_node("Player2")):
+			Game.ultimate_player1 += 5
 	else:
 		shoot_time += step
 	
@@ -214,15 +215,21 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
+
 func _fixed_process(delta):
 	get_node("/root/Game/HUD/Control/HealthPlayer1").set_value(health)
+	get_node("/root/Game/HUD/Control/UltimatePlayer1").set_value(Game.ultimate_player1)
 	health += delta * 2
+	if (get_parent().has_node("Player2")):
+		Game.ultimate_player1 += delta*5
+
 
 func damage(dmg):
 	health -= dmg
 	if health <= 0:
 		die()
 
+
 func die():
-	Game.number_player2_victory += 1 
+	Game.number_player2_victory += 1
 	queue_free()
