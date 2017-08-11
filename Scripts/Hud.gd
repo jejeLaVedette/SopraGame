@@ -6,6 +6,7 @@ var ultimate_timer_p1 = 0
 var ultimate_timer_p2 = 0
 var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
+var gatlinggun = preload("res://gatlinggun.tscn")
 
 
 # Spawn a notice at center of screen
@@ -55,6 +56,13 @@ func _process(delta):
 	else:
 		get_node("Round").hide()
 		get_node("Timer").show()
+		if(not Game.spawn_gatlinggun):
+			var gi = gatlinggun.instance()
+			var posx = randi()%1000+100
+			gi.set_pos(Vector2(posx, 100))
+			get_node("/root/stage").add_child(gi)
+			Game.spawn_gatlinggun = true
+
 		if (get_node("/root/stage").has_node("Player1") and get_node("/root/stage").has_node("Player2")):
 			get_node("Timer").set_text(str(rounded_timer-1))
 

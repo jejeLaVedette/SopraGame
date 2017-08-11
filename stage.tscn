@@ -15,7 +15,7 @@
 
 script/script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sky" type="Sprite" parent="."]
 
 transform/pos = Vector2( 881.456, 791.414 )
 transform/scale = Vector2( 5.39968, 1.4699 )
@@ -49,7 +49,7 @@ __meta__ = {
 
 [node name="coin" parent="coins" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 164.783, -96.4922 )
+transform/pos = Vector2( 248.034, -76.097 )
 
 [node name="props" type="Node" parent="."]
 

@@ -17,6 +17,7 @@ func _input(event):
 		get_tree().reload_current_scene()
 		Game.round_current += 1
 		Game.timer = 0
+		Game.spawn_gatlinggun = false
 
 
 func _fixed_process(delta):

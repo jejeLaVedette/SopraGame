@@ -17,6 +17,7 @@ onready var munitions = 0
 onready var munitions_total = 0
 onready var round_max = 3
 onready var round_current = 1
+onready var spawn_gatlinggun = false
 
 # Player stats
 onready var number_player1_victory = 0
