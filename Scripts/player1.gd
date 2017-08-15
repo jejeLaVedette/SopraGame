@@ -67,7 +67,13 @@ func _integrate_forces(s):
 	# A good idea when impementing characters of all kinds,
 	# compensates for physics imprecission, as well as human reaction delay.
 	if (shoot and not shooting) || (Game.gatlinggun_p1):
-		shoot_time = 0
+		if (Game.gatlinggun_p1):
+			crouch = null
+			jump = null
+			shoot = null
+			hauteur_tir = 13
+		else:
+			shoot_time = 0
 		var bi = bullet.instance()
 		var ss
 		if (siding_left):
@@ -195,7 +201,10 @@ func _integrate_forces(s):
 			get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
 			get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
 		siding_left = new_siding_left
-	
+
+	if (Game.gatlinggun_p1):
+		new_anim = "idle"
+
 	# Change animation
 	if (new_anim != anim):
 		anim = new_anim
@@ -225,16 +234,13 @@ func _fixed_process(delta):
 	Game.health_p1 += delta * 2
 	if (get_parent().has_node("Player2") and not Game.gatlinggun_p1):
 		Game.ultimate_p1 += delta*5
-	if (Game.gatlinggun_p1 and GatlingGun_Timer < 2):
+	if (Game.gatlinggun_p1 and GatlingGun_Timer < 3):
 		GatlingGun_Timer += delta
-		WALK_MAX_VELOCITY = 50
-		JUMP_VELOCITY = 300
+		WALK_MAX_VELOCITY = 1
 		get_node("GatlingGun").set_opacity(1)
-#		get_node("GatlingGun/Particles2D").set_opacity(1)
 	else:
 		Game.gatlinggun_p1 = false
 		WALK_MAX_VELOCITY = 200
-		JUMP_VELOCITY = 460
 		get_node("GatlingGun").set_opacity(0)
 
 

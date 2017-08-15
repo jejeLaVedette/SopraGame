@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=1]
+[gd_scene load_steps=38 format=1]
 
 [ext_resource path="res://Scripts/player2.gd" type="Script" id=1]
 [ext_resource path="res://Images/Player2/PlayerIdle.png" type="Texture" id=2]
@@ -14,11 +14,14 @@
 [ext_resource path="res://Images/Player2/PlayerWalk7.png" type="Texture" id=12]
 [ext_resource path="res://Images/Player2/PlayerWalk8.png" type="Texture" id=13]
 [ext_resource path="res://Images/Player2/PlayerFalling.png" type="Texture" id=14]
-[ext_resource path="res://player2.tres" type="Animation" id=15]
-[ext_resource path="res://Images/osb_left.png" type="Texture" id=16]
-[ext_resource path="res://Images/osb_right.png" type="Texture" id=17]
-[ext_resource path="res://Images/osb_jump.png" type="Texture" id=18]
-[ext_resource path="res://Images/osb_fire.png" type="Texture" id=19]
+[ext_resource path="res://Images/GatlingGun.png" type="Texture" id=15]
+[ext_resource path="res://Images/fire_particle.png" type="Texture" id=16]
+[ext_resource path="res://Images/smokeparticle.png" type="Texture" id=17]
+[ext_resource path="res://player2.tres" type="Animation" id=18]
+[ext_resource path="res://Images/osb_left.png" type="Texture" id=19]
+[ext_resource path="res://Images/osb_right.png" type="Texture" id=20]
+[ext_resource path="res://Images/osb_jump.png" type="Texture" id=21]
+[ext_resource path="res://Images/osb_fire.png" type="Texture" id=22]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -241,6 +244,75 @@ transform/pos = Vector2( -0.237823, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "Player2"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GatlingGun" type="Sprite" parent="."]
+
+transform/pos = Vector2( 18, -15 )
+transform/scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 15 )
+
+[node name="Sparks" type="Particles2D" parent="GatlingGun"]
+
+transform/pos = Vector2( 275, 16.6667 )
+transform/rot = 90.0
+transform/scale = Vector2( 1.41146, 1.41146 )
+config/amount = 32
+config/lifetime = 2.0
+config/process_mode = 1
+config/half_extents = Vector2( 20, 0 )
+config/texture = ExtResource( 16 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 50.0
+params/spin_velocity = 5.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 10.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.5
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/spread = 10.0
+randomness/spin_velocity = 5.0
+color/color = Color( 0.96875, 1, 0, 1 )
+
+[node name="Smoke" type="Particles2D" parent="GatlingGun"]
+
+transform/pos = Vector2( -225, 16.6667 )
+config/amount = 10
+config/lifetime = 2.0
+config/time_scale = 0.5
+config/process_mode = 1
+config/half_extents = Vector2( 8, 8 )
+config/texture = ExtResource( 17 )
+params/direction = 200.0
+params/spread = 10.0
+params/linear_velocity = 80.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.1
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/direction = 0.5
+randomness/spread = 0.3
+randomness/linear_velocity = 0.6
+color/color = Color( 0.71875, 0.71875, 0.71875, 1 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
@@ -256,7 +328,7 @@ anims/jumping = SubResource( 12 )
 anims/jumping_weapon = SubResource( 13 )
 anims/run = SubResource( 14 )
 anims/run_weapon = SubResource( 15 )
-anims/standing_weapon_ready = ExtResource( 15 )
+anims/standing_weapon_ready = ExtResource( 18 )
 playback/active = true
 playback/speed = 2.0
 blend_times = [  ]
@@ -265,6 +337,9 @@ autoplay = "idle"
 [node name="bullet_shoot" type="Position2D" parent="."]
 
 transform/pos = Vector2( 31.2428, 4.08784 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -272,6 +347,9 @@ transform/pos = Vector2( 0, 13 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
@@ -279,6 +357,9 @@ build_mode = 0
 polygon = Vector2Array( -6.05104, -45, -9.05104, -37, -5.05104, -28, -0.490143, -31.615, -3.05104, -20, -4.05104, 7, -5.05104, 21, -6, 36, 0, 45, 6, 36, 3.94896, 21, 7.94896, -15, 3.94896, -31, 3.94896, -36, 4.94896, -44, 2.94896, -47, -3.05104, -48 )
 shape_range = Vector2( 1, 4 )
 trigger = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ui" type="CanvasLayer" parent="."]
 
@@ -292,7 +373,7 @@ scale = Vector2( 1, 1 )
 
 transform/pos = Vector2( 27.7593, 360.87 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 16 )
+normal = ExtResource( 19 )
 pressed = null
 bitmask = null
 shape = null
@@ -306,7 +387,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 121.542, 361.415 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 17 )
+normal = ExtResource( 20 )
 pressed = null
 bitmask = null
 shape = null
@@ -320,7 +401,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 666.224, 359.02 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 18 )
+normal = ExtResource( 21 )
 pressed = null
 bitmask = null
 shape = null
@@ -334,7 +415,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 668.073, 262.788 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 19 )
+normal = ExtResource( 22 )
 pressed = null
 bitmask = null
 shape = null

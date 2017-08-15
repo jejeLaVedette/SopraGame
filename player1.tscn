@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=1]
+[gd_scene load_steps=38 format=1]
 
 [ext_resource path="res://Scripts/player1.gd" type="Script" id=1]
 [ext_resource path="res://Images/Player1/PlayerIdle.png" type="Texture" id=2]
@@ -15,12 +15,13 @@
 [ext_resource path="res://Images/Player1/PlayerWalk8.png" type="Texture" id=13]
 [ext_resource path="res://Images/Player1/PlayerFalling.png" type="Texture" id=14]
 [ext_resource path="res://Images/GatlingGun.png" type="Texture" id=15]
-[ext_resource path="res://Images/coin.png" type="Texture" id=16]
-[ext_resource path="res://player1.tres" type="Animation" id=17]
-[ext_resource path="res://Images/osb_left.png" type="Texture" id=18]
-[ext_resource path="res://Images/osb_right.png" type="Texture" id=19]
-[ext_resource path="res://Images/osb_jump.png" type="Texture" id=20]
-[ext_resource path="res://Images/osb_fire.png" type="Texture" id=21]
+[ext_resource path="res://Images/fire_particle.png" type="Texture" id=16]
+[ext_resource path="res://Images/smokeparticle.png" type="Texture" id=17]
+[ext_resource path="res://player1.tres" type="Animation" id=18]
+[ext_resource path="res://Images/osb_left.png" type="Texture" id=19]
+[ext_resource path="res://Images/osb_right.png" type="Texture" id=20]
+[ext_resource path="res://Images/osb_jump.png" type="Texture" id=21]
+[ext_resource path="res://Images/osb_fire.png" type="Texture" id=22]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -249,37 +250,69 @@ __meta__ = {
 
 [node name="GatlingGun" type="Sprite" parent="."]
 
-visibility/opacity = 0.0
-transform/pos = Vector2( 18, -15 )
+transform/pos = Vector2( 19, -14 )
 transform/scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 15 )
 
-[node name="Particles2D" type="Particles2D" parent="GatlingGun"]
+[node name="Sparks" type="Particles2D" parent="GatlingGun"]
 
-transform/pos = Vector2( 316.667, 25 )
+transform/pos = Vector2( 275, 16.6667 )
 transform/rot = 90.0
 transform/scale = Vector2( 1.41146, 1.41146 )
 config/amount = 32
 config/lifetime = 2.0
 config/process_mode = 1
+config/half_extents = Vector2( 20, 0 )
 config/texture = ExtResource( 16 )
 params/direction = 0.0
-params/spread = 50.0
-params/linear_velocity = 100.0
-params/spin_velocity = 100.0
-params/orbit_velocity = 10.0
+params/spread = 10.0
+params/linear_velocity = 50.0
+params/spin_velocity = 5.0
+params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
 params/gravity_strength = 9.8
 params/radial_accel = 10.0
 params/tangential_accel = 0.0
 params/damping = 0.0
 params/initial_angle = 0.0
-params/initial_size = 1.0
+params/initial_size = 0.5
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/spread = 10.0
+randomness/spin_velocity = 5.0
+color/color = Color( 0.96875, 1, 0, 1 )
+
+[node name="Smoke" type="Particles2D" parent="GatlingGun"]
+
+transform/pos = Vector2( -225, 16.6667 )
+config/amount = 10
+config/lifetime = 2.0
+config/time_scale = 0.5
+config/process_mode = 1
+config/half_extents = Vector2( 8, 8 )
+config/texture = ExtResource( 17 )
+params/direction = 200.0
+params/spread = 10.0
+params/linear_velocity = 80.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.1
 params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color = Color( 0.917969, 0.644606, 0.0645447, 1 )
+randomness/direction = 0.5
+randomness/spread = 0.3
+randomness/linear_velocity = 0.6
+color/color = Color( 0.71875, 0.71875, 0.71875, 1 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
@@ -295,7 +328,7 @@ anims/jumping = SubResource( 12 )
 anims/jumping_weapon = SubResource( 13 )
 anims/run = SubResource( 14 )
 anims/run_weapon = SubResource( 15 )
-anims/standing_weapon_ready = ExtResource( 17 )
+anims/standing_weapon_ready = ExtResource( 18 )
 playback/active = true
 playback/speed = 2.0
 blend_times = [  ]
@@ -340,7 +373,7 @@ scale = Vector2( 1, 1 )
 
 transform/pos = Vector2( 27.7593, 360.87 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 18 )
+normal = ExtResource( 19 )
 pressed = null
 bitmask = null
 shape = null
@@ -354,7 +387,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 121.542, 361.415 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 19 )
+normal = ExtResource( 20 )
 pressed = null
 bitmask = null
 shape = null
@@ -368,7 +401,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 666.224, 359.02 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 20 )
+normal = ExtResource( 21 )
 pressed = null
 bitmask = null
 shape = null
@@ -382,7 +415,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 668.073, 262.788 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 21 )
+normal = ExtResource( 22 )
 pressed = null
 bitmask = null
 shape = null
@@ -391,7 +424,5 @@ shape_visible = true
 passby_press = false
 action = "shoot"
 visibility_mode = 1
-
-[connection signal="body_enter" from="." to="." method="_on_player_body_enter"]
 
 

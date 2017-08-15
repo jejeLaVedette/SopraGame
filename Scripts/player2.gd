@@ -9,6 +9,7 @@ var shooting = false
 var birot = 0
 var direction = -1
 var hauteur_tir = 0
+var GatlingGun_Timer = 0
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -65,8 +66,14 @@ func _integrate_forces(s):
 	
 	# A good idea when impementing characters of all kinds,
 	# compensates for physics imprecission, as well as human reaction delay.
-	if (shoot and not shooting):
-		shoot_time = 0
+	if (shoot and not shooting) || (Game.gatlinggun_p2):
+		if (Game.gatlinggun_p2):
+			crouch = null
+			jump = null
+			shoot = null
+			hauteur_tir = 13
+		else:
+			shoot_time = 0
 		var bi = bullet.instance()
 		var ss
 		if (siding_right):
@@ -82,7 +89,7 @@ func _integrate_forces(s):
 		bi.get_node("sprite").set_rotd(birot)
 		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
-		if (get_parent().has_node("Player1")):
+		if (get_parent().has_node("Player1") and not Game.gatlinggun_p2):
 			Game.ultimate_p2 += 5
 	else:
 		shoot_time += step
@@ -187,11 +194,17 @@ func _integrate_forces(s):
 	if (new_siding_right != siding_right):
 		if (new_siding_right):
 			get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+			get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
+			get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
 		else:
 			get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
-		
+			get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
+			get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
 		siding_right = new_siding_right
-	
+
+	if (Game.gatlinggun_p2):
+		new_anim = "idle"
+
 	# Change animation
 	if (new_anim != anim):
 		anim = new_anim
@@ -219,8 +232,16 @@ func _fixed_process(delta):
 	get_node("/root/Game/HUD/Control/HealthPlayer2").set_value(Game.health_p2)
 	get_node("/root/Game/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_p2)
 	Game.health_p2 += delta * 2
-	if (get_parent().has_node("Player1")):
+	if (get_parent().has_node("Player1") and not Game.gatlinggun_p2):
 		Game.ultimate_p2 += delta*5
+	if (Game.gatlinggun_p2 and GatlingGun_Timer < 3):
+		GatlingGun_Timer += delta
+		WALK_MAX_VELOCITY = 1
+		get_node("GatlingGun").set_opacity(1)
+	else:
+		Game.gatlinggun_p2 = false
+		WALK_MAX_VELOCITY = 200
+		get_node("GatlingGun").set_opacity(0)
 
 
 func damage(dmg):
