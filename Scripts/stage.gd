@@ -18,6 +18,12 @@ func _input(event):
 		Game.round_current += 1
 		Game.timer = 0
 		Game.spawn_gatlinggun = false
+		Game.gatlinggun_p1 = false
+		Game.gatlinggun_p2 = false
+		Game.health_p1 = Game.health_limit
+		Game.health_p2 = Game.health_limit
+		randomize()
+		Game.spawn_timer = randi()%12+2
 
 
 func _fixed_process(delta):

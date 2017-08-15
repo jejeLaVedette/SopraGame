@@ -64,15 +64,15 @@ points = Vector2Array( -32, -24, 32, -24, 32, 24, -32, 24 )
 custom_solver_bias = 0.0
 points = Vector2Array( -32, -24, 24, -24, 24, 24, -32, 24 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="ConvexPolygonShape2D" id=13]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="ConvexPolygonShape2D" id=14]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
 [node name="Node" type="Node"]
 
@@ -450,7 +450,7 @@ max_lines_visible = -1
 
 [node name="floor2" type="Sprite" parent="."]
 
-transform/pos = Vector2( 377.212, 174.593 )
+transform/pos = Vector2( 412, 182 )
 texture = ExtResource( 2 )
 
 [node name="collision" type="StaticBody2D" parent="floor2"]
@@ -466,15 +466,16 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor2/collision"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor2/collision"]
 
-shape = SubResource( 13 )
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
 trigger = false
-_update_shape_index = 0
 
 [node name="wall2" type="Sprite" parent="."]
 
-transform/pos = Vector2( 497.235, 174.339 )
+transform/pos = Vector2( 477, 182 )
 texture = ExtResource( 3 )
 
 [node name="colision" type="StaticBody2D" parent="wall2"]
@@ -490,10 +491,11 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall2/colision"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall2/colision"]
 
-shape = SubResource( 14 )
+build_mode = 0
+polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+shape_range = Vector2( 0, 0 )
 trigger = false
-_update_shape_index = 0
 
 

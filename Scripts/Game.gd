@@ -6,10 +6,10 @@ onready var hud_scene = preload("res://Hud/main.tscn")
 const HEALTH_MAX = 100.0
 const ARMOR_MAX = 100.0
 const SHOOT_MAX = 3
-onready var healthPlayer1 = 100.0
-onready var healthPlayer2 = 100.0
 onready var armor = 0.0
 onready var ammo = 4
+onready var health_limit = 100
+onready var ultimate_limit = 100
 
 # Level stats
 onready var timer = 0
@@ -18,12 +18,17 @@ onready var munitions_total = 0
 onready var round_max = 3
 onready var round_current = 1
 onready var spawn_gatlinggun = false
+onready var gatlinggun_p1 = false
+onready var gatlinggun_p2 = false
+onready var spawn_timer = randi()%12+2
 
 # Player stats
-onready var number_player1_victory = 0
-onready var ultimate_player1 = 0
-onready var number_player2_victory = 0
-onready var ultimate_player2 = 0
+onready var number_victory_p1 = 0
+onready var ultimate_p1 = 0
+onready var health_p1 = 100
+onready var number_victory_p2 = 0
+onready var ultimate_p2 = 0
+onready var health_p2 = 100
 
 
 func _ready():

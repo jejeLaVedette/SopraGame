@@ -1,12 +1,12 @@
 extends RigidBody2D
 
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-
-func _on_RigidBody2D_body_enter( body ):
-	if (body.has_method("damage")):
+func _on_GatlingGun_body_enter( body ):
+	get_node(".").set_gravity_scale(1)
+	get_node("Parachute").set_opacity(0)
+	if (body.has_method("die_p1")):
+		Game.gatlinggun_p1 = true
+		queue_free()
+	elif (body.has_method("die_p2")):
+		Game.gatlinggun_p2 = true
 		queue_free()

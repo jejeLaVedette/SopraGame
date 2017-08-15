@@ -9,7 +9,6 @@ var shooting = false
 var birot = 0
 var direction = -1
 var hauteur_tir = 0
-onready var health = 100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -84,7 +83,7 @@ func _integrate_forces(s):
 		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 		if (get_parent().has_node("Player1")):
-			Game.ultimate_player2 += 5
+			Game.ultimate_p2 += 5
 	else:
 		shoot_time += step
 	
@@ -217,19 +216,19 @@ func _ready():
 
 
 func _fixed_process(delta):
-	get_node("/root/Game/HUD/Control/HealthPlayer2").set_value(health)
-	get_node("/root/Game/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_player2)
-	health += delta * 2
+	get_node("/root/Game/HUD/Control/HealthPlayer2").set_value(Game.health_p2)
+	get_node("/root/Game/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_p2)
+	Game.health_p2 += delta * 2
 	if (get_parent().has_node("Player1")):
-		Game.ultimate_player2 += delta*5
+		Game.ultimate_p2 += delta*5
 
 
 func damage(dmg):
-	health -= dmg
-	if health <= 0:
-		die()
+	Game.health_p2 -= dmg
+	if Game.health_p2 <= 0:
+		die_p2()
 
 
-func die():
-	Game.number_player1_victory += 1
+func die_p2():
+	Game.number_victory_p1 += 1
 	queue_free()

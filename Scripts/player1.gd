@@ -9,7 +9,7 @@ var shooting = false
 var birot = 0
 var direction = 1
 var hauteur_tir = 0
-onready var health = 100
+var GatlingGun_Timer = 0
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -66,7 +66,7 @@ func _integrate_forces(s):
 	
 	# A good idea when impementing characters of all kinds,
 	# compensates for physics imprecission, as well as human reaction delay.
-	if (shoot and not shooting):
+	if (shoot and not shooting) || (Game.gatlinggun_p1):
 		shoot_time = 0
 		var bi = bullet.instance()
 		var ss
@@ -83,8 +83,8 @@ func _integrate_forces(s):
 		bi.get_node("sprite").set_rotd(birot)
 		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
-		if (get_parent().has_node("Player2")):
-			Game.ultimate_player1 += 5
+		if (get_parent().has_node("Player2") and not Game.gatlinggun_p1):
+			Game.ultimate_p1 += 5
 	else:
 		shoot_time += step
 	
@@ -187,10 +187,13 @@ func _integrate_forces(s):
 	# Update siding
 	if (new_siding_left != siding_left):
 		if (new_siding_left):
-			get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+			get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
+			get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
+			get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
 		else:
-			get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
-		
+			get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
+			get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
+			get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
 		siding_left = new_siding_left
 	
 	# Change animation
@@ -217,19 +220,30 @@ func _ready():
 
 
 func _fixed_process(delta):
-	get_node("/root/Game/HUD/Control/HealthPlayer1").set_value(health)
-	get_node("/root/Game/HUD/Control/UltimatePlayer1").set_value(Game.ultimate_player1)
-	health += delta * 2
-	if (get_parent().has_node("Player2")):
-		Game.ultimate_player1 += delta*5
+	get_node("/root/Game/HUD/Control/HealthPlayer1").set_value(Game.health_p1)
+	get_node("/root/Game/HUD/Control/UltimatePlayer1").set_value(Game.ultimate_p1)
+	Game.health_p1 += delta * 2
+	if (get_parent().has_node("Player2") and not Game.gatlinggun_p1):
+		Game.ultimate_p1 += delta*5
+	if (Game.gatlinggun_p1 and GatlingGun_Timer < 2):
+		GatlingGun_Timer += delta
+		WALK_MAX_VELOCITY = 50
+		JUMP_VELOCITY = 300
+		get_node("GatlingGun").set_opacity(1)
+#		get_node("GatlingGun/Particles2D").set_opacity(1)
+	else:
+		Game.gatlinggun_p1 = false
+		WALK_MAX_VELOCITY = 200
+		JUMP_VELOCITY = 460
+		get_node("GatlingGun").set_opacity(0)
 
 
 func damage(dmg):
-	health -= dmg
-	if health <= 0:
-		die()
+	Game.health_p1 -= dmg
+	if Game.health_p1 <= 0:
+		die_p1()
 
 
-func die():
-	Game.number_player2_victory += 1
+func die_p1():
+	Game.number_victory_p2 += 1
 	queue_free()

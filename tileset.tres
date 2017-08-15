@@ -39,15 +39,15 @@ points = Vector2Array( -32, -24, 32, -24, 32, 24, -32, 24 )
 custom_solver_bias = 0.0
 points = Vector2Array( -32, -24, 24, -24, 24, 24, -32, 24 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="ConvexPolygonShape2D" id=8]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="ConvexPolygonShape2D" id=9]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
 
 [sub_resource type="ConvexPolygonShape2D" id=10]
 

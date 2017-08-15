@@ -55,15 +55,11 @@ transform/pos = Vector2( 248.034, -76.097 )
 
 [node name="moving_platform" parent="props" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 453.694, 716.145 )
+transform/pos = Vector2( 590.649, 642.657 )
 motion = Vector2( 300, 0 )
 cycle = 10.0
 
 [node name="seesaw" parent="props" instance=ExtResource( 6 )]
-
-transform/pos = Vector2( 1066.63, 789.132 )
-
-[node name="seesaw1" parent="props" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 504.326, 981.887 )
 

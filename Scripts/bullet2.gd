@@ -1,6 +1,5 @@
 extends RigidBody2D
 
-var Angle=randi() % 10
 var isAlreadyColliding
 var bodyEnnemi = false
 var bullet_explode = preload("res://bullet_explode.tscn")
@@ -17,7 +16,7 @@ func _ready():
 
 func _fixed_process(delta):
 	time_explode += delta
-	if(Game.ultimate_player2 >= 100):
+	if(Game.ultimate_p2 >= Game.ultimate_limit):
 		if(time_explode > 0.48 and time_explode < 0.5):
 			for i in range(8):
 				rotation-=45
@@ -32,7 +31,6 @@ func _fixed_process(delta):
 
 
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
-#	set_linear_damp(Angle)
 #	if (body.get_name()=="Player"):
 #		if Game.munitions < Game.munitions_total:
 #			Game.munitions += 1
