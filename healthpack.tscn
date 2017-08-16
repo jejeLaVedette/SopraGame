@@ -42,7 +42,7 @@ texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.06, 0.06 )
+transform/scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
