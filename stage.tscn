@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://Scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://Images/Sky.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://player1.tscn" type="PackedScene" id=9]
 [ext_resource path="res://player2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Images/light.png" type="Texture" id=11]
 
 [node name="stage" type="Node"]
 
@@ -104,5 +105,36 @@ drag_margin/bottom = 0.2
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+transform/pos = Vector2( 110.747, 827.78 )
+transform/rot = -180.0
+transform/scale = Vector2( 205.51, 236.24 )
+color = Color( 0.824219, 0.708816, 0.624603, 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+
+transform/pos = Vector2( 110.747, 827.78 )
+transform/scale = Vector2( -205.51, -236.24 )
+enabled = true
+editor_only = false
+texture = ExtResource( 11 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 0.214844, 0.214844, 0.214844, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = 0
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = false
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
 
 
