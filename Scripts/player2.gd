@@ -10,6 +10,7 @@ var birot = 0
 var direction = -1
 var hauteur_tir = 0
 var GatlingGun_Timer = 0
+var ultimate_timer_p2 = 0
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -91,6 +92,11 @@ func _integrate_forces(s):
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 		if (get_parent().has_node("Player1") and not Game.gatlinggun_p2):
 			Game.ultimate_p2 += 5
+		if(Game.ultimate_p2 >= Game.ultimate_limit):
+			ultimate_timer_p2 += 1
+			if(ultimate_timer_p2 > 4):
+				Game.ultimate_p2 = 0
+				ultimate_timer_p2 = 0
 	else:
 		shoot_time += step
 	

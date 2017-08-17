@@ -2,8 +2,6 @@ extends CanvasLayer
 
 var rounded_timer = 0
 var round_initial_pos
-var ultimate_timer_p1 = 0
-var ultimate_timer_p2 = 0
 var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 var gatlinggun = preload("res://gatlinggun.tscn")
@@ -72,18 +70,6 @@ func _process(delta):
 
 		if (get_node("/root/stage").has_node("Player1") and get_node("/root/stage").has_node("Player2")):
 			get_node("Timer").set_text(str(rounded_timer-1))
-
-	if(Game.ultimate_p1 >= Game.ultimate_limit):
-		ultimate_timer_p1 += delta
-		if(ultimate_timer_p1 > 3):
-			Game.ultimate_p1 = 0
-			ultimate_timer_p1 = 0
-
-	if(Game.ultimate_p2 >= Game.ultimate_limit):
-		ultimate_timer_p2 += delta
-		if(ultimate_timer_p2 > 3):
-			Game.ultimate_p2 = 0
-			ultimate_timer_p2 = 0
 
 
 func _on_UltimatePlayer1_value_changed( value ):
