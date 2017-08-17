@@ -90,8 +90,7 @@ func _integrate_forces(s):
 		bi.get_node("sprite").set_rotd(birot)
 		bi.set_linear_velocity(Vector2(800.0*ss, -100))
 		PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
-		if (get_parent().has_node("Player1") and not Game.gatlinggun_p2):
-			Game.ultimate_p2 += 5
+
 		if(Game.ultimate_p2 >= Game.ultimate_limit):
 			ultimate_timer_p2 += 1
 			if(ultimate_timer_p2 > 4):
