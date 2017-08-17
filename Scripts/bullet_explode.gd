@@ -6,9 +6,10 @@ var bodyEnnemi = false
 
 func _ready():
 	isAlreadyColliding = false
-
+	get_node("Particles2D").set_emitting(true)
 
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
+	get_node("Particles2D").set_emitting(false)
 	if (body.has_method("damage") and isAlreadyColliding == false):
 			body.damage(20)
 			bodyEnnemi = true

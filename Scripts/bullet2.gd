@@ -4,9 +4,10 @@ var isAlreadyColliding
 var bodyEnnemi = false
 var bullet_explode = preload("res://bullet_explode.tscn")
 var time_explode = 0
-var rotation = 0
+var rotation = 150
 var x = 0
-var y = 400
+var y = 600
+var rotation_inverse = 0
 
 
 func _ready():
@@ -18,14 +19,16 @@ func _fixed_process(delta):
 	time_explode += delta
 	if(Game.ultimate_p2 >= Game.ultimate_limit):
 		if(time_explode > 0.48 and time_explode < 0.5):
-			for i in range(8):
-				rotation-=45
+			for i in range(3):
+				if (get_node(".").get_linear_velocity().x < 0):
+					rotation_inverse = 180
+				rotation-=30
 				var be = bullet_explode.instance()
-				var pos = get_node(".").get_pos() + Vector2(x/20, y/20).rotated(deg2rad(rotation))
+				var pos = get_node(".").get_pos() + Vector2(x/20, y/20).rotated(deg2rad(rotation+rotation_inverse))
 				be.set_pos(pos)
 				get_parent().add_child(be)
-				be.set_linear_velocity(Vector2(x, y).rotated(deg2rad(rotation)))
-				be.get_node("sprite").set_rotd(rotation+270)
+				be.get_node("Sprite").set_rotd(rotation+270)
+				be.set_linear_velocity(Vector2(x, y).rotated(deg2rad(rotation+rotation_inverse)))
 				PS2D.body_add_collision_exception(be.get_rid(), get_rid())
 			get_node(".").queue_free()
 
@@ -35,7 +38,6 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 #		if Game.munitions < Game.munitions_total:
 #			Game.munitions += 1
 #		get_node(".").queue_free()
-	
 	if (body.has_method("damage") and isAlreadyColliding == false):
 		body.damage(40)
 		Game.ultimate_p2 += 15
@@ -46,3 +48,8 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 
 func _on_bullet_body_exit_shape( body_id, body, body_shape, local_shape ):
 	isAlreadyColliding = true;
+
+
+func _on_Timer_timeout():
+	if (Game.gatlinggun_p2):
+		queue_free()
