@@ -2,6 +2,7 @@ extends RigidBody2D
 
 var isAlreadyColliding
 var bodyEnnemi = false
+var first_contact = true
 var bullet_explode = preload("res://bullet_explode.tscn")
 var time_explode = 0
 var rotation = 150
@@ -38,6 +39,13 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 #		if Game.munitions < Game.munitions_total:
 #			Game.munitions += 1
 #		get_node(".").queue_free()
+
+	# Destruction decor
+	if (first_contact):
+		var tile = get_parent().get_node("TileMap").world_to_map(get_node(".").get_global_pos())
+		get_parent().get_node("TileMap").set_cell(tile.x, tile.y, -1)
+		first_contact = false
+
 	if (body.has_method("damage") and isAlreadyColliding == false):
 		body.damage(40)
 		Game.ultimate_p2 += 15
