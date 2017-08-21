@@ -10,6 +10,8 @@ var birot = 0
 var direction = -1
 var hauteur_tir = 0
 var GatlingGun_Timer = 0
+var GatlingGun_Tempo = 0
+var GatlingGun_Modulo = 5
 var ultimate_timer_p2 = 0
 var fatality_timer = 0
 
@@ -76,9 +78,11 @@ func _integrate_forces(s):
 				jump = null
 				shoot = null
 				hauteur_tir = 13
+				GatlingGun_Tempo += 1
 			else:
+				GatlingGun_Tempo = GatlingGun_Modulo
 				shoot_time = 0
-			var bi = bullet.instance()
+
 			var ss
 			if (siding_right):
 				ss = 1.0
@@ -86,13 +90,16 @@ func _integrate_forces(s):
 			else:
 				ss = -1.0
 				birot = 180
-			var pos = get_pos() + Vector2(15*direction, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 
-			bi.set_pos(pos)
-			get_parent().add_child(bi)
-			bi.get_node("Sprite").set_rotd(birot)
-			bi.set_linear_velocity(Vector2(800.0*ss, -100))
-			PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
+			var bi = bullet.instance()
+			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
+			if(modulo == 0):
+				var pos = get_pos() + Vector2(15*direction, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
+				bi.set_pos(pos)
+				get_parent().add_child(bi)
+				bi.get_node("Sprite").set_rotd(birot)
+				bi.set_linear_velocity(Vector2(800.0*ss, -100))
+				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 
 			if(Game.ultimate_p2 >= Game.ultimate_limit):
 				ultimate_timer_p2 += 1
