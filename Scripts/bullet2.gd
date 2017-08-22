@@ -9,6 +9,7 @@ var rotation = 150
 var x = 0
 var y = 600
 var rotation_inverse = 0
+var global_pos
 
 
 func _ready():
@@ -18,10 +19,11 @@ func _ready():
 
 func _fixed_process(delta):
 	time_explode += delta
+	var direction = get_node(".").get_linear_velocity().x
 	if(Game.ultimate_p2 >= Game.ultimate_limit):
 		if(time_explode > 0.48 and time_explode < 0.5):
 			for i in range(3):
-				if (get_node(".").get_linear_velocity().x < 0):
+				if (direction < 0):
 					rotation_inverse = 180
 				rotation-=30
 				var be = bullet_explode.instance()
@@ -40,9 +42,13 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 #			Game.munitions += 1
 #		get_node(".").queue_free()
 
-	# Destruction decor
-	if (first_contact):
-		var tile = get_parent().get_node("TileMap").world_to_map(get_node(".").get_global_pos())
+	# Destruction TileMap
+	if (first_contact and body.get_name() == "TileMap"):
+		if (get_node("Sprite").get_rotd() > 90):
+			global_pos = get_node(".").get_global_pos() - Vector2(10, 0)
+		else:
+			global_pos = get_node(".").get_global_pos() + Vector2(10, 0)
+		var tile = get_parent().get_node("TileMap").world_to_map(global_pos)
 		get_parent().get_node("TileMap").set_cell(tile.x, tile.y, -1)
 		first_contact = false
 
