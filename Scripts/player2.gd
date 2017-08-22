@@ -7,13 +7,14 @@ var jumping = false
 var stopping_jump = false
 var shooting = false
 var birot = 0
-var direction = -1
-var hauteur_tir = 0
+var direction = 1
 var GatlingGun_Timer = 0
 var GatlingGun_Tempo = 0
 var GatlingGun_Modulo = 5
 var ultimate_timer_p2 = 0
 var fatality_timer = 0
+var vecteur_bullet_x = 15
+var vecteur_bullet_y = 0
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -77,11 +78,14 @@ func _integrate_forces(s):
 				crouch = null
 				jump = null
 				shoot = null
-				hauteur_tir = 13
 				GatlingGun_Tempo += 1
+				new_anim = "gatlinggun"
+				vecteur_bullet_x = 30
+				vecteur_bullet_y = 30
 			else:
 				GatlingGun_Tempo = GatlingGun_Modulo
 				shoot_time = 0
+				vecteur_bullet_x = 15
 
 			var ss
 			if (siding_right):
@@ -94,7 +98,7 @@ func _integrate_forces(s):
 			var bi = bullet.instance()
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
 			if(modulo == 0):
-				var pos = get_pos() + Vector2(15*direction, hauteur_tir) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
+				var pos = get_pos() + Vector2(-vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 				bi.set_pos(pos)
 				get_parent().add_child(bi)
 				bi.get_node("Sprite").set_rotd(birot)
@@ -118,7 +122,7 @@ func _integrate_forces(s):
 
 		# Process jump
 		if (jumping):
-			hauteur_tir = 15
+			vecteur_bullet_y = 15
 			if (lv.y > 0):
 				# Set off the jumping flag if going down
 				jumping = false
@@ -152,10 +156,10 @@ func _integrate_forces(s):
 			# Check siding
 			if (lv.x < 0 and move_left):
 				new_siding_right = false
-				direction = -1
+				direction = 1
 			elif (lv.x > 0 and move_right):
 				new_siding_right = true
-				direction = 1
+				direction = -1
 			if (jumping):
 				new_anim = "jumping"
 			elif (abs(lv.x) < 0.1):
@@ -173,12 +177,12 @@ func _integrate_forces(s):
 				new_anim = "crouch"
 				get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.8))
 				get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
-				hauteur_tir = 30
+				vecteur_bullet_y = 30
 				lv.x = 0
 			else:
 				get_node("CollisionPolygon2D").set_scale(Vector2(direction, 1))
 				get_node("CollisionPolygon2D").set_pos(Vector2(0, 0))
-				hauteur_tir = 0
+				vecteur_bullet_y = 0
 		else:
 			# Process logic when the character is in the air
 			if (move_left and not move_right):
@@ -208,17 +212,19 @@ func _integrate_forces(s):
 		# Update siding
 		if (new_siding_right != siding_right):
 			if (new_siding_right):
-				get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
-				get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
-				get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
+				get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
 			else:
-				get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
-				get_node("GatlingGun").set_scale(Vector2(0.12*direction, 0.12))
-				get_node("GatlingGun").set_pos(Vector2(18*direction, -15))
+				get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
 			siding_right = new_siding_right
 
 		if (Game.gatlinggun_p2):
-			new_anim = "idle"
+			new_anim = "gatlinggun"
+			get_node("AnimatedSprite/Sparks").show()
+			get_node("AnimatedSprite/Smoke").set_emitting(true)
+			get_node("AnimatedSprite/Smoke").show()
+		else:
+			get_node("AnimatedSprite/Sparks").hide()
+			get_node("AnimatedSprite/Smoke").hide()
 
 		# Change animation
 		if (new_anim != anim):
@@ -254,11 +260,9 @@ func _fixed_process(delta):
 		if (Game.gatlinggun_p2 and GatlingGun_Timer < 3):
 			GatlingGun_Timer += delta
 			WALK_MAX_VELOCITY = 1
-			get_node("GatlingGun").set_opacity(1)
 		else:
 			Game.gatlinggun_p2 = false
 			WALK_MAX_VELOCITY = 200
-			get_node("GatlingGun").set_opacity(0)
 	else:
 		fatality_timer += delta
 		if (fatality_timer > 5 ):

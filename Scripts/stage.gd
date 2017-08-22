@@ -13,6 +13,7 @@ func _ready():
 
 func _input(event):
 	var retry = Input.is_action_pressed("retry")
+	var exit_game = Input.is_action_pressed("exit_game")
 	if (retry):
 		get_tree().reload_current_scene()
 		Game.round_current += 1
@@ -24,6 +25,9 @@ func _input(event):
 		Game.health_p2 = Game.health_limit
 		randomize()
 		Game.spawn_timer = randi()%12+2
+	
+	if (exit_game):
+		get_tree().quit()
 
 
 func _fixed_process(delta):
