@@ -95,9 +95,9 @@ func _integrate_forces(s):
 				ss = 1.0
 				birot = 0
 
-			var bi = bullet.instance()
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
 			if(modulo == 0):
+				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
 				bi.set_pos(pos)
 				get_parent().add_child(bi)

@@ -323,6 +323,7 @@ transform/pos = Vector2( -88.8109, 5 )
 config/amount = 10
 config/lifetime = 1.0
 config/time_scale = 0.5
+config/emitting = false
 config/process_mode = 1
 config/half_extents = Vector2( 8, 8 )
 config/texture = ExtResource( 21 )
