@@ -59,7 +59,7 @@ func _process(delta):
 			var gi = gatlinggun.instance()
 			randomize()
 			var posx_gi = randi()%1000+100
-			gi.set_pos(Vector2(posx_gi, 100))
+			gi.set_pos(Vector2(posx_gi, 200))
 			get_node("/root/stage").add_child(gi)
 			Game.spawn_gatlinggun = true
 			randomize()
