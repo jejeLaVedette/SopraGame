@@ -23,6 +23,7 @@ func _input(event):
 		Game.gatlinggun_p2 = false
 		Game.health_p1 = Game.health_limit
 		Game.health_p2 = Game.health_limit
+		Game.fatality_timer = 0
 		randomize()
 		Game.spawn_timer = randi()%12+2
 	
@@ -58,3 +59,8 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
+	
+	if (Game.fatality_timer != 0 ):
+		get_node("CanvasModulate").set_color(Color("a46969"))
+	else:
+		get_node("CanvasModulate").set_color(Color("d2b49f"))

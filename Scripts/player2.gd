@@ -12,7 +12,6 @@ var GatlingGun_Timer = 0
 var GatlingGun_Tempo = 0
 var GatlingGun_Modulo = 5
 var ultimate_timer_p2 = 0
-var fatality_timer = 0
 var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
 
@@ -264,8 +263,8 @@ func _fixed_process(delta):
 			Game.gatlinggun_p2 = false
 			WALK_MAX_VELOCITY = 200
 	else:
-		fatality_timer += delta
-		if (fatality_timer > 5 ):
+		Game.fatality_timer += delta
+		if (Game.fatality_timer > 5 ):
 			die_p2()
 
 

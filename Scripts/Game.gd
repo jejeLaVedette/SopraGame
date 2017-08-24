@@ -21,6 +21,7 @@ onready var spawn_gatlinggun = false
 onready var gatlinggun_p1 = false
 onready var gatlinggun_p2 = false
 onready var spawn_timer = randi()%12+2
+onready var fatality_timer = 0
 
 # Player stats
 onready var number_victory_p1 = 0
