@@ -68,7 +68,7 @@ func _process(delta):
 			hi.set_pos(Vector2(posx_hi, 100))
 			get_node("/root/stage").add_child(hi)
 
-		if (get_node("/root/stage").has_node("Player1") and get_node("/root/stage").has_node("Player2")):
+		if (get_node("/root/stage/Player").has_node("Player1") and get_node("/root/stage/Player").has_node("Player2")):
 			get_node("Timer").set_text(str(rounded_timer-1))
 
 

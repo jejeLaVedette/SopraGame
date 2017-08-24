@@ -48,8 +48,8 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 			global_pos = get_node(".").get_global_pos() - Vector2(10, 0)
 		else:
 			global_pos = get_node(".").get_global_pos() + Vector2(10, 0)
-		var tile = get_parent().get_node("TileMap").world_to_map(global_pos)
-		get_parent().get_node("TileMap").set_cell(tile.x, tile.y, -1)
+		var tile = get_parent().get_node("/root/stage/TileMaps/TileMap").world_to_map(global_pos)
+		get_parent().get_node("/root/stage/TileMaps/TileMap").set_cell(tile.x, tile.y, -1)
 		first_contact = false
 
 	if (body.has_method("damage") and isAlreadyColliding == false):

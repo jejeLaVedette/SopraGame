@@ -264,6 +264,7 @@ func _fixed_process(delta):
 			WALK_MAX_VELOCITY = 200
 	else:
 		Game.fatality_timer += delta
+		get_node(".").set_sleeping(true)
 		if (Game.fatality_timer > 5 ):
 			die_p1()
 
