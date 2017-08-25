@@ -4,8 +4,8 @@ var rounded_timer = 0
 var round_initial_pos
 var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
-var gatlinggun = preload("res://gatlinggun.tscn")
-var healthpack = preload("res://healthpack.tscn")
+var gatlinggun_scene = preload("res://gatlinggun.tscn")
+var healthpack_scene = preload("res://healthpack.tscn")
 var spawn_object_flag
 var spawn_object_instance
 
@@ -60,22 +60,16 @@ func _process(delta):
 		# Spawn Object
 		for i in range(0, Game.spawn_object_array.size()):
 			var spawn_object_name = Game.spawn_object_array[i]
-			if (spawn_object_name == "gatlinggun"):
-				spawn_object_flag = Game.spawn_gatlinggun
-			elif (spawn_object_name == "healthpack"):
-				spawn_object_flag = Game.spawn_healthpack
-#
-			if(!spawn_object_flag and rounded_timer == Game.spawn_timer_array[i]):
-				print("Game.spawn_gatlinggun :", Game.spawn_gatlinggun)
-				var variable_name = "spawn_" + spawn_object_name
-				Game.set(variable_name, true)
-				print("Game.spawn_gatlinggun2 :", Game.spawn_gatlinggun)
+			var instance_object_path = "res://" + spawn_object_name + ".tscn"
+			var value = "spawn_" + spawn_object_name
+			var spawn_object_bool = Game.get(value)
+
+			if(!spawn_object_bool and rounded_timer == Game.spawn_timer_array[i]):
+				Game.set(value, true)
 				if (spawn_object_name == "gatlinggun"):
-					Game.spawn_gatlinggun = true
-					spawn_object_instance = gatlinggun.instance()
+					spawn_object_instance = gatlinggun_scene.instance()
 				elif (spawn_object_name == "healthpack"):
-					Game.spawn_healthpack = true
-					spawn_object_instance = healthpack.instance()
+					spawn_object_instance = healthpack_scene.instance()
 				randomize()
 				var posx_spawn_object_instance = randi()%1000+100
 				spawn_object_instance.set_pos(Vector2(posx_spawn_object_instance, 200))

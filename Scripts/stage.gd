@@ -29,8 +29,7 @@ func _input(event):
 		randomize()
 		for i in range(0, Game.spawn_timer_array.size()):
 			Game.spawn_timer_array[i] = randi()%12+2
-			print(Game.spawn_timer_array[i])
-	
+
 	if (exit_game):
 		get_tree().quit()
 
