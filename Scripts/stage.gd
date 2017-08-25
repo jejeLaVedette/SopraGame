@@ -19,6 +19,7 @@ func _input(event):
 		get_tree().reload_current_scene()
 		Game.round_current += 1
 		Game.timer = 0
+		Game.spawn_healthpack = false
 		Game.spawn_gatlinggun = false
 		Game.gatlinggun_p1 = false
 		Game.gatlinggun_p2 = false
@@ -26,7 +27,9 @@ func _input(event):
 		Game.health_p2 = Game.health_limit
 		Game.fatality_timer = 0
 		randomize()
-		Game.spawn_timer = randi()%12+2
+		for i in range(0, Game.spawn_timer_array.size()):
+			Game.spawn_timer_array[i] = randi()%12+2
+			print(Game.spawn_timer_array[i])
 	
 	if (exit_game):
 		get_tree().quit()
@@ -60,10 +63,11 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-	
+
 	# Fatality Environnement
 	if (Game.fatality_timer != 0 ):
 		Game.spawn_gatlinggun = true
+		Game.spawn_healthpack = true
 		var timer_thunder_max = 2
 		if (timer_thunder == 0):
 			get_node("Fatality/CanvasFatality").play("CanvasModulateFatality")

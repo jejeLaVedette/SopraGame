@@ -17,10 +17,12 @@ onready var munitions = 0
 onready var munitions_total = 0
 onready var round_max = 3
 onready var round_current = 1
+onready var spawn_timer_array = [0, 0]
+onready var spawn_object_array = ["gatlinggun", "healthpack"]
+onready var spawn_healthpack = false
 onready var spawn_gatlinggun = false
 onready var gatlinggun_p1 = false
 onready var gatlinggun_p2 = false
-onready var spawn_timer = randi()%12+2
 onready var fatality_timer = 0
 
 # Player stats
@@ -34,5 +36,9 @@ onready var health_p2 = 100
 
 func _ready():
 	print("OfficeFight [0.1.0]")
+	randomize()
+	for i in range(0, spawn_timer_array.size()):
+		spawn_timer_array[i] = randi()%12+2
+
 	var hud = hud_scene.instance()
 	add_child(hud)

@@ -6,7 +6,8 @@ var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 var gatlinggun = preload("res://gatlinggun.tscn")
 var healthpack = preload("res://healthpack.tscn")
-
+var spawn_object_flag
+var spawn_object_instance
 
 # Spawn a notice at center of screen
 # Currently used by shops
@@ -55,18 +56,30 @@ func _process(delta):
 	else:
 		get_node("Round").hide()
 		get_node("Timer").show()
-		if(not Game.spawn_gatlinggun and rounded_timer == Game.spawn_timer):
-			var gi = gatlinggun.instance()
-			randomize()
-			var posx_gi = randi()%1000+100
-			gi.set_pos(Vector2(posx_gi, 200))
-			get_node("/root/stage").add_child(gi)
-			Game.spawn_gatlinggun = true
-			randomize()
-			var hi = healthpack.instance()
-			var posx_hi = randi()%1000+100
-			hi.set_pos(Vector2(posx_hi, 100))
-			get_node("/root/stage").add_child(hi)
+
+		# Spawn Object
+		for i in range(0, Game.spawn_object_array.size()):
+			var spawn_object_name = Game.spawn_object_array[i]
+			if (spawn_object_name == "gatlinggun"):
+				spawn_object_flag = Game.spawn_gatlinggun
+			elif (spawn_object_name == "healthpack"):
+				spawn_object_flag = Game.spawn_healthpack
+#
+			if(!spawn_object_flag and rounded_timer == Game.spawn_timer_array[i]):
+				print("Game.spawn_gatlinggun :", Game.spawn_gatlinggun)
+				var variable_name = "spawn_" + spawn_object_name
+				Game.set(variable_name, true)
+				print("Game.spawn_gatlinggun2 :", Game.spawn_gatlinggun)
+				if (spawn_object_name == "gatlinggun"):
+					Game.spawn_gatlinggun = true
+					spawn_object_instance = gatlinggun.instance()
+				elif (spawn_object_name == "healthpack"):
+					Game.spawn_healthpack = true
+					spawn_object_instance = healthpack.instance()
+				randomize()
+				var posx_spawn_object_instance = randi()%1000+100
+				spawn_object_instance.set_pos(Vector2(posx_spawn_object_instance, 200))
+				get_node("/root/stage").add_child(spawn_object_instance)
 
 		if (get_node("/root/stage/Player").has_node("Player1") and get_node("/root/stage/Player").has_node("Player2")):
 			get_node("Timer").set_text(str(rounded_timer-1))
