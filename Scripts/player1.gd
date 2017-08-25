@@ -10,10 +10,12 @@ var birot = 0
 var direction = 1
 var GatlingGun_Timer = 0
 var GatlingGun_Tempo = 0
-var GatlingGun_Modulo = 5
+var GatlingGun_Modulo = 6
 var ultimate_timer_p1 = 0
 var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
+var linear_velocity_x = 800
+var linear_velocity_y = -100
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -78,30 +80,30 @@ func _integrate_forces(s):
 				jump = null
 				shoot = null
 				GatlingGun_Tempo += 1
-				new_anim = "gatlinggun"
 				vecteur_bullet_x = 30
 				vecteur_bullet_y = 30
+				linear_velocity_x = 1000
+				linear_velocity_y = -(randi()%150+50)
 			else:
 				GatlingGun_Tempo = GatlingGun_Modulo
 				shoot_time = 0
 				vecteur_bullet_x = 15
+				linear_velocity_x = 800
+				linear_velocity_y = -100
 
-			var ss
 			if (siding_left):
-				ss = -1.0
 				birot = 180
 			else:
-				ss = 1.0
 				birot = 0
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
 			if(modulo == 0):
 				var bi = bullet.instance()
-				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(ss, -6.0)
+				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(direction, -6.0)
 				bi.set_pos(pos)
 				get_parent().add_child(bi)
 				bi.get_node("Sprite").set_rotd(birot)
-				bi.set_linear_velocity(Vector2(800.0*ss, -100))
+				bi.set_linear_velocity(Vector2(linear_velocity_x*direction, linear_velocity_y))
 				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 
 			if(Game.ultimate_p1 >= Game.ultimate_limit):

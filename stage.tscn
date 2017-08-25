@@ -99,12 +99,10 @@ transform/pos = Vector2( 248.034, -76.097 )
 
 [node name="props" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="moving_platform" parent="props" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 590.649, 642.657 )
-motion = Vector2( 300, 0 )
+transform/pos = Vector2( 456.455, 649.543 )
+motion = Vector2( 150, 0 )
 cycle = 10.0
 
 [node name="seesaw" parent="props" instance=ExtResource( 6 )]
