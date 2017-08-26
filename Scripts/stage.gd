@@ -23,6 +23,8 @@ func _input(event):
 		Game.spawn_gatlinggun = false
 		Game.gatlinggun_p1 = false
 		Game.gatlinggun_p2 = false
+		Game.defeat_p1 = false
+		Game.defeat_p2 = false
 		Game.health_p1 = Game.health_limit
 		Game.health_p2 = Game.health_limit
 		Game.fatality_timer = 0
@@ -36,7 +38,7 @@ func _input(event):
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
-	if (get_node(".").has_node("Player/Player1") and get_node(".").has_node("Player/Player2")):
+	if (not Game.defeat_p1 and not Game.defeat_p2):
 		var p1 = get_node("Player/Player1")
 		var p2 = get_node("Player/Player2")
 		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
@@ -46,7 +48,7 @@ func _fixed_process(delta):
 		var zoom = Vector2(1,1) * zoom_factor / 4
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
-	elif (get_node(".").has_node("Player/Player1")):
+	elif (not Game.defeat_p1):
 		var newpos = (get_node("Player/Player1").get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
@@ -54,7 +56,7 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-	elif (get_node(".").has_node("Player/Player2")):
+	elif (not Game.defeat_p2):
 		var newpos = (get_node("Player/Player2").get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):

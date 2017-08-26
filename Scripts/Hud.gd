@@ -75,7 +75,7 @@ func _process(delta):
 				spawn_object_instance.set_pos(Vector2(posx_spawn_object_instance, 200))
 				get_node("/root/stage").add_child(spawn_object_instance)
 
-		if (get_node("/root/stage/Player").has_node("Player1") and get_node("/root/stage/Player").has_node("Player2")):
+		if (not Game.defeat_p1 and not Game.defeat_p1):
 			get_node("Timer").set_text(str(rounded_timer-1))
 
 

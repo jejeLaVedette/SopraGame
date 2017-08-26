@@ -24,6 +24,8 @@ onready var spawn_gatlinggun = false
 onready var gatlinggun_p1 = false
 onready var gatlinggun_p2 = false
 onready var fatality_timer = 0
+onready var defeat_p1 = false
+onready var defeat_p2 = false
 
 # Player stats
 onready var number_victory_p1 = 0

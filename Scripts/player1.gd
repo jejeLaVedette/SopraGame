@@ -123,7 +123,7 @@ func _integrate_forces(s):
 
 		# Process jump
 		if (jumping):
-			vecteur_bullet_y = 15
+			vecteur_bullet_y = 5
 			if (lv.y > 0):
 				# Set off the jumping flag if going down
 				jumping = false
@@ -209,6 +209,7 @@ func _integrate_forces(s):
 					new_anim = "falling_weapon"
 				else:
 					new_anim = "falling"
+				vecteur_bullet_y = 15
 
 		# Update siding
 		if (new_siding_left != siding_left):
@@ -273,14 +274,17 @@ func _fixed_process(delta):
 
 func damage(dmg):
 	if (get_node("anim").get_current_animation() == "fatality"):
+		Game.defeat_p1 = true
+		Game.number_victory_p2 += 1
 		die_p1()
 	Game.health_p1 -= dmg
 	#Fatality
-	if (Game.health_p1 <= 0):
+	if (Game.health_p1 <= 0 and not Game.defeat_p1):
 		get_parent().add_child(fatality_hud.instance())
 		get_node("anim").play("fatality")
 
 
 func die_p1():
-	Game.number_victory_p2 += 1
-	queue_free()
+	get_node("anim").play("defeat")
+	get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
+	get_node("CollisionPolygon2D").set_pos(Vector2(5*direction, 20))
