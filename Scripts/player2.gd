@@ -270,13 +270,13 @@ func _fixed_process(delta):
 		get_node(".").set_sleeping(true)
 		if (Game.fatality_timer > 5 ):
 			die_p2()
+			Game.defeat_p2 = true
 
 
 func damage(dmg):
 	if (get_node("anim").get_current_animation() == "fatality"):
-		Game.defeat_p2 = true
-		Game.number_victory_p1 += 1
 		die_p2()
+		Game.defeat_p2 = true
 	Game.health_p2 -= dmg
 	#Fatality
 	if (Game.health_p2 <= 0 and not Game.defeat_p2):
@@ -285,6 +285,8 @@ func damage(dmg):
 
 
 func die_p2():
+	if (not Game.defeat_p2):
+		Game.number_victory_p1 += 1
 	get_node("anim").play("defeat")
 	get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
 	get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))

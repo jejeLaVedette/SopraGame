@@ -74,7 +74,7 @@ func _fixed_process(delta):
 			get_node("Fatality/CanvasFatality").play("CanvasModulateFatality")
 			get_node("Fatality/Particles2D").set_emitting(true)
 		timer_thunder += delta
-		if (timer_thunder >= timer_thunder_max):
+		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1):
 			if (!get_node("Fatality/Thunder").is_visible()):
 				randomize()
 				var posx = randi()%1000+100
@@ -83,14 +83,15 @@ func _fixed_process(delta):
 				var full_path_image = ("res://Images/Thunder" + str(image_idx) + ".png")
 				var texture_thunder = load(full_path_image)
 				get_node("Fatality/Thunder").set_texture(texture_thunder)
-				get_node("Fatality/Thunder/Timer_Thunder").start()
 			get_node("Fatality/Thunder").show()
+			get_node("CanvasModulate").set_color(Color("000000"))
+			if (get_node("Fatality/Thunder").get_opacity() == 0):
+				get_node("Fatality/Thunder").set_opacity(1)
+			else:
+				get_node("Fatality/Thunder").set_opacity(0)
 		else:
 			get_node("Fatality/Thunder").hide()
+			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,2)))
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
-
-
-func _on_Timer_Thunder_timeout():
-	get_node("Fatality/Thunder").hide()
