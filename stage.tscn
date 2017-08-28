@@ -212,7 +212,7 @@ visibility/blend_mode = 1
 transform/pos = Vector2( 297.643, 1137.41 )
 transform/rot = -180.0
 transform/scale = Vector2( 205.51, 236.24 )
-color = Color( 0.00976563, 0, 0.125, 1 )
+color = Color( 0.69, 0.64, 0.55, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
