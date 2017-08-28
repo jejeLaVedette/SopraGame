@@ -53,9 +53,11 @@ func _process(delta):
 	if (rounded_timer < 2):
 		get_node("Timer").hide()
 		get_node("Round").show()
+		Game.round_started = false
 	else:
 		get_node("Round").hide()
 		get_node("Timer").show()
+		Game.round_started = true
 
 		# Spawn Object
 		for i in range(0, Game.spawn_object_array.size()):

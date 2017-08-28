@@ -74,7 +74,7 @@ func _integrate_forces(s):
 
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
-		if (shoot and not shooting) || (Game.gatlinggun_p1):
+		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_p1):
 			if (Game.gatlinggun_p1):
 				crouch = null
 				jump = null

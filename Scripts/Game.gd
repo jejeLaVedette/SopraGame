@@ -17,6 +17,7 @@ onready var munitions = 0
 onready var munitions_total = 0
 onready var round_max = 3
 onready var round_current = 1
+onready var round_started = false
 onready var spawn_timer_array = [0, 0]
 onready var spawn_object_array = ["gatlinggun", "healthpack"]
 onready var spawn_healthpack = false

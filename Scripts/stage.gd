@@ -84,7 +84,7 @@ func _fixed_process(delta):
 				var texture_thunder = load(full_path_image)
 				get_node("Fatality/Thunder").set_texture(texture_thunder)
 			get_node("Fatality/Thunder").show()
-			get_node("CanvasModulate").set_color(Color("000000"))
+			get_node("CanvasModulate").set_color(Color("02001f"))
 			if (get_node("Fatality/Thunder").get_opacity() == 0):
 				get_node("Fatality/Thunder").set_opacity(1)
 			else:
