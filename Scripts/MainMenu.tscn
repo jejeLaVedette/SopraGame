@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Images/MainMenu/NewGame.PNG" type="Texture" id=2]
-[ext_resource path="res://Images/MainMenu/Quit.PNG" type="Texture" id=3]
+[ext_resource path="res://Images/MainMenu/OfficeFight.PNG" type="Texture" id=3]
+[ext_resource path="res://Images/MainMenu/Quit.PNG" type="Texture" id=4]
 
 [node name="Menu" type="Control"]
 
@@ -41,14 +42,30 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 340.0
-margin/top = 220.0
-margin/right = 683.0
-margin/bottom = 310.0
+margin/left = 348.0
+margin/top = 89.0
+margin/right = 691.0
+margin/bottom = 179.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 icon = ExtResource( 2 )
+flat = false
+
+[node name="Campagne" type="Button" parent="MainMenu 2"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 313.0
+margin/top = 218.0
+margin/right = 729.0
+margin/bottom = 308.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+icon = ExtResource( 3 )
 flat = false
 
 [node name="Quit" type="Button" parent="MainMenu 2"]
@@ -64,7 +81,7 @@ margin/bottom = 423.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 3 )
+icon = ExtResource( 4 )
 flat = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="MainMenu 2"]
@@ -74,6 +91,8 @@ transform/scale = Vector2( 0.553333, 0.361111 )
 animation = "default"
 
 [connection signal="pressed" from="MainMenu 2/NewGame" to="." method="_on_NewGame_pressed"]
+
+[connection signal="pressed" from="MainMenu 2/Campagne" to="." method="_on_Campagne_pressed"]
 
 [connection signal="pressed" from="MainMenu 2/Quit" to="." method="_on_Quit_pressed"]
 
