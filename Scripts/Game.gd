@@ -36,6 +36,9 @@ onready var number_victory_p2 = 0
 onready var ultimate_p2 = 0
 onready var health_p2 = 100
 
+# Weapon stats
+onready var bullet_damage = 40
+onready var bullet_ulti_damage = 20
 
 func _ready():
 	print("OfficeFight [0.1.0]")
