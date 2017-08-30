@@ -40,7 +40,6 @@ max_lines_visible = -1
 
 [node name="Round" type="Label" parent="."]
 
-visibility/opacity = 0.5
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2

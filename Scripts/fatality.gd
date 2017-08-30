@@ -1,14 +1,20 @@
 extends CanvasLayer
 
+var opacity = 1
+
+
 func _ready():
-	set_fixed_process(true)
+	set_process(true)
 
 
-func _fixed_process(delta):
+func _process(delta):
 	if (not Game.defeat_p1 and not Game.defeat_p2):
+		opacity -= 0.02
 		get_node("Fatality").set_text("Dart HIM !!!")
+		get_node("Fatality").set_opacity(opacity)
 	else:
-		get_node("Fatality").set_text("FATALITY")
+		get_node("Fatality").set_text("DARTALITY")
+		get_node("Fatality").set_opacity(0.5)
 
 
 func _on_Timer_timeout():
