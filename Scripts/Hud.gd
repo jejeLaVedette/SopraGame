@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var rounded_timer = 0
-var round_initial_pos
+var opacity = 0.5
 var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 var gatlinggun_scene = preload("res://gatlinggun.tscn")
@@ -52,8 +52,8 @@ func _process(delta):
 
 	get_node("Round").set_text(str("ROUND ", Game.round_current))
 	if (rounded_timer < 2):
-		get_node("Timer").hide()
-		get_node("Round").show()
+		opacity -= 0.005
+		get_node("Round").set_opacity(opacity)
 		Game.round_started = false
 	else:
 		get_node("Round").hide()
