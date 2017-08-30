@@ -43,6 +43,7 @@ func _process(delta):
 		get_node("NbVictoryP1").set_text(str("W:", Game.number_victory_p1))
 	else:
 		get_node("NbVictoryP1").hide()
+
 	if (Game.number_victory_p2 > 0):
 		get_node("NbVictoryP2").show()
 		get_node("NbVictoryP2").set_text(str("W:", Game.number_victory_p2))
@@ -77,7 +78,7 @@ func _process(delta):
 				spawn_object_instance.set_pos(Vector2(posx_spawn_object_instance, 200))
 				get_node("/root/stage").add_child(spawn_object_instance)
 
-		if (not Game.defeat_p1 and not Game.defeat_p1):
+		if (not Game.defeat_p1 and not Game.defeat_p2):
 			get_node("Timer").set_text(str(rounded_timer-1))
 
 func _on_UltimatePlayer1_value_changed( value ):
