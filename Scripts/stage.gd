@@ -5,9 +5,12 @@ var zoomx = 1
 var zoomy = 1
 var coeffzoomfinal = 0.5
 var timer_thunder = 0
+onready var hud_scene = preload("res://Hud/main.tscn")
 
 
 func _ready():
+	var hud = hud_scene.instance()
+	add_child(hud)
 	set_fixed_process(true)
 	set_process_input(true)
 

@@ -14,9 +14,7 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Timer" type="Label" parent="."]
 
@@ -119,9 +117,7 @@ margin/bottom = 681.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = 1
-__meta__ = {
-"_edit_lock_": true
-}
+__meta__ = { "_edit_lock_":true }
 
 [node name="FPS" type="Control" parent="."]
 

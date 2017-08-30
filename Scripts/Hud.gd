@@ -66,7 +66,7 @@ func _process(delta):
 			var value = "spawn_" + spawn_object_name
 			var spawn_object_bool = Game.get(value)
 
-			if(!spawn_object_bool and rounded_timer == Game.spawn_timer_array[i]):
+			if(!spawn_object_bool and rounded_timer == Game.spawn_timer_array[i] and Game.round_started):
 				Game.set(value, true)
 				if (spawn_object_name == "gatlinggun"):
 					spawn_object_instance = gatlinggun_scene.instance()
@@ -79,7 +79,6 @@ func _process(delta):
 
 		if (not Game.defeat_p1 and not Game.defeat_p1):
 			get_node("Timer").set_text(str(rounded_timer-1))
-
 
 func _on_UltimatePlayer1_value_changed( value ):
 	if(value >= Game.ultimate_limit):

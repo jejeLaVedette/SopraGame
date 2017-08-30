@@ -1,6 +1,6 @@
 extends Node
 
-onready var hud_scene = preload("res://Hud/main.tscn")
+#onready var hud_scene = preload("res://Hud/main.tscn")
 
 # Game stats (maximal)
 const HEALTH_MAX = 100.0
@@ -43,5 +43,5 @@ func _ready():
 	for i in range(0, spawn_timer_array.size()):
 		spawn_timer_array[i] = randi()%12+2
 
-	var hud = hud_scene.instance()
-	add_child(hud)
+#	var hud = hud_scene.instance()
+#	add_child(hud)
