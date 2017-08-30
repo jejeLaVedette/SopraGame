@@ -53,7 +53,7 @@ func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 		first_contact = false
 
 	if (body.has_method("damage") and isAlreadyColliding == false):
-		body.damage(40)
+		body.damage(Game.bullet_damage)
 		if(Game.health_p1 > 0):
 			Game.ultimate_p2 += 15
 		bodyEnnemi = true

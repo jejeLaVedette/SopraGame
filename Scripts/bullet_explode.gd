@@ -11,7 +11,7 @@ func _ready():
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 	get_node("Particles2D").set_emitting(false)
 	if (body.has_method("damage") and isAlreadyColliding == false):
-			body.damage(20)
+			body.damage(Game.bullet_ulti_damage)
 			bodyEnnemi = true
 			add_collision_exception_with(body)
 
