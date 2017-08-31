@@ -290,6 +290,7 @@ color/color = Color( 0.96875, 1, 0, 1 )
 
 [node name="Smoke" type="Particles2D" parent="AnimatedSprite"]
 
+visibility/opacity = 0.5
 transform/pos = Vector2( -88.8109, 5 )
 config/amount = 10
 config/lifetime = 1.0

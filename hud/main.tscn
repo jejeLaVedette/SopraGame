@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
-[ext_resource path="res://Polices/Timer.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://Polices/Victory.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=4]
-[ext_resource path="res://Images/HealthBar.png" type="Texture" id=5]
-[ext_resource path="res://Images/UltimateBar.png" type="Texture" id=6]
+[ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=3]
+[ext_resource path="res://Images/HealthBar.png" type="Texture" id=4]
+[ext_resource path="res://Images/UltimateBar.png" type="Texture" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -14,18 +13,23 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
 
 [node name="Timer" type="Label" parent="."]
 
+visibility/visible = false
+visibility/opacity = 0.5
+rect/scale = Vector2( 0.5, 0.5 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 481.0
-margin/top = -19.0
-margin/right = 521.0
-margin/bottom = 81.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 2048.0
+margin/bottom = 113.0
 custom_fonts/font = ExtResource( 2 )
 text = "01"
 align = 1
@@ -40,10 +44,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 399.0
-margin/top = 29.0
-margin/right = 598.0
-margin/bottom = 232.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1024.0
+margin/bottom = 328.0
 custom_fonts/font = ExtResource( 2 )
 text = "Round"
 align = 1
@@ -51,18 +55,23 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NbVictoryP1" type="Label" parent="."]
 
+visibility/opacity = 0.5
+rect/scale = Vector2( 0.3, 0.3 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 11.0
-margin/top = 28.0
-margin/right = 54.0
-margin/bottom = 68.0
-custom_fonts/font = ExtResource( 3 )
+margin/left = 12.0
+margin/top = 32.0
+margin/right = 204.0
+margin/bottom = 139.0
+custom_fonts/font = ExtResource( 2 )
 text = "W:1"
 align = 1
 valign = 1
@@ -72,15 +81,17 @@ max_lines_visible = -1
 
 [node name="NbVictoryP2" type="Label" parent="."]
 
+visibility/opacity = 0.5
+rect/scale = Vector2( 0.3, 0.3 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 960.0
-margin/top = 28.0
-margin/right = 1003.0
-margin/bottom = 68.0
-custom_fonts/font = ExtResource( 3 )
+margin/left = 948.0
+margin/top = 32.0
+margin/right = 1140.0
+margin/bottom = 139.0
+custom_fonts/font = ExtResource( 2 )
 text = "W:1"
 align = 1
 valign = 1
@@ -117,7 +128,9 @@ margin/bottom = 681.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = 1
-__meta__ = { "_edit_lock_":true }
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="FPS" type="Control" parent="."]
 
@@ -126,10 +139,13 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 2.0
+margin/left = 0.0
 margin/top = 0.0
-margin/right = 226.0
+margin/right = 224.0
 margin/bottom = 64.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Control" type="Control" parent="."]
 
@@ -152,10 +168,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 10.0
-margin/top = 10.0
-margin/right = 270.0
-margin/bottom = 58.0
+margin/left = 12.0
+margin/top = 8.0
+margin/right = 272.0
+margin/bottom = 56.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -163,9 +179,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 4 )
+texture/under = ExtResource( 3 )
 texture/over = null
-texture/progress = ExtResource( 5 )
+texture/progress = ExtResource( 4 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
@@ -176,10 +192,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 1017.0
-margin/top = 10.0
-margin/right = 1277.0
-margin/bottom = 58.0
+margin/left = 1012.0
+margin/top = 8.0
+margin/right = 1272.0
+margin/bottom = 56.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -187,9 +203,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 4 )
+texture/under = ExtResource( 3 )
 texture/over = null
-texture/progress = ExtResource( 5 )
+texture/progress = ExtResource( 4 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
@@ -199,9 +215,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 10.0
+margin/left = 12.0
 margin/top = 20.0
-margin/right = 270.0
+margin/right = 272.0
 margin/bottom = 60.0
 range/min = 0.0
 range/max = 100.0
@@ -210,9 +226,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 4 )
+texture/under = ExtResource( 3 )
 texture/over = null
-texture/progress = ExtResource( 6 )
+texture/progress = ExtResource( 5 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 
@@ -223,9 +239,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 1017.0
+margin/left = 1012.0
 margin/top = 20.0
-margin/right = 1277.0
+margin/right = 1272.0
 margin/bottom = 60.0
 range/min = 0.0
 range/max = 100.0
@@ -234,9 +250,9 @@ range/page = 0.0
 range/value = 1.0
 range/exp_edit = false
 range/rounded = false
-texture/under = ExtResource( 4 )
+texture/under = ExtResource( 3 )
 texture/over = null
-texture/progress = ExtResource( 6 )
+texture/progress = ExtResource( 5 )
 radial_fill/fill_degrees = 360.0
 radial_fill/center_offset = Vector2( 0, 0 )
 

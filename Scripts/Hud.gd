@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var rounded_timer = 0
-var round_initial_pos
+var opacity = 1
 var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
 var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 var gatlinggun_scene = preload("res://gatlinggun.tscn")
@@ -43,6 +43,7 @@ func _process(delta):
 		get_node("NbVictoryP1").set_text(str("W:", Game.number_victory_p1))
 	else:
 		get_node("NbVictoryP1").hide()
+
 	if (Game.number_victory_p2 > 0):
 		get_node("NbVictoryP2").show()
 		get_node("NbVictoryP2").set_text(str("W:", Game.number_victory_p2))
@@ -51,8 +52,8 @@ func _process(delta):
 
 	get_node("Round").set_text(str("ROUND ", Game.round_current))
 	if (rounded_timer < 2):
-		get_node("Timer").hide()
-		get_node("Round").show()
+		opacity -= 0.01
+		get_node("Round").set_opacity(opacity)
 		Game.round_started = false
 	else:
 		get_node("Round").hide()
@@ -77,7 +78,7 @@ func _process(delta):
 				spawn_object_instance.set_pos(Vector2(posx_spawn_object_instance, 200))
 				get_node("/root/stage").add_child(spawn_object_instance)
 
-		if (not Game.defeat_p1 and not Game.defeat_p1):
+		if (not Game.defeat_p1 and not Game.defeat_p2):
 			get_node("Timer").set_text(str(rounded_timer-1))
 
 func _on_UltimatePlayer1_value_changed( value ):
