@@ -18,37 +18,17 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:visibility/self_opacity")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 3.58422, 4.33851 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
-}
+tracks/0/keys = { "times":FloatArray( 3.58422, 4.33851 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("sprite:frame")
 tracks/1/interp = 1
 tracks/1/imported = false
-tracks/1/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
-"update": 0,
-"values": [ 4 ]
-}
+tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 4 ] }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/imported = false
-tracks/2/keys = {
-"times": FloatArray( 3.20357, 5.07305 ),
-"transitions": FloatArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "_pre_explode"
-}, {
-"args": [  ],
-"method": "_die"
-} ]
-}
+tracks/2/keys = { "times":FloatArray( 3.20357, 5.07305 ), "transitions":FloatArray( 1, 1 ), "values":[ { "args":[  ], "method":"_pre_explode" }, { "args":[  ], "method":"_die" } ] }
 
 [sub_resource type="Animation" id=3]
 
@@ -59,12 +39,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ] }
 
 [sub_resource type="Animation" id=4]
 
@@ -76,12 +51,7 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
+tracks/0/keys = { "times":FloatArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 4, 0 ] }
 
 [node name="enemy" type="RigidBody2D"]
 
