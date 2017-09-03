@@ -62,17 +62,14 @@ func _input(event):
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
-<<<<<<< HEAD
 	if (not Game.defeat_p1 and not Game.defeat_p2):
 		var p1 = get_node(node_player1)
 		var p2 = get_node(node_player2)
-		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
-=======
+
 	if (not Game.defeat_p1 and not Game.defeat_bot):
-		var p1 = get_node("Player/Player1")
+		var p1 = get_node(node_player1)
 		var bot = get_node("Player/Bot")
 		var newpos = (p1.get_global_pos() + bot.get_global_pos()) * 0.5
->>>>>>> 1a90c5f214a88121fd477e05cd96e4f597dc912c
 		get_node("Camera2D").set_global_pos(newpos)
 		var distance = p1.get_global_pos().distance_to(bot.get_global_pos()) * 2
 		var zoom_factor = distance * 0.005
@@ -87,13 +84,10 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-<<<<<<< HEAD
 	elif (not Game.defeat_p2):
 		var newpos = (get_node(node_player2).get_global_pos())
-=======
 	elif (not Game.defeat_bot):
-		var newpos = (get_node("Player/Player2").get_global_pos())
->>>>>>> 1a90c5f214a88121fd477e05cd96e4f597dc912c
+		var newpos = (get_node("Player/Bot").get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
 			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
