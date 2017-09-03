@@ -10,7 +10,7 @@
 [ext_resource path="res://one_way_platform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://player1.tscn" type="PackedScene" id=10]
-[ext_resource path="res://player2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Bot.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Images/light.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
@@ -37,6 +37,8 @@ texture = ExtResource( 2 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="Fatality" type="Node" parent="."]
+
+editor/display_folded = true
 
 [node name="CanvasFatality" type="AnimationPlayer" parent="Fatality"]
 
@@ -160,15 +162,13 @@ transform/pos = Vector2( 732.176, -51.1154 )
 
 [node name="Player" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="Player1" parent="Player" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 207.129, 780.662 )
 
-[node name="Player2" parent="Player" instance=ExtResource( 11 )]
+[node name="Bot" parent="Player" instance=ExtResource( 11 )]
 
-transform/pos = Vector2( 823.029, 780.399 )
+transform/pos = Vector2( 838.673, 779.944 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
