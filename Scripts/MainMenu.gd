@@ -1,4 +1,3 @@
-
 extends Control
 
 func _on_Quit_pressed():

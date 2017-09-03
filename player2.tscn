@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=1]
+[gd_scene load_steps=59 format=1]
 
 [ext_resource path="res://Scripts/player2.gd" type="Script" id=1]
 [ext_resource path="res://Images/Player2/PlayerIdle.png" type="Texture" id=2]
@@ -28,13 +28,16 @@
 [ext_resource path="res://Images/Player2/PlayerRunWeapon7.png" type="Texture" id=26]
 [ext_resource path="res://Images/Player2/PlayerRunWeapon8.png" type="Texture" id=27]
 [ext_resource path="res://Images/Player2/PlayerDefeat.png" type="Texture" id=28]
-[ext_resource path="res://Images/fire_particle.png" type="Texture" id=29]
-[ext_resource path="res://Images/smokeparticle.png" type="Texture" id=30]
-[ext_resource path="res://player2.tres" type="Animation" id=31]
-[ext_resource path="res://Images/osb_left.png" type="Texture" id=32]
-[ext_resource path="res://Images/osb_right.png" type="Texture" id=33]
-[ext_resource path="res://Images/osb_jump.png" type="Texture" id=34]
-[ext_resource path="res://Images/osb_fire.png" type="Texture" id=35]
+[ext_resource path="res://Images/Player2/PlayerFatality1_1.png" type="Texture" id=29]
+[ext_resource path="res://Images/Player2/PlayerFatality1_2.png" type="Texture" id=30]
+[ext_resource path="res://Images/Player2/PlayerFatality1_3.png" type="Texture" id=31]
+[ext_resource path="res://Images/fire_particle.png" type="Texture" id=32]
+[ext_resource path="res://Images/smokeparticle.png" type="Texture" id=33]
+[ext_resource path="res://player2.tres" type="Animation" id=34]
+[ext_resource path="res://Images/osb_left.png" type="Texture" id=35]
+[ext_resource path="res://Images/osb_right.png" type="Texture" id=36]
+[ext_resource path="res://Images/osb_jump.png" type="Texture" id=37]
+[ext_resource path="res://Images/osb_fire.png" type="Texture" id=38]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -75,7 +78,7 @@ height = 10.0
 [sub_resource type="SpriteFrames" id=8]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
 "loop": true,
 "name": "Player2",
 "speed": 5.0
@@ -335,7 +338,7 @@ config/amount = 32
 config/lifetime = 1.0
 config/process_mode = 1
 config/half_extents = Vector2( 20, 0 )
-config/texture = ExtResource( 29 )
+config/texture = ExtResource( 32 )
 params/direction = 180.0
 params/spread = 50.0
 params/linear_velocity = 50.0
@@ -366,7 +369,7 @@ config/time_scale = 0.5
 config/emitting = false
 config/process_mode = 1
 config/half_extents = Vector2( 8, 8 )
-config/texture = ExtResource( 30 )
+config/texture = ExtResource( 33 )
 params/direction = 160.0
 params/spread = 10.0
 params/linear_velocity = 80.0
@@ -405,7 +408,7 @@ anims/jumping = SubResource( 17 )
 anims/jumping_weapon = SubResource( 18 )
 anims/run = SubResource( 19 )
 anims/run_weapon = SubResource( 20 )
-anims/standing_weapon_ready = ExtResource( 31 )
+anims/standing_weapon_ready = ExtResource( 34 )
 playback/active = true
 playback/speed = 2.0
 blend_times = [  ]
@@ -454,7 +457,7 @@ scale = Vector2( 1, 1 )
 
 transform/pos = Vector2( 27.7593, 360.87 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 32 )
+normal = ExtResource( 35 )
 pressed = null
 bitmask = null
 shape = null
@@ -468,7 +471,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 121.542, 361.415 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 33 )
+normal = ExtResource( 36 )
 pressed = null
 bitmask = null
 shape = null
@@ -482,7 +485,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 666.224, 359.02 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 34 )
+normal = ExtResource( 37 )
 pressed = null
 bitmask = null
 shape = null
@@ -496,7 +499,7 @@ visibility_mode = 1
 
 transform/pos = Vector2( 668.073, 262.788 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 35 )
+normal = ExtResource( 38 )
 pressed = null
 bitmask = null
 shape = null

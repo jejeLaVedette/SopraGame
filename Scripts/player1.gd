@@ -24,17 +24,13 @@ var AIR_ACCEL = 200.0
 var AIR_DEACCEL = 200.0
 var JUMP_VELOCITY = 460
 var STOP_JUMP_FORCE = 900.0
-
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
-
 var airborne_time = 1e20
 var shoot_time = 1e20
-
 var MAX_SHOOT_POSE_TIME = 0.3
 
 var bullet = preload("res://bullet1.tscn")
 var fatality_hud = preload("res://fatality.tscn")
-
 var floor_h_velocity = 0.0
 var player
 
@@ -97,7 +93,7 @@ func _integrate_forces(s):
 				birot = 0
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
-			if(modulo == 0):
+			if(modulo == 0 and not Game.fatality_ready):
 				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(direction, -6.0)
 				bi.set_pos(pos)
@@ -105,6 +101,9 @@ func _integrate_forces(s):
 				bi.get_node("Sprite").set_rotd(birot)
 				bi.set_linear_velocity(Vector2(linear_velocity_x*direction, linear_velocity_y))
 				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
+			elif (Game.fatality_ready and not Game.fatality_executed):
+				Game.fatality_executed = true
+				Game.fatality_running = true
 
 			if(Game.ultimate_p1 >= Game.ultimate_limit):
 				ultimate_timer_p1 += 1
@@ -269,24 +268,30 @@ func _fixed_process(delta):
 		Game.fatality_timer += delta
 		get_node(".").set_sleeping(true)
 		if (Game.fatality_timer > 5 ):
+			Game.fatality_ready = false
 			die_p1()
 			Game.defeat_p1 = true
+		else:
+			Game.fatality_ready = true
 
 
 func damage(dmg):
 	if (get_node("anim").get_current_animation() == "fatality"):
 		die_p1()
 		Game.defeat_p1 = true
+
 	Game.health_p1 -= dmg
 	#Fatality
 	if (Game.health_p1 <= 0 and not Game.defeat_p1):
 		get_parent().add_child(fatality_hud.instance())
-		get_node("anim").play("fatality")
+		if (not Game.fatality_executed):
+			get_node("anim").play("fatality")
 
 
 func die_p1():
 	if (not Game.defeat_p1):
 		Game.number_victory_p2 += 1
-	get_node("anim").play("defeat")
-	get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
-	get_node("CollisionPolygon2D").set_pos(Vector2(5*direction, 20))
+	if (not Game.fatality_executed):
+		get_node("anim").play("defeat")
+		get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
+		get_node("CollisionPolygon2D").set_pos(Vector2(5*direction, 20))

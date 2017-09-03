@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var opacity = 1
-
+var bullet = preload("res://bullet_explode.tscn")
 
 func _ready():
 	set_process(true)

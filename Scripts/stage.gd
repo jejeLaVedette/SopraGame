@@ -6,6 +6,24 @@ var zoomy = 1
 var coeffzoomfinal = 0.5
 var timer_thunder = 0
 onready var hud_scene = preload("res://Hud/main.tscn")
+var curve1 = Curve2D.new()
+var curve2 = Curve2D.new()
+var curve3 = Curve2D.new()
+var path_node = Path2D.new()
+var pathfollow_node = PathFollow2D.new()
+var sprite_node = Sprite.new()
+var tex_sprite = preload("res://Images/bullet.png")
+var sprite_speed = 16
+var path1 = []
+var path2 = []
+var path3 = []
+var position_shooter
+var position_target
+var fatality1_shoot = 0
+var player_frame = 27
+var node_player1 = "Player/Player1"
+var node_player2 = "Player/Player2"
+var node_target
 
 
 func _ready():
@@ -31,6 +49,9 @@ func _input(event):
 		Game.health_p1 = Game.health_limit
 		Game.health_p2 = Game.health_limit
 		Game.fatality_timer = 0
+		Game.fatality_ready = false
+		Game.fatality_executed = false
+		Game.fatality_running = false
 		randomize()
 		for i in range(0, Game.spawn_timer_array.size()):
 			Game.spawn_timer_array[i] = randi()%12+2
@@ -42,8 +63,8 @@ func _input(event):
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
 	if (not Game.defeat_p1 and not Game.defeat_p2):
-		var p1 = get_node("Player/Player1")
-		var p2 = get_node("Player/Player2")
+		var p1 = get_node(node_player1)
+		var p2 = get_node(node_player2)
 		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
 		get_node("Camera2D").set_global_pos(newpos)
 		var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
@@ -52,7 +73,7 @@ func _fixed_process(delta):
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
 	elif (not Game.defeat_p1):
-		var newpos = (get_node("Player/Player1").get_global_pos())
+		var newpos = (get_node(node_player1).get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
 			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
@@ -60,7 +81,7 @@ func _fixed_process(delta):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 	elif (not Game.defeat_p2):
-		var newpos = (get_node("Player/Player2").get_global_pos())
+		var newpos = (get_node(node_player2).get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
 			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
@@ -68,14 +89,16 @@ func _fixed_process(delta):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 
-	# Fatality Environnement
+	# Fatality
 	if (Game.fatality_timer != 0 ):
+		# Environment
 		Game.spawn_gatlinggun = true
 		Game.spawn_healthpack = true
 		var timer_thunder_max = 2
 		if (timer_thunder == 0):
 			get_node("Fatality/CanvasFatality").play("CanvasModulateFatality")
-			get_node("Fatality/Particles2D").set_emitting(true)
+			get_node("Fatality/Particles2D Left").set_emitting(true)
+			get_node("Fatality/Particles2D Right").set_emitting(true)
 		timer_thunder += delta
 		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1):
 			if (!get_node("Fatality/Thunder").is_visible()):
@@ -95,6 +118,67 @@ func _fixed_process(delta):
 		else:
 			get_node("Fatality/Thunder").hide()
 			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,2)))
+
+		# Animation
+		if (Game.fatality_ready and Game.fatality_executed and Game.fatality_running):
+			Game.fatality_running = false
+			if (Game.health_p1 <= 0):
+				position_shooter = get_node(node_player2).get_global_pos()
+				position_target = get_node(node_player1).get_global_pos()
+				node_target = node_player1
+			elif (Game.health_p2 <= 0):
+				position_shooter = get_node(node_player1).get_global_pos()
+				position_target = get_node(node_player2).get_global_pos()
+				node_target = node_player2
+
+			var deplacement_x = position_target.x - position_shooter.x
+			var deplacement_y = position_target.y - position_shooter.y
+
+			path_node.set_pos(position_shooter)
+			# LegShot
+			path1.append(Vector2(-15, -20))
+			path1.append(Vector2(deplacement_x + 10, deplacement_y + 20))
+			# LegShot
+			path2.append(Vector2(-15, -20))
+			path2.append(Vector2(deplacement_x + 10, deplacement_y + 20))
+			# HeadShot
+			path3.append(Vector2(-15, -20))
+			path3.append(Vector2(deplacement_x + 10, deplacement_y - 20))
+
+			for point in path1:
+				curve1.add_point(point)
+			for point in path2:
+				curve2.add_point(point)
+			for point in path3:
+				curve3.add_point(point)
+			path_node.set_curve(curve1)
+			sprite_node.set_texture(tex_sprite)
+
+			get_node(".").add_child(path_node)
+			path_node.add_child(pathfollow_node)
+			pathfollow_node.add_child(sprite_node)
+			pathfollow_node.set_pos(Vector2(0, 0))
+			pathfollow_node.set_loop(false)
+			pathfollow_node.set_rotate(true)
+			pathfollow_node.set_offset(0)
+			sprite_node.set_pos(Vector2(0, 0))
+			sprite_node.set_scale(Vector2(0.025769, 0.034305))
+
+		if (Game.fatality_executed and Game.fatality_timer <= 5):
+			Game.fatality_timer = 1
+			pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
+			if (pathfollow_node.get_unit_offset() > 1):
+				fatality1_shoot += 1
+				get_node(node_target).get_node("AnimatedSprite").set_frame(player_frame)
+				get_node(node_target).get_node("anim").stop(true)
+				player_frame += 1
+				var curve = "curve" + str(fatality1_shoot+1)
+				path_node.set_curve(get(curve))
+				pathfollow_node.set_unit_offset(0)
+				if (fatality1_shoot == 3):
+					sprite_node.queue_free()
+					Game.fatality_timer = 6
+					Game.fatality_ready = false
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()

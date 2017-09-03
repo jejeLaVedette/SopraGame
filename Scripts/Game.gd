@@ -25,6 +25,9 @@ onready var spawn_gatlinggun = false
 onready var gatlinggun_p1 = false
 onready var gatlinggun_p2 = false
 onready var fatality_timer = 0
+onready var fatality_ready = false
+onready var fatality_executed = false
+onready var fatality_running = false
 onready var defeat_p1 = false
 onready var defeat_p2 = false
 
@@ -45,6 +48,3 @@ func _ready():
 	randomize()
 	for i in range(0, spawn_timer_array.size()):
 		spawn_timer_array[i] = randi()%12+2
-
-#	var hud = hud_scene.instance()
-#	add_child(hud)
