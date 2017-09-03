@@ -46,6 +46,10 @@ onready var health_bot = 100
 onready var bullet_damage = 40
 onready var bullet_ulti_damage = 20
 
+# Menu
+onready var versus_player = false
+onready var versus_bot = true
+
 func _ready():
 	print("OfficeFight [0.1.0]")
 	randomize()

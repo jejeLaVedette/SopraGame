@@ -45,8 +45,6 @@ __meta__ = {
 
 [node name="Fatality" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="CanvasFatality" type="AnimationPlayer" parent="Fatality"]
 
 playback/process_mode = 1

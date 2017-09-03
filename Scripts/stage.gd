@@ -23,6 +23,7 @@ var fatality1_shoot = 0
 var player_frame = 27
 var node_player1 = "Player/Player1"
 var node_player2 = "Player/Player2"
+var node_bot = "Player/Bot"
 var node_target
 
 
@@ -62,39 +63,60 @@ func _input(event):
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
-	if (not Game.defeat_p1 and not Game.defeat_p2):
-		var p1 = get_node(node_player1)
-		var p2 = get_node(node_player2)
-
-	if (not Game.defeat_p1 and not Game.defeat_bot):
-		var p1 = get_node(node_player1)
-		var bot = get_node("Player/Bot")
-		var newpos = (p1.get_global_pos() + bot.get_global_pos()) * 0.5
-		get_node("Camera2D").set_global_pos(newpos)
-		var distance = p1.get_global_pos().distance_to(bot.get_global_pos()) * 2
-		var zoom_factor = distance * 0.005
-		var zoom = Vector2(1,1) * zoom_factor / 4
-		if (Vector2(1,1) < zoom):
-			get_node("Camera2D").set_zoom(zoom)
-	elif (not Game.defeat_p1):
-		var newpos = (get_node(node_player1).get_global_pos())
-		get_node("Camera2D").set_global_pos(newpos)
-		if (get_node("Camera2D").get_zoom().x > 1):
-			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
-		if (get_node("Camera2D").get_zoom().y > 1):
-			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
-		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-	elif (not Game.defeat_p2):
-		var newpos = (get_node(node_player2).get_global_pos())
-	elif (not Game.defeat_bot):
-		var newpos = (get_node("Player/Bot").get_global_pos())
-		get_node("Camera2D").set_global_pos(newpos)
-		if (get_node("Camera2D").get_zoom().x > 1):
-			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
-		if (get_node("Camera2D").get_zoom().y > 1):
-			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
-		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-
+	if (Game.versus_player):
+		if (not Game.defeat_p1 and not Game.defeat_p2):
+			var p1 = get_node(node_player1)
+			var p2 = get_node(node_player2)
+			var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
+			get_node("Camera2D").set_global_pos(newpos)
+			var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
+			var zoom_factor = distance * 0.005
+			var zoom = Vector2(1,1) * zoom_factor / 4
+			if (Vector2(1,1) < zoom):
+				get_node("Camera2D").set_zoom(zoom)
+		elif (not Game.defeat_p1):
+			var newpos = (get_node(node_player1).get_global_pos())
+			get_node("Camera2D").set_global_pos(newpos)
+			if (get_node("Camera2D").get_zoom().x > 1):
+				zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+			if (get_node("Camera2D").get_zoom().y > 1):
+				zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+			get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
+		elif (not Game.defeat_p2):
+			var newpos = (get_node(node_player2).get_global_pos())
+			get_node("Camera2D").set_global_pos(newpos)
+			if (get_node("Camera2D").get_zoom().x > 1):
+				zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+			if (get_node("Camera2D").get_zoom().y > 1):
+				zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+			get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
+	elif (Game.versus_bot):
+		if (not Game.defeat_p1 and not Game.defeat_bot):
+			var p1 = get_node(node_player1)
+			var bot = get_node(node_bot)
+			var newpos = (p1.get_global_pos() + bot.get_global_pos()) * 0.5
+			get_node("Camera2D").set_global_pos(newpos)
+			var distance = p1.get_global_pos().distance_to(bot.get_global_pos()) * 2
+			var zoom_factor = distance * 0.005
+			var zoom = Vector2(1,1) * zoom_factor / 4
+			if (Vector2(1,1) < zoom):
+				get_node("Camera2D").set_zoom(zoom)
+		elif (not Game.defeat_p1):
+			var newpos = (get_node(node_player1).get_global_pos())
+			get_node("Camera2D").set_global_pos(newpos)
+			if (get_node("Camera2D").get_zoom().x > 1):
+				zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+			if (get_node("Camera2D").get_zoom().y > 1):
+				zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+			get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
+		elif (not Game.defeat_bot):
+			var newpos = (get_node(node_bot).get_global_pos())
+			get_node("Camera2D").set_global_pos(newpos)
+			if (get_node("Camera2D").get_zoom().x > 1):
+				zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
+			if (get_node("Camera2D").get_zoom().y > 1):
+				zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
+			get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 	# Fatality
 	if (Game.fatality_timer != 0 ):
 		# Environment
