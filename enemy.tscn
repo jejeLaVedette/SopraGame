@@ -111,6 +111,7 @@ autoplay = ""
 
 [node name="sprite" type="Sprite" parent="."]
 
+transform/pos = Vector2( 0, 0.291985 )
 texture = ExtResource( 2 )
 hframes = 8
 frame = 4
@@ -146,7 +147,7 @@ type_mask = 15
 
 [node name="raycast_right" type="RayCast2D" parent="."]
 
-transform/pos = Vector2( 29.1987, -9.34363 )
+transform/pos = Vector2( 29.4907, -9.34363 )
 enabled = true
 cast_to = Vector2( 0, 45 )
 layer_mask = 1

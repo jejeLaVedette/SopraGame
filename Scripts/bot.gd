@@ -49,7 +49,6 @@ var shoot = false
 var special
 var crouch
 
-
 func _integrate_forces(s):
 	if (Game.health_bot > 0):
 		var lv = s.get_linear_velocity()
@@ -58,16 +57,6 @@ func _integrate_forces(s):
 		var new_anim = anim
 		var new_siding_right = siding_right
 		var wall_side = 0.0
-		
-#		if(get_node(
-
-		# Get the controls
-#		var move_left = Input.is_action_pressed("move_left_p2")
-#		var move_right = Input.is_action_pressed("move_right_p2")
-#		var jump = Input.is_action_pressed("jump_p2")
-#		var shoot = Input.is_action_pressed("shoot_p2")
-#		var special = Input.is_action_pressed("special_p2")
-#		var crouch = Input.is_action_pressed("crouch_p2")
 
 		if (special):
 			lv.y -= 100
@@ -88,37 +77,22 @@ func _integrate_forces(s):
 			var cc = s.get_contact_collider_object(x)
 			var dp = s.get_contact_local_normal(x)
 			
-#			if (cc):
-#				if (cc extends bullet):
-#					print("DEAD")
-#					set_mode(MODE_RIGID)
-#					state = STATE_DYING
-#					#lv = s.get_contact_local_normal(i)*400
-#					s.set_angular_velocity(sign(dp.x)*33.0)
-#					set_friction(1)
-#					break
-			
 #			print(dp.x)
 			if (dp.x > 0.9):
 				wall_side = -1.0
 			elif (dp.x < -0.9):
 				wall_side = 1.0
-				move_right = true
 
-#		print("wall_side ", wall_side)
-#		print("direction ",direction)
 		if (wall_side != 0 and wall_side != direction):
-			print("T1")
 			direction = -direction
-			move_left = !move_left
-			move_right = !move_right
+			move_left = not move_left
+			move_right = not move_right
+		# Si il y a du vide	alors on fait demi tour
 		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
-			print("T2")
 			direction = -direction
 			move_left = false
 			move_right = true
 		elif (direction < 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
-			print("T3")
 			direction = -direction
 			move_right = false
 			move_left = true
@@ -300,15 +274,15 @@ func _integrate_forces(s):
 
 func _ready():
 	bot = ResourceLoader.load("res://bot.tscn")
-	set_fixed_process(true)
-	set_process_input(true)
 	rc_left = get_node("raycast_left")
 	rc_right = get_node("raycast_right")
+	set_fixed_process(true)
+	set_process_input(true)
 	
 	_timer = Timer.new()
 	add_child(_timer)
 	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_timer.set_wait_time(3.0)
+	_timer.set_wait_time(1.0)
 	_timer.set_one_shot(false) # Make sure it loops
 	_timer.start()
 
