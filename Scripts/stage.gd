@@ -44,10 +44,13 @@ func _input(event):
 		Game.spawn_healthpack = false
 		Game.spawn_gatlinggun = false
 		Game.gatlinggun_p1 = false
+		Game.gatlinggun_p2 = false
 		Game.gatlinggun_bot = false
 		Game.defeat_p1 = false
+		Game.defeat_p2 = false
 		Game.defeat_bot = false
 		Game.health_p1 = Game.health_limit
+		Game.health_p2 = Game.health_limit
 		Game.health_bot = Game.health_limit
 		Game.fatality_timer = 0
 		Game.fatality_ready = false
