@@ -17,7 +17,7 @@ var vecteur_bullet_y = 0
 var linear_velocity_x = 800
 var linear_velocity_y = -100
 
-var _timer = null
+var timer = null
 var rc_left = null
 var rc_right = null
 
@@ -41,6 +41,7 @@ var fatality_hud = preload("res://fatality.tscn")
 
 var floor_h_velocity = 0.0
 var bot
+var new_siding_right
 
 var move_left = true
 var move_right = false
@@ -55,7 +56,7 @@ func _integrate_forces(s):
 		var step = s.get_step()
 
 		var new_anim = anim
-		var new_siding_right = siding_right
+		new_siding_right = siding_right
 		var wall_side = 0.0
 
 		if (special):
@@ -77,7 +78,6 @@ func _integrate_forces(s):
 			var cc = s.get_contact_collider_object(x)
 			var dp = s.get_contact_local_normal(x)
 			
-#			print(dp.x)
 			if (dp.x > 0.9):
 				wall_side = -1.0
 			elif (dp.x < -0.9):
@@ -116,6 +116,7 @@ func _integrate_forces(s):
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
 				linear_velocity_y = -100
+				lv.x=0
 
 			if (siding_right):
 				birot = 0
@@ -279,14 +280,28 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_timer.set_wait_time(1.0)
-	_timer.set_one_shot(false) # Make sure it loops
-	_timer.start()
+	timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", self, "_on_Timer_timeout")
+	timer.set_wait_time(2.0)
+	timer.set_one_shot(false) # Make sure it loops
+	timer.start()
 
 func _on_Timer_timeout():
+	var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+	var currentPosition = get_node(".").get_global_pos().x
+	
+	if positionJoueurX < currentPosition :
+		if (move_right):
+			direction = -direction
+			move_right=false
+			move_left=true
+	else :
+		if (move_left):
+			direction = -direction
+			move_right=true
+			move_left=false
+	
 	shoot = true
 
 func _fixed_process(delta):
