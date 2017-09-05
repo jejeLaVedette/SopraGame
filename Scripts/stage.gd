@@ -25,6 +25,7 @@ var node_player1 = "Player/Player1"
 var node_player2 = "Player/Player2"
 var node_bot = "Player/Bot"
 var node_target
+var node_target_opacity = 1
 
 
 func _ready():
@@ -208,8 +209,21 @@ func _fixed_process(delta):
 				pathfollow_node.set_unit_offset(0)
 				if (fatality1_shoot == 3):
 					sprite_node.queue_free()
+					get_node("Fatality/SpotLight").set_pos(Vector2(position_target.x, position_target.y - 250))
+					get_node("Fatality/SpotLight").show()
+					get_node("Fatality/SpotLight/TimerSpotLight").start()
 					Game.fatality_timer = 6
 					Game.fatality_ready = false
+
+		if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
+			node_target_opacity -= 0.005
+			get_node(node_target).move_local_y(-2)
+			get_node(node_target).set_opacity(node_target_opacity)
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
+
+
+func _on_TimerSpotLight_timeout():
+	get_node("Fatality/SpotLight").hide()
+	get_node(node_target).queue_free()
