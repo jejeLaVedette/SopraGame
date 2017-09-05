@@ -1,17 +1,18 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://Scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://Images/Sky.png" type="Texture" id=2]
 [ext_resource path="res://Images/feuille.png" type="Texture" id=3]
-[ext_resource path="res://tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://coin.tscn" type="PackedScene" id=5]
-[ext_resource path="res://moving_platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://seesaw.tscn" type="PackedScene" id=7]
-[ext_resource path="res://one_way_platform.tscn" type="PackedScene" id=8]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://player1.tscn" type="PackedScene" id=10]
-[ext_resource path="res://player2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Images/light.png" type="Texture" id=12]
+[ext_resource path="res://Images/SpotLight.png" type="Texture" id=4]
+[ext_resource path="res://tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://coin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://moving_platform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://seesaw.tscn" type="PackedScene" id=8]
+[ext_resource path="res://one_way_platform.tscn" type="PackedScene" id=9]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://player2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Images/light.png" type="Texture" id=13]
 
 [sub_resource type="Animation" id=1]
 
@@ -118,6 +119,38 @@ params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
 randomness/spin_velocity = 1.0
 
+[node name="SpotLight" type="Light2D" parent="Fatality"]
+
+visibility/visible = false
+visibility/opacity = 0.5
+transform/pos = Vector2( 820, 530 )
+enabled = true
+editor_only = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 0 )
+scale = 1.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.0
+mode = 0
+range/height = 0.0
+range/z_min = -1024
+range/z_max = 1024
+range/layer_min = 0
+range/layer_max = 0
+range/item_mask = 1
+shadow/enabled = false
+shadow/color = Color( 0, 0, 0, 0 )
+shadow/buffer_size = 2048
+shadow/esm_multiplier = 80.0
+shadow/item_mask = 1
+
+[node name="TimerSpotLight" type="Timer" parent="Fatality/SpotLight"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
 [node name="TileMaps" type="Node" parent="."]
 
 editor/display_folded = true
@@ -125,7 +158,7 @@ editor/display_folded = true
 [node name="TileMap" type="TileMap" parent="TileMaps"]
 
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 5 )
 cell/size = Vector2( 64, 64 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -146,7 +179,7 @@ __meta__ = {
 [node name="TileMap Indestructible" type="TileMap" parent="TileMaps"]
 
 mode = 0
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 5 )
 cell/size = Vector2( 64, 64 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -168,7 +201,7 @@ __meta__ = {
 
 editor/display_folded = true
 
-[node name="coin" parent="coins" instance=ExtResource( 5 )]
+[node name="coin" parent="coins" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 248.034, -76.097 )
 
@@ -176,17 +209,17 @@ transform/pos = Vector2( 248.034, -76.097 )
 
 editor/display_folded = true
 
-[node name="moving_platform" parent="props" instance=ExtResource( 6 )]
+[node name="moving_platform" parent="props" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 456.455, 649.543 )
 motion = Vector2( 150, 0 )
 cycle = 10.0
 
-[node name="seesaw" parent="props" instance=ExtResource( 7 )]
+[node name="seesaw" parent="props" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 504.326, 981.887 )
 
-[node name="one_way_platform" parent="props" instance=ExtResource( 8 )]
+[node name="one_way_platform" parent="props" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 1245.71, -92.3315 )
 
@@ -194,7 +227,7 @@ transform/pos = Vector2( 1245.71, -92.3315 )
 
 editor/display_folded = true
 
-[node name="enemy 5" parent="enemies" instance=ExtResource( 9 )]
+[node name="enemy 5" parent="enemies" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 732.176, -51.1154 )
 
@@ -202,11 +235,11 @@ transform/pos = Vector2( 732.176, -51.1154 )
 
 editor/display_folded = true
 
-[node name="Player1" parent="Player" instance=ExtResource( 10 )]
+[node name="Player1" parent="Player" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 207.129, 780.662 )
 
-[node name="Player2" parent="Player" instance=ExtResource( 11 )]
+[node name="Player2" parent="Player" instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 823.029, 780.399 )
 
@@ -251,7 +284,7 @@ transform/pos = Vector2( 112.417, 827.78 )
 transform/scale = Vector2( -205.51, -236.24 )
 enabled = true
 editor_only = false
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 offset = Vector2( 0, 0 )
 scale = 1.0
 color = Color( 0.214844, 0.214844, 0.214844, 1 )
@@ -271,5 +304,7 @@ shadow/item_mask = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[connection signal="timeout" from="Fatality/SpotLight/TimerSpotLight" to="." method="_on_TimerSpotLight_timeout"]
 
 
