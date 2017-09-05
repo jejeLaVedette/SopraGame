@@ -199,6 +199,7 @@ func _fixed_process(delta):
 		if (Game.fatality_executed and Game.fatality_timer <= 5):
 			Game.fatality_timer = 1
 			pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
+			get_node(node_player2).set_pause_mode(1)
 			if (pathfollow_node.get_unit_offset() > 1):
 				fatality1_shoot += 1
 				get_node(node_target).get_node("AnimatedSprite").set_frame(player_frame)
@@ -219,6 +220,7 @@ func _fixed_process(delta):
 			node_target_opacity -= 0.005
 			get_node(node_target).move_local_y(-2)
 			get_node(node_target).set_opacity(node_target_opacity)
+			get_node(node_target).get_node("AnimatedSprite").set_frame(30)
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
