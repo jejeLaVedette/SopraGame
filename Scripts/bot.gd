@@ -294,7 +294,7 @@ func _on_Timer_timeout():
 	var currentPositionX = get_node(".").get_global_pos().x
 	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
 	var currentPositionY = get_node(".").get_global_pos().y
-	print(abs(positionJoueurY-currentPositionY))
+	
 	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
 		if positionJoueurX < currentPositionX :
 			if (move_right):
