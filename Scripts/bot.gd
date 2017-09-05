@@ -16,6 +16,8 @@ var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
 var linear_velocity_x = 800
 var linear_velocity_y = -100
+var distanceHorizontalTir = 550
+var distanceVerticalTir = 160
 
 var timer = null
 var rc_left = null
@@ -289,20 +291,23 @@ func _ready():
 
 func _on_Timer_timeout():
 	var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-	var currentPosition = get_node(".").get_global_pos().x
-	
-	if positionJoueurX < currentPosition :
-		if (move_right):
-			direction = -direction
-			move_right=false
-			move_left=true
-	else :
-		if (move_left):
-			direction = -direction
-			move_right=true
-			move_left=false
-	
-	shoot = true
+	var currentPositionX = get_node(".").get_global_pos().x
+	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
+	var currentPositionY = get_node(".").get_global_pos().y
+	print(abs(positionJoueurY-currentPositionY))
+	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
+		if positionJoueurX < currentPositionX :
+			if (move_right):
+				direction = -direction
+				move_right=false
+				move_left=true
+		else :
+			if (move_left):
+				direction = -direction
+				move_right=true
+				move_left=false
+		
+		shoot = true
 
 func _fixed_process(delta):
 	get_node("/root/stage/HUD/Control/HealthPlayer2").set_value(Game.health_bot)
