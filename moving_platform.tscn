@@ -6,7 +6,7 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -91.7717, -24, 91.1, -24, 91.1, 15, -91.7717, 15 )
+points = Vector2Array( -90, -14, 89, -14, 89, 9, -90, 9 )
 
 [node name="moving_platform" type="Node2D"]
 
@@ -45,7 +45,7 @@ texture = ExtResource( 2 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform"]
 
 build_mode = 0
-polygon = Vector2Array( -91.7717, -24, 91.1, -24, 91.1, 15, -91.7717, 15 )
+polygon = Vector2Array( -90, -14, 89, -14, 89, 9, -90, 9 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

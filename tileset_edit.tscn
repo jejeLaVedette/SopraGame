@@ -70,7 +70,7 @@ points = Vector2Array( -32, -24, 24, -24, 24, 24, -32, 24 )
 [sub_resource type="ConvexPolygonShape2D" id=13]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -25, 32, -25, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="CanvasItemShader" id=14]
 
@@ -94,7 +94,7 @@ shader_param/normal = ExtResource( 3 )
 [sub_resource type="ConvexPolygonShape2D" id=16]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="CanvasItemShader" id=17]
 
@@ -118,7 +118,7 @@ shader_param/normal = ExtResource( 5 )
 [sub_resource type="ConvexPolygonShape2D" id=19]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [node name="Node" type="Node"]
 
@@ -515,7 +515,7 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor2/collision"]
 
 build_mode = 0
-polygon = Vector2Array( -32, -25, 32, -25, 32, 32, -32, 32 )
+polygon = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
@@ -541,7 +541,7 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="stone_wall/colision"]
 
 build_mode = 0
-polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+polygon = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
@@ -567,7 +567,7 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wood_wall/StaticBody2D"]
 
 build_mode = 0
-polygon = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+polygon = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

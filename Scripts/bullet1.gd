@@ -20,7 +20,7 @@ func _ready():
 func _fixed_process(delta):
 	time_explode += delta
 	var direction = get_node(".").get_linear_velocity().x
-	if(Game.ultimate_p1 >= Game.ultimate_limit):
+	if(Game.ultimate_p1 >= Game.ultimate_limit and first_contact):
 		if(time_explode > 0.48 and time_explode < 0.5):
 			for i in range(3):
 				if (direction < 0):

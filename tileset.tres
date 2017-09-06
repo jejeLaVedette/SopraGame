@@ -45,7 +45,7 @@ points = Vector2Array( -32, -24, 24, -24, 24, 24, -32, 24 )
 [sub_resource type="ConvexPolygonShape2D" id=8]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -25, 32, -25, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="CanvasItemShader" id=9]
 
@@ -69,7 +69,7 @@ shader_param/normal = ExtResource( 3 )
 [sub_resource type="ConvexPolygonShape2D" id=11]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="CanvasItemShader" id=12]
 
@@ -93,7 +93,7 @@ shader_param/normal = ExtResource( 5 )
 [sub_resource type="ConvexPolygonShape2D" id=14]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -32, -32, 32, -32, 32, 32, -32, 32 )
+points = Vector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=15]
 
@@ -270,29 +270,29 @@ points = Vector2Array( -32, 32, -32, -24, 32, -24, 32, 32 )
 16/texture = ExtResource( 2 )
 16/tex_offset = Vector2( 0, 0 )
 16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 0, 0, 64, 64 )
-16/occluder_offset = Vector2( 32, 32 )
-16/navigation_offset = Vector2( 32, 32 )
-16/shape_offset = Vector2( 32, 32 )
+16/region = Rect2( 0, 0, 32, 32 )
+16/occluder_offset = Vector2( 16, 16 )
+16/navigation_offset = Vector2( 16, 16 )
+16/shape_offset = Vector2( 16, 16 )
 16/shapes = [ SubResource( 8 ) ]
 17/name = "stone_wall"
 17/texture = ExtResource( 4 )
 17/tex_offset = Vector2( 0, 0 )
 17/material = SubResource( 10 )
 17/modulate = Color( 1, 1, 1, 1 )
-17/region = Rect2( 0, 0, 64, 64 )
-17/occluder_offset = Vector2( 32, 32 )
-17/navigation_offset = Vector2( 32, 32 )
-17/shape_offset = Vector2( 32, 32 )
+17/region = Rect2( 0, 0, 32, 32 )
+17/occluder_offset = Vector2( 16, 16 )
+17/navigation_offset = Vector2( 16, 16 )
+17/shape_offset = Vector2( 16, 16 )
 17/shapes = [ SubResource( 11 ) ]
 18/name = "wood_wall"
 18/texture = ExtResource( 6 )
 18/tex_offset = Vector2( 0, 0 )
 18/material = SubResource( 13 )
 18/modulate = Color( 1, 1, 1, 1 )
-18/region = Rect2( 0, 0, 64, 64 )
-18/occluder_offset = Vector2( 32, 32 )
-18/navigation_offset = Vector2( 32, 32 )
-18/shape_offset = Vector2( 32, 32 )
+18/region = Rect2( 0, 0, 32, 32 )
+18/occluder_offset = Vector2( 16, 16 )
+18/navigation_offset = Vector2( 16, 16 )
+18/shape_offset = Vector2( 16, 16 )
 18/shapes = [ SubResource( 14 ) ]
 

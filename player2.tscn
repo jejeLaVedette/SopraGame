@@ -457,6 +457,7 @@ scale = Vector2( 1, 1 )
 
 [node name="left" type="TouchScreenButton" parent="ui"]
 
+visibility/visible = false
 transform/pos = Vector2( 27.7593, 360.87 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 36 )
@@ -471,6 +472,7 @@ visibility_mode = 1
 
 [node name="right" type="TouchScreenButton" parent="ui"]
 
+visibility/visible = false
 transform/pos = Vector2( 121.542, 361.415 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 37 )
@@ -485,6 +487,7 @@ visibility_mode = 1
 
 [node name="jump" type="TouchScreenButton" parent="ui"]
 
+visibility/visible = false
 transform/pos = Vector2( 666.224, 359.02 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 38 )
@@ -499,6 +502,7 @@ visibility_mode = 1
 
 [node name="fire" type="TouchScreenButton" parent="ui"]
 
+visibility/visible = false
 transform/pos = Vector2( 668.073, 262.788 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 39 )
