@@ -10,6 +10,7 @@ var curve1 = Curve2D.new()
 var curve2 = Curve2D.new()
 var curve3 = Curve2D.new()
 var path_node = Path2D.new()
+var path_node_exist = false
 var pathfollow_node = PathFollow2D.new()
 var sprite_node = Sprite.new()
 var tex_sprite = preload("res://Images/bullet.png")
@@ -19,6 +20,7 @@ var path2 = []
 var path3 = []
 var position_shooter
 var position_target
+var direction
 var fatality1_shoot = 0
 var player_frame = 27
 var node_player1 = "Player/Player1"
@@ -152,8 +154,7 @@ func _fixed_process(delta):
 			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,2)))
 
 		# Animation
-		if (Game.fatality_ready and Game.fatality_executed and Game.fatality_running):
-			Game.fatality_running = false
+		if (Game.fatality_ready and Game.fatality_executed and not path_node_exist):
 			if (Game.health_p1 <= 0):
 				position_shooter = get_node(node_player2).get_global_pos()
 				position_target = get_node(node_player1).get_global_pos()
@@ -165,17 +166,21 @@ func _fixed_process(delta):
 
 			var deplacement_x = position_target.x - position_shooter.x
 			var deplacement_y = position_target.y - position_shooter.y
+			if (deplacement_x < 0):
+				direction = 1
+			else:
+				direction = -1
 
 			path_node.set_pos(position_shooter)
 			# LegShot
-			path1.append(Vector2(-15, -20))
-			path1.append(Vector2(deplacement_x + 10, deplacement_y + 20))
+			path1.append(Vector2(-35*direction, -22))
+			path1.append(Vector2(deplacement_x+10*direction, deplacement_y + 25))
 			# LegShot
-			path2.append(Vector2(-15, -20))
-			path2.append(Vector2(deplacement_x + 10, deplacement_y + 20))
+			path2.append(Vector2(-35*direction, -22))
+			path2.append(Vector2(deplacement_x+10*direction, deplacement_y + 25))
 			# HeadShot
-			path3.append(Vector2(-15, -20))
-			path3.append(Vector2(deplacement_x + 10, deplacement_y - 20))
+			path3.append(Vector2(-35*direction, -22))
+			path3.append(Vector2(deplacement_x+10*direction, deplacement_y - 17))
 
 			for point in path1:
 				curve1.add_point(point)
@@ -195,9 +200,12 @@ func _fixed_process(delta):
 			pathfollow_node.set_offset(0)
 			sprite_node.set_pos(Vector2(0, 0))
 			sprite_node.set_scale(Vector2(0.025769, 0.034305))
+			path_node_exist = true
 
 		if (Game.fatality_executed and Game.fatality_timer <= 5):
 			Game.fatality_timer = 1
+			if (fatality1_shoot == 2):
+				sprite_speed = 2
 			pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
 			get_node(node_player2).set_pause_mode(1)
 			if (pathfollow_node.get_unit_offset() > 1):
@@ -215,6 +223,7 @@ func _fixed_process(delta):
 					get_node("Fatality/SpotLight/TimerSpotLight").start()
 					Game.fatality_timer = 6
 					Game.fatality_ready = false
+					Game.fatality_running = false
 
 		if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
 			node_target_opacity -= 0.005

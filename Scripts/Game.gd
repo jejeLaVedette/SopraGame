@@ -27,6 +27,7 @@ onready var fatality_timer = 0
 onready var fatality_ready = false
 onready var fatality_executed = false
 onready var fatality_running = false
+onready var fatality_
 onready var defeat_p1 = false
 onready var defeat_p2 = false
 onready var defeat_bot = false

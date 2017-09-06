@@ -36,7 +36,7 @@ var player
 
 
 func _integrate_forces(s):
-	if (Game.health_p1 > 0):
+	if (Game.health_p1 > 0 and not Game.fatality_running):
 		var lv = s.get_linear_velocity()
 		var step = s.get_step()
 
@@ -101,7 +101,7 @@ func _integrate_forces(s):
 				bi.get_node("Sprite").set_rotd(birot)
 				bi.set_linear_velocity(Vector2(linear_velocity_x*direction, linear_velocity_y))
 				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
-			elif (Game.fatality_ready and not Game.fatality_executed):
+			elif (Game.fatality_ready and not Game.fatality_executed and found_floor):
 				Game.fatality_executed = true
 				Game.fatality_running = true
 
@@ -242,6 +242,8 @@ func _integrate_forces(s):
 		# Finally, apply gravity and set back the linear velocity
 		lv += s.get_total_gravity()*step
 		s.set_linear_velocity(lv)
+	elif (Game.fatality_running):
+		s.set_linear_velocity(Vector2(0,0))
 
 
 func _ready():
