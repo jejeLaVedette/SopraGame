@@ -21,6 +21,7 @@ var path3 = []
 var position_shooter
 var position_target
 var direction
+var direction_shooter
 var fatality1_shoot = 0
 var player_frame = 27
 var node_player1 = "Player/Player1"
@@ -157,10 +158,12 @@ func _fixed_process(delta):
 		if (Game.fatality_ready and Game.fatality_executed and not path_node_exist):
 			if (Game.health_p1 <= 0):
 				position_shooter = get_node(node_player2).get_global_pos()
+				direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
 				position_target = get_node(node_player1).get_global_pos()
 				node_target = node_player1
 			elif (Game.health_p2 <= 0):
 				position_shooter = get_node(node_player1).get_global_pos()
+				direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
 				position_target = get_node(node_player2).get_global_pos()
 				node_target = node_player2
 
@@ -168,8 +171,16 @@ func _fixed_process(delta):
 			var deplacement_y = position_target.y - position_shooter.y
 			if (deplacement_x < 0):
 				direction = 1
+				if (Game.health_p2 <= 0):
+					get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+				elif (Game.health_p1 <= 0):
+					get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
 			else:
 				direction = -1
+				if (Game.health_p2 <= 0):
+					get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
+				elif (Game.health_p1 <= 0):
+					get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 
 			path_node.set_pos(position_shooter)
 			# LegShot
@@ -205,9 +216,8 @@ func _fixed_process(delta):
 		if (Game.fatality_executed and Game.fatality_timer <= 5):
 			Game.fatality_timer = 1
 			if (fatality1_shoot == 2):
-				sprite_speed = 2
+				sprite_speed = 4
 			pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
-			get_node(node_player2).set_pause_mode(1)
 			if (pathfollow_node.get_unit_offset() > 1):
 				fatality1_shoot += 1
 				get_node(node_target).get_node("AnimatedSprite").set_frame(player_frame)
@@ -218,7 +228,7 @@ func _fixed_process(delta):
 				pathfollow_node.set_unit_offset(0)
 				if (fatality1_shoot == 3):
 					sprite_node.queue_free()
-					get_node("Fatality/SpotLight").set_pos(Vector2(position_target.x, position_target.y - 250))
+					get_node("Fatality/SpotLight").set_pos(Vector2(position_target.x, position_target.y - 260))
 					get_node("Fatality/SpotLight").show()
 					get_node("Fatality/SpotLight/TimerSpotLight").start()
 					Game.fatality_timer = 6
