@@ -167,6 +167,9 @@ func _fixed_process(delta):
 				position_target = get_node(node_player2).get_global_pos()
 				node_target = node_player2
 
+			# Desactivation collision de la cible
+			get_node(node_target).set_layer_mask(0)
+			get_node(node_target).set_collision_mask(0)
 			var deplacement_x = position_target.x - position_shooter.x
 			var deplacement_y = position_target.y - position_shooter.y
 			if (deplacement_x < 0):
