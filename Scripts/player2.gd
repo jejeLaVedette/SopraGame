@@ -110,6 +110,7 @@ func _integrate_forces(s):
 				if(ultimate_timer_p2 > 5):
 					Game.ultimate_p2 = 0
 					ultimate_timer_p2 = 0
+					Game.ultimate_running_p2 = false
 		else:
 			shoot_time += step
 

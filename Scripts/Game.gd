@@ -35,9 +35,11 @@ onready var defeat_bot = false
 # Player stats
 onready var number_victory_p1 = 0
 onready var ultimate_p1 = 0
+onready var ultimate_running_p1 = false
 onready var health_p1 = 100
 onready var number_victory_p2 = 0
 onready var ultimate_p2 = 0
+onready var ultimate_running_p2 = false
 onready var health_p2 = 100
 onready var number_victory_bot = 0
 onready var ultimate_bot = 0

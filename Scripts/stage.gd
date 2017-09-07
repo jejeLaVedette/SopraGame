@@ -63,6 +63,12 @@ func _input(event):
 		randomize()
 		for i in range(0, Game.spawn_timer_array.size()):
 			Game.spawn_timer_array[i] = randi()%12+2
+		if (Game.ultimate_running_p1):
+			Game.ultimate_p1 = 0
+			Game.ultimate_running_p1 = false
+		if (Game.ultimate_running_p2):
+			Game.ultimate_p2 = 0
+			Game.ultimate_running_p2 = false
 
 	if (exit_game):
 		get_tree().quit()
