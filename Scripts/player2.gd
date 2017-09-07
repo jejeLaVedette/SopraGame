@@ -251,6 +251,8 @@ func _ready():
 	player = ResourceLoader.load("res://player2.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
+	get_node("raycast_left").set_enabled(false)
+	get_node("raycast_right").set_enabled(false)
 
 
 func _fixed_process(delta):

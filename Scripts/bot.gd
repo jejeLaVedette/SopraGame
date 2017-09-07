@@ -11,13 +11,19 @@ var direction = 1
 var GatlingGun_Timer = 0
 var GatlingGun_Tempo = 0
 var GatlingGun_Modulo = 6
-var ultimate_timer_bot = 0
+var ultimate_timer_p2 = 0
 var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
 var linear_velocity_x = 800
 var linear_velocity_y = -100
 var distanceHorizontalTir = 550
 var distanceVerticalTir = 160
+var move_left = true
+var move_right = false
+var jump
+var shoot = false
+var special
+var crouch
 
 var timer = null
 var rc_left = null
@@ -30,30 +36,21 @@ var AIR_ACCEL = 200.0
 var AIR_DEACCEL = 200.0
 var JUMP_VELOCITY = 460
 var STOP_JUMP_FORCE = 900.0
-
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
-
 var airborne_time = 1e20
 var shoot_time = 1e20
-
 var MAX_SHOOT_POSE_TIME = 0.3
 
 var bullet = preload("res://bullet2.tscn")
 var fatality_hud = preload("res://fatality.tscn")
-
 var floor_h_velocity = 0.0
-var bot
+var player
 var new_siding_right
 
-var move_left = true
-var move_right = false
-var jump
-var shoot = false
-var special
-var crouch
-
 func _integrate_forces(s):
-	if (Game.health_bot > 0):
+	rc_left = get_node("raycast_left")
+	rc_right = get_node("raycast_right")
+	if (Game.health_p2 > 0 and not Game.fatality_running):
 		var lv = s.get_linear_velocity()
 		var step = s.get_step()
 
@@ -79,7 +76,7 @@ func _integrate_forces(s):
 				floor_index = x
 			var cc = s.get_contact_collider_object(x)
 			var dp = s.get_contact_local_normal(x)
-			
+
 			if (dp.x > 0.9):
 				wall_side = -1.0
 			elif (dp.x < -0.9):
@@ -89,7 +86,7 @@ func _integrate_forces(s):
 			direction = -direction
 			move_left = not move_left
 			move_right = not move_right
-		# Si il y a du vide	alors on fait demi tour
+		# Si il y a du vide alors on fait demi tour
 		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
 			direction = -direction
 			move_left = false
@@ -102,8 +99,8 @@ func _integrate_forces(s):
 
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
-		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_bot):
-			if (Game.gatlinggun_bot):
+		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_p2):
+			if (Game.gatlinggun_p2):
 				crouch = null
 				jump = null
 				shoot = null
@@ -126,7 +123,7 @@ func _integrate_forces(s):
 				birot = 180
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
-			if(modulo == 0):
+			if(modulo == 0 and not Game.fatality_ready):
 				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(-vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(-direction, -6.0)
 				bi.set_pos(pos)
@@ -134,12 +131,16 @@ func _integrate_forces(s):
 				bi.get_node("Sprite").set_rotd(birot)
 				bi.set_linear_velocity(Vector2(-linear_velocity_x*direction, linear_velocity_y))
 				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
+			elif (Game.fatality_ready and not Game.fatality_executed and found_floor):
+				Game.fatality_executed = true
+				Game.fatality_running = true
 
-			if(Game.ultimate_bot >= Game.ultimate_limit):
-				ultimate_timer_bot += 1
-				if(ultimate_timer_bot > 5):
-					Game.ultimate_bot = 0
-					ultimate_timer_bot = 0
+			if(Game.ultimate_p2 >= Game.ultimate_limit):
+				ultimate_timer_p2 += 1
+				if(ultimate_timer_p2 > 5):
+					Game.ultimate_p2 = 0
+					ultimate_timer_p2 = 0
+					Game.ultimate_running_p2 = false
 		else:
 			shoot_time += step
 
@@ -248,7 +249,7 @@ func _integrate_forces(s):
 				get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
 			siding_right = new_siding_right
 
-		if (Game.gatlinggun_bot):
+		if (Game.gatlinggun_p2):
 			new_anim = "gatlinggun"
 			get_node("AnimatedSprite/Sparks").show()
 			get_node("AnimatedSprite/Smoke").set_emitting(true)
@@ -273,15 +274,17 @@ func _integrate_forces(s):
 		# Finally, apply gravity and set back the linear velocity
 		lv += s.get_total_gravity()*step
 		s.set_linear_velocity(lv)
+	elif (Game.fatality_running):
+		s.set_linear_velocity(Vector2(0,0))
 
 
 func _ready():
-	bot = ResourceLoader.load("res://bot.tscn")
-	rc_left = get_node("raycast_left")
-	rc_right = get_node("raycast_right")
+	player = ResourceLoader.load("res://player2.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
-	
+	get_node("raycast_left").set_enabled(true)
+	get_node("raycast_right").set_enabled(true)
+
 	timer = Timer.new()
 	add_child(timer)
 	timer.connect("timeout", self, "_on_Timer_timeout")
@@ -294,7 +297,7 @@ func _on_Timer_timeout():
 	var currentPositionX = get_node(".").get_global_pos().x
 	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
 	var currentPositionY = get_node(".").get_global_pos().y
-	
+
 	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
 		if positionJoueurX < currentPositionX :
 			if (move_right):
@@ -306,45 +309,49 @@ func _on_Timer_timeout():
 				direction = -direction
 				move_right=true
 				move_left=false
-		
+
 		shoot = true
 
 func _fixed_process(delta):
-	get_node("/root/stage/HUD/Control/HealthPlayer2").set_value(Game.health_bot)
-	get_node("/root/stage/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_bot)
-	if (Game.health_bot > 0):
-		Game.health_bot += delta * 2
-		if (Game.health_p1 > 0 and not Game.gatlinggun_bot):
-			Game.ultimate_bot += delta * 5
+	get_node("/root/stage/HUD/Control/HealthPlayer2").set_value(Game.health_p2)
+	get_node("/root/stage/HUD/Control/UltimatePlayer2").set_value(Game.ultimate_p2)
+	if (Game.health_p2 > 0):
+		Game.health_p2 += delta * 2
+		if (Game.health_p1 > 0 and not Game.gatlinggun_p2):
+			Game.ultimate_p2 += delta * 5
 
-		if (Game.gatlinggun_bot and GatlingGun_Timer < 3):
+		if (Game.gatlinggun_p2 and GatlingGun_Timer < 3):
 			GatlingGun_Timer += delta
 			WALK_MAX_VELOCITY = 1
 		else:
-			Game.gatlinggun_bot = false
+			Game.gatlinggun_p2 = false
 			WALK_MAX_VELOCITY = 200
 	else:
 		Game.fatality_timer += delta
 		get_node(".").set_sleeping(true)
 		if (Game.fatality_timer > 5 ):
-			die_bot()
-			Game.defeat_bot = true
+			Game.fatality_ready = false
+			die_p2()
+			Game.defeat_p2 = true
+		else:
+			Game.fatality_ready = true
 
 
 func damage(dmg):
-	if (get_node("anim").get_current_animation() == "fatality"):
-		die_bot()
-		Game.defeat_bot = true
-	Game.health_bot -= dmg
+	Game.health_p2 -= dmg
 	#Fatality
-	if (Game.health_bot <= 0 and not Game.defeat_bot):
+	if (Game.health_p2 <= 0 and not Game.defeat_p2):
 		get_parent().add_child(fatality_hud.instance())
-		get_node("anim").play("fatality")
+		if (not Game.fatality_executed):
+			get_node("anim").play("fatality")
+	elif (Game.health_p2 > 0):
+		get_node("Damage").play("Damage")
 
 
-func die_bot():
-	if (not Game.defeat_bot):
+func die_p2():
+	if (not Game.defeat_p2):
 		Game.number_victory_p1 += 1
-	get_node("anim").play("defeat")
-	get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
-	get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))
+	if (not Game.fatality_executed):
+		get_node("anim").play("defeat")
+		get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
+		get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))

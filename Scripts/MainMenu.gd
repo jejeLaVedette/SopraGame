@@ -14,4 +14,4 @@ func _ready():
 func _on_Campagne_pressed():
 	Game.versus_player = false
 	Game.versus_bot = true
-	get_tree().change_scene("res://campagne.tscn")
+	get_tree().change_scene("res://stage.tscn")

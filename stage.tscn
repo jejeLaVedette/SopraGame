@@ -233,8 +233,6 @@ transform/pos = Vector2( 732.176, -51.1154 )
 
 [node name="Player" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="Player1" parent="Player" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 207.129, 780.662 )
