@@ -288,6 +288,8 @@ func damage(dmg):
 		get_parent().add_child(fatality_hud.instance())
 		if (not Game.fatality_executed):
 			get_node("anim").play("fatality")
+	elif (Game.health_p2 > 0):
+		get_node("Damage").play("Damage")
 
 
 func die_p2():
