@@ -279,10 +279,6 @@ func _fixed_process(delta):
 
 
 func damage(dmg):
-	if (get_node("anim").get_current_animation() == "fatality"):
-		die_p2()
-		Game.defeat_p2 = true
-
 	Game.health_p2 -= dmg
 	#Fatality
 	if (Game.health_p2 <= 0 and not Game.defeat_p2):
