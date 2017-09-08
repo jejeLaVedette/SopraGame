@@ -6,13 +6,13 @@ var zoomy = 1
 var coeffzoomfinal = 0.5
 var timer_thunder = 0
 onready var hud_scene = preload("res://Hud/main.tscn")
-var curve1 = Curve2D.new()
-var curve2 = Curve2D.new()
-var curve3 = Curve2D.new()
-var path_node = Path2D.new()
+var curve1 = null
+var curve2 = null
+var curve3 = null
+var path_node = null
 var path_node_exist = false
-var pathfollow_node = PathFollow2D.new()
-var sprite_node = Sprite.new()
+var pathfollow_node = null
+var sprite_node = null
 var tex_sprite = preload("res://Images/bullet.png")
 var script_player2 = preload ("res://Scripts/player2.gd")
 var script_bot = preload ("res://Scripts/bot.gd")
@@ -177,6 +177,12 @@ func fatality_animation_1():
 			elif (Game.health_p1 <= 0):
 				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 
+		curve1 = Curve2D.new()
+		curve2 = Curve2D.new()
+		curve3 = Curve2D.new()
+		path_node = Path2D.new()
+		pathfollow_node = PathFollow2D.new()
+		sprite_node = Sprite.new()
 		# Trajectoire des tirs
 		path_node.set_pos(position_shooter)
 		# Position du gun du tireur
@@ -281,6 +287,10 @@ func fatality_animation_2():
 			elif (Game.health_p1 <= 0):
 				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 
+		curve1 = Curve2D.new()
+		path_node = Path2D.new()
+		pathfollow_node = PathFollow2D.new()
+		sprite_node = Sprite.new()
 		# Trajectoire des tirs
 		path_node.set_pos(position_shooter)
 
