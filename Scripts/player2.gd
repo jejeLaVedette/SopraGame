@@ -251,8 +251,6 @@ func _ready():
 	player = ResourceLoader.load("res://player2.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
-	get_node("raycast_left").set_enabled(false)
-	get_node("raycast_right").set_enabled(false)
 
 
 func _fixed_process(delta):
@@ -298,3 +296,7 @@ func die_p2():
 		get_node("anim").play("defeat")
 		get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
 		get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))
+
+
+func _on_Timer_timeout():
+	pass

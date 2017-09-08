@@ -76,7 +76,7 @@ func _input(event):
 			Game.ultimate_running_p2 = false
 
 	if (exit_game):
-		get_tree().quit()
+		get_tree().change_scene("res://Hud/MainMenu.tscn")
 
 
 func _fixed_process(delta):
