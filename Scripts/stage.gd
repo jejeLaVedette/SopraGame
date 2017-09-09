@@ -28,6 +28,7 @@ var fatality1_shoot = 0
 var node_player1 = "Player/Player1"
 var node_player2 = "Player/Player2"
 var node_target
+var node_shooter
 var node_target_opacity = 1
 var target_frame = 27
 var fatality_function_name
@@ -149,11 +150,13 @@ func fatality_animation_1():
 		if (Game.health_p1 <= 0):
 			position_shooter = get_node(node_player2).get_global_pos()
 			direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player2
 			position_target = get_node(node_player1).get_global_pos()
 			node_target = node_player1
 		elif (Game.health_p2 <= 0):
 			position_shooter = get_node(node_player1).get_global_pos()
 			direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player1
 			position_target = get_node(node_player2).get_global_pos()
 			node_target = node_player2
 
@@ -220,6 +223,7 @@ func fatality_animation_1():
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):
+		get_node(node_shooter).get_node("anim").play("idle_weapon")
 		Game.fatality_timer = 1
 		# Ralentissement du dernier tir
 		if (fatality1_shoot == 2):
@@ -259,11 +263,13 @@ func fatality_animation_2():
 		if (Game.health_p1 <= 0):
 			position_shooter = get_node(node_player2).get_global_pos()
 			direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player2
 			position_target = get_node(node_player1).get_global_pos()
 			node_target = node_player1
 		elif (Game.health_p2 <= 0):
 			position_shooter = get_node(node_player1).get_global_pos()
 			direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player1
 			position_target = get_node(node_player2).get_global_pos()
 			node_target = node_player2
 
@@ -317,6 +323,7 @@ func fatality_animation_2():
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):
+		get_node(node_shooter).get_node("anim").play("idle_weapon")
 		Game.fatality_timer = 1
 		pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
 
