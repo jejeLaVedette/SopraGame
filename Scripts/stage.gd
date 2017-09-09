@@ -48,8 +48,8 @@ func _ready():
 
 
 func _input(event):
-	var retry = Input.is_action_pressed("retry")
-	var exit_game = Input.is_action_pressed("exit_game")
+	var retry = event.is_action_pressed("retry")
+	var exit_game = event.is_action_pressed("exit_game")
 	if (retry):
 		get_tree().reload_current_scene()
 		Game.round_current += 1

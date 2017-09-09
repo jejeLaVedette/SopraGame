@@ -18,6 +18,6 @@ func _on_Campagne_pressed():
 	get_tree().change_scene("res://stage.tscn")
 
 func _input(event):
-	var exit_game = Input.is_action_pressed("exit_game")
+	var exit_game = event.is_action_pressed("exit_game")
 	if (exit_game):
 		get_tree().quit()
