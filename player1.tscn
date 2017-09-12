@@ -335,6 +335,7 @@ transform/pos = Vector2( -0.237823, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
 animation = "Player1"
+frame = 3
 __meta__ = {
 "_edit_lock_": true
 }

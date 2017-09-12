@@ -25,7 +25,6 @@ var shoot = false
 var special
 var crouch
 
-var timer = null
 var rc_left = null
 var rc_right = null
 
@@ -48,8 +47,11 @@ var player
 var new_siding_right
 
 func _integrate_forces(s):
-	rc_left = get_node("raycast_left")
-	rc_right = get_node("raycast_right")
+	rc_left = get_node("NodeBot/raycast_left")
+	rc_right = get_node("NodeBot/raycast_right")
+	rc_left.set_enabled(true)
+	rc_right.set_enabled(true)
+
 	if (Game.health_p2 > 0 and not Game.fatality_running):
 		var lv = s.get_linear_velocity()
 		var step = s.get_step()
@@ -86,6 +88,7 @@ func _integrate_forces(s):
 			direction = -direction
 			move_left = not move_left
 			move_right = not move_right
+
 		# Si il y a du vide alors on fait demi tour
 		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
 			direction = -direction
@@ -278,39 +281,33 @@ func _integrate_forces(s):
 		s.set_linear_velocity(Vector2(0,0))
 
 
+func _on_Timer_timeout():
+	if (not Game.fatality_executed):
+		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+		var currentPositionX = get_node(".").get_global_pos().x
+		var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
+		var currentPositionY = get_node(".").get_global_pos().y
+	
+		if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
+			if (positionJoueurX < currentPositionX):
+				if (move_right):
+					direction = -direction
+					move_right=false
+					move_left=true
+			else:
+				if (move_left):
+					direction = -direction
+					move_right=true
+					move_left=false
+	
+			shoot = true
+
+
 func _ready():
 	player = ResourceLoader.load("res://player2.tscn")
 	set_fixed_process(true)
 	set_process_input(true)
-	get_node("raycast_left").set_enabled(true)
-	get_node("raycast_right").set_enabled(true)
 
-	timer = Timer.new()
-	add_child(timer)
-	timer.connect("timeout", self, "_on_Timer_timeout")
-	timer.set_wait_time(2.0)
-	timer.set_one_shot(false) # Make sure it loops
-	timer.start()
-
-func _on_Timer_timeout():
-	var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-	var currentPositionX = get_node(".").get_global_pos().x
-	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
-	var currentPositionY = get_node(".").get_global_pos().y
-
-	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
-		if positionJoueurX < currentPositionX :
-			if (move_right):
-				direction = -direction
-				move_right=false
-				move_left=true
-		else :
-			if (move_left):
-				direction = -direction
-				move_right=true
-				move_left=false
-
-		shoot = true
 
 func _fixed_process(delta):
 	get_node("/root/stage/HUD/Control/HealthPlayer2").set_value(Game.health_p2)

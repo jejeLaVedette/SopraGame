@@ -6,13 +6,13 @@ var zoomy = 1
 var coeffzoomfinal = 0.5
 var timer_thunder = 0
 onready var hud_scene = preload("res://Hud/main.tscn")
-var curve1 = Curve2D.new()
-var curve2 = Curve2D.new()
-var curve3 = Curve2D.new()
-var path_node = Path2D.new()
+var curve1 = null
+var curve2 = null
+var curve3 = null
+var path_node = null
 var path_node_exist = false
-var pathfollow_node = PathFollow2D.new()
-var sprite_node = Sprite.new()
+var pathfollow_node = null
+var sprite_node = null
 var tex_sprite = preload("res://Images/bullet.png")
 var script_player2 = preload ("res://Scripts/player2.gd")
 var script_bot = preload ("res://Scripts/bot.gd")
@@ -28,6 +28,7 @@ var fatality1_shoot = 0
 var node_player1 = "Player/Player1"
 var node_player2 = "Player/Player2"
 var node_target
+var node_shooter
 var node_target_opacity = 1
 var target_frame = 27
 var fatality_function_name
@@ -47,8 +48,8 @@ func _ready():
 
 
 func _input(event):
-	var retry = Input.is_action_pressed("retry")
-	var exit_game = Input.is_action_pressed("exit_game")
+	var retry = event.is_action_pressed("retry")
+	var exit_game = event.is_action_pressed("exit_game")
 	if (retry):
 		get_tree().reload_current_scene()
 		Game.round_current += 1
@@ -76,7 +77,7 @@ func _input(event):
 			Game.ultimate_running_p2 = false
 
 	if (exit_game):
-		get_tree().quit()
+		get_tree().change_scene("res://Hud/MainMenu.tscn")
 
 
 func _fixed_process(delta):
@@ -149,11 +150,13 @@ func fatality_animation_1():
 		if (Game.health_p1 <= 0):
 			position_shooter = get_node(node_player2).get_global_pos()
 			direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player2
 			position_target = get_node(node_player1).get_global_pos()
 			node_target = node_player1
 		elif (Game.health_p2 <= 0):
 			position_shooter = get_node(node_player1).get_global_pos()
 			direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player1
 			position_target = get_node(node_player2).get_global_pos()
 			node_target = node_player2
 
@@ -177,6 +180,12 @@ func fatality_animation_1():
 			elif (Game.health_p1 <= 0):
 				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 
+		curve1 = Curve2D.new()
+		curve2 = Curve2D.new()
+		curve3 = Curve2D.new()
+		path_node = Path2D.new()
+		pathfollow_node = PathFollow2D.new()
+		sprite_node = Sprite.new()
 		# Trajectoire des tirs
 		path_node.set_pos(position_shooter)
 		# Position du gun du tireur
@@ -214,6 +223,7 @@ func fatality_animation_1():
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):
+		get_node(node_shooter).get_node("anim").play("idle_weapon")
 		Game.fatality_timer = 1
 		# Ralentissement du dernier tir
 		if (fatality1_shoot == 2):
@@ -253,11 +263,13 @@ func fatality_animation_2():
 		if (Game.health_p1 <= 0):
 			position_shooter = get_node(node_player2).get_global_pos()
 			direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player2
 			position_target = get_node(node_player1).get_global_pos()
 			node_target = node_player1
 		elif (Game.health_p2 <= 0):
 			position_shooter = get_node(node_player1).get_global_pos()
 			direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player1
 			position_target = get_node(node_player2).get_global_pos()
 			node_target = node_player2
 
@@ -281,6 +293,10 @@ func fatality_animation_2():
 			elif (Game.health_p1 <= 0):
 				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
 
+		curve1 = Curve2D.new()
+		path_node = Path2D.new()
+		pathfollow_node = PathFollow2D.new()
+		sprite_node = Sprite.new()
 		# Trajectoire des tirs
 		path_node.set_pos(position_shooter)
 
@@ -307,6 +323,7 @@ func fatality_animation_2():
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):
+		get_node(node_shooter).get_node("anim").play("idle_weapon")
 		Game.fatality_timer = 1
 		pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
 
