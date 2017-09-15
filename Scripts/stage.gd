@@ -32,7 +32,9 @@ var node_shooter
 var node_target_opacity = 1
 var target_frame = 27
 var fatality_function_name
-
+var node_drone = "enemies/Path2D/PathFollow2D"
+var timer_drone = false
+var drone_attack = true
 
 func _ready():
 	var hud = hud_scene.instance()
@@ -108,6 +110,28 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
+
+	var current_pos = get_node(node_drone).get_offset()
+	if (drone_attack):
+		get_node(node_drone).set_offset(current_pos + (300*delta))
+	else:
+		get_node(node_drone).set_offset(current_pos - (300*delta))
+
+	if (get_node(node_drone).get_unit_offset() <= 0):
+		get_node(node_drone).hide()
+	else:
+		get_node(node_drone).show()
+
+	if (get_node(node_drone).get_unit_offset() >= 1):
+		Game.drone_straffing = true
+		if (not timer_drone):
+			timer_drone = true
+			randomize()
+			var wait_timer = randi()%5+3
+			get_node(node_drone).get_node("TimerDrone").set_wait_time(wait_timer)
+			get_node(node_drone).get_node("TimerDrone").start()
+	else:
+		Game.drone_straffing = false
 
 	# Fatality
 	if (Game.fatality_timer != 0 ):
@@ -348,6 +372,11 @@ func fatality_animation_2():
 		get_node(node_target).set_opacity(node_target_opacity)
 		get_node(node_target).get_node("AnimatedSprite").set_frame(30)
 
+
 func _on_TimerSpotLight_timeout():
 	get_node("Fatality/SpotLight").hide()
 	get_node(node_target).queue_free()
+
+
+func _on_TimerDrone_timeout():
+	drone_attack = false

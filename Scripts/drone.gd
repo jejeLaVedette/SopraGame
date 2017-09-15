@@ -22,22 +22,15 @@ func _fixed_process(delta):
 
 
 func _on_TimerBullet_timeout():
-	if (get_node(".").is_visible()):
+	if (Game.drone_straffing and get_node("Drone").is_visible()):
 		var rotation = 240
 		var x = -1
 		for i in range(3):
 			var bullet_instance = bullet.instance()
-			var pos = get_node("Drone").get_global_pos() + Vector2(x*20, 0)
+			var pos = get_node("Drone").get_pos() + Vector2(x*20, 0)
 			bullet_instance.set_pos(pos)
 			get_parent().add_child(bullet_instance)
 			bullet_instance.get_node("Sprite").set_rotd(rotation)
 			bullet_instance.set_applied_force(Vector2(x, 1))
 			rotation += 30
 			x += 1
-
-
-func _on_TimerDrone_timeout():
-	if (get_node(".").is_visible()):
-		get_node(".").hide()
-	else:
-		get_node(".").show()
