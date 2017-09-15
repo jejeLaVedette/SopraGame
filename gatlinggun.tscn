@@ -7,27 +7,27 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -1, 5, -2, 11, -9, 15, -9, 5, -7, -2 )
+points = Vector2Array( 2, 5, 2, 12, -6, 16, -6, 5, -4, -2 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 37, -2, 37, 5, -1, 5, -7, -2 )
+points = Vector2Array( -37, -3, -27, -9, -25, -1, -37, 5 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -35, 5, -35, -7, -25, -7, -25, -1 )
+points = Vector2Array( -6, 5, -37, 5, -25, -1, -16, -1 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -9, 5, -35, 5, -25, -1, -16, -1 )
+points = Vector2Array( 47, -2, 47, 5, 2, 5, -4, -2 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -7, -2, -9, 5, -16, -1, -11, -9, -7, -9 )
+points = Vector2Array( -4, -2, -6, 5, -16, -1, -11, -11, -4, -11 )
 
 [node name="GatlingGun" type="RigidBody2D"]
 
@@ -74,6 +74,7 @@ texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
+transform/pos = Vector2( -1, 2 )
 transform/scale = Vector2( 0.2, 0.2 )
 z/relative = false
 texture = ExtResource( 3 )
@@ -81,7 +82,7 @@ texture = ExtResource( 3 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( 37, -2, -7, -2, -7, -9, -11, -9, -16, -1, -25, -1, -25, -7, -35, -7, -35, 5, -9, 5, -9, 15, -2, 11, -1, 5, 37, 5 )
+polygon = Vector2Array( 47, -2, -4, -2, -4, -11, -11, -11, -16, -1, -25, -1, -27, -9, -37, -3, -37, 5, -6, 5, -6, 16, 2, 12, 2, 5, 47, 5 )
 shape_range = Vector2( 0, 4 )
 trigger = false
 
