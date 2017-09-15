@@ -33,8 +33,10 @@ var node_target_opacity = 1
 var target_frame = 27
 var fatality_function_name
 var node_drone = "enemies/Path2D/PathFollow2D"
+var timer_drone_appear
 var timer_drone = false
-var drone_attack = true
+var drone_attack = false
+
 
 func _ready():
 	var hud = hud_scene.instance()
@@ -43,6 +45,10 @@ func _ready():
 	set_process_input(true)
 	randomize()
 	fatality_function_name = "fatality_animation_" + str(randi()%2+1)
+	timer_drone_appear = randi()%10+2
+	get_node(node_drone).get_node("TimerDroneAppear").set_wait_time(timer_drone_appear)
+	get_node(node_drone).get_node("TimerDroneAppear").start()
+
 	if (Game.versus_bot):
 		get_node(node_player2).set_script(script_bot)
 	else:
@@ -112,9 +118,9 @@ func _fixed_process(delta):
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 
 	var current_pos = get_node(node_drone).get_offset()
-	if (drone_attack):
+	if (drone_attack and get_node(node_drone).get_unit_offset() < 1.1):
 		get_node(node_drone).set_offset(current_pos + (300*delta))
-	else:
+	elif (get_node(node_drone).get_unit_offset() > 0):
 		get_node(node_drone).set_offset(current_pos - (300*delta))
 
 	if (get_node(node_drone).get_unit_offset() <= 0):
@@ -274,6 +280,7 @@ func fatality_animation_1():
 				Game.fatality_running = false
 
 	if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
+		# le perdant s'envole vers les cieux
 		node_target_opacity -= 0.005
 		get_node(node_target).move_local_y(-2)
 		get_node(node_target).set_opacity(node_target_opacity)
@@ -367,6 +374,7 @@ func fatality_animation_2():
 				Game.fatality_running = false
 
 	if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
+		# le perdant s'envole vers les cieux
 		node_target_opacity -= 0.005
 		get_node(node_target).move_local_y(-2)
 		get_node(node_target).set_opacity(node_target_opacity)
@@ -374,9 +382,16 @@ func fatality_animation_2():
 
 
 func _on_TimerSpotLight_timeout():
+	# Timer du temps d'apparition du halo de la fatality
 	get_node("Fatality/SpotLight").hide()
 	get_node(node_target).queue_free()
 
 
 func _on_TimerDrone_timeout():
+	# Timer du temps de l'attaque
 	drone_attack = false
+
+
+func _on_TimerDroneAppear_timeout():
+	# Timer du temps d'apparition du drone
+	drone_attack = true

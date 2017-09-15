@@ -269,6 +269,13 @@ wait_time = 3.0
 one_shot = true
 autostart = false
 
+[node name="TimerDroneAppear" type="Timer" parent="enemies/Path2D/PathFollow2D"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
 [node name="Player" type="Node" parent="."]
 
 [node name="Player1" parent="Player" instance=ExtResource( 12 )]
@@ -344,5 +351,7 @@ __meta__ = {
 [connection signal="timeout" from="Fatality/SpotLight/TimerSpotLight" to="." method="_on_TimerSpotLight_timeout"]
 
 [connection signal="timeout" from="enemies/Path2D/PathFollow2D/TimerDrone" to="." method="_on_TimerDrone_timeout"]
+
+[connection signal="timeout" from="enemies/Path2D/PathFollow2D/TimerDroneAppear" to="." method="_on_TimerDroneAppear_timeout"]
 
 
