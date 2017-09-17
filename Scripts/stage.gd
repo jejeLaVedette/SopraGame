@@ -90,7 +90,7 @@ func _input(event):
 
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
-	if (not Game.defeat_p1 and not Game.defeat_p2):
+	if (get_node(".").has_node(node_player1) and get_node(".").has_node(node_player2)):
 		var p1 = get_node(node_player1)
 		var p2 = get_node(node_player2)
 		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
@@ -98,9 +98,14 @@ func _fixed_process(delta):
 		var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
 		var zoom_factor = distance * 0.005
 		var zoom = Vector2(1,1) * zoom_factor / 4
+		if (zoom.x > 1.5):
+			zoom.x = 1.5
+		if (zoom.y > 1.5):
+			zoom.y = 1.5
+
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
-	elif (not Game.defeat_p1):
+	elif (get_node(".").has_node(node_player1)):
 		var newpos = (get_node(node_player1).get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
@@ -108,7 +113,7 @@ func _fixed_process(delta):
 		if (get_node("Camera2D").get_zoom().y > 1):
 			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
 		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-	elif (not Game.defeat_p2):
+	elif (get_node(".").has_node(node_player2)):
 		var newpos = (get_node(node_player2).get_global_pos())
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
@@ -142,6 +147,7 @@ func _fixed_process(delta):
 	# Fatality
 	if (Game.fatality_timer != 0 ):
 		# Environment
+		get_node("Cloud").show()
 		Game.spawn_gatlinggun = true
 		Game.spawn_healthpack = true
 		var timer_thunder_max = 2
@@ -172,6 +178,7 @@ func _fixed_process(delta):
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
+		get_node("Cloud").hide()
 
 
 func fatality_animation_1():
