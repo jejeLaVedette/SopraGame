@@ -105,6 +105,10 @@ func _fixed_process(delta):
 			zoom.y = zoom_max
 			# Centre de l'écran
 			newpos = Vector2(670, 690)
+		if (newpos.x > camera_x_max):
+			newpos = Vector2(camera_x_max, newpos.y)
+		elif (newpos.x < camera_x_min):
+			newpos = Vector2(camera_x_min, newpos.y)
 		get_node("Camera2D").set_global_pos(newpos)
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
@@ -114,10 +118,10 @@ func _fixed_process(delta):
 		elif(get_node(".").has_node(node_player2)):
 			node_shooter = node_player2
 		var newpos = (get_node(node_shooter).get_global_pos())
-		if (get_node(node_shooter).get_global_pos().x > camera_x_max):
-			newpos = Vector2(camera_x_max, get_node(node_shooter).get_global_pos().y)
-		elif (get_node(node_shooter).get_global_pos().x < camera_x_min):
-			newpos = Vector2(camera_x_min, get_node(node_shooter).get_global_pos().y)
+		if (newpos.x > camera_x_max):
+			newpos = Vector2(camera_x_max, newpos.y)
+		elif (newpos.x < camera_x_min):
+			newpos = Vector2(camera_x_min, newpos.y)
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
 			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal

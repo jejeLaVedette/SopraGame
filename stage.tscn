@@ -47,7 +47,7 @@ float cloud(vec3 p) {
 
 vec2 position = vec2(1) - UV;
 position.y+=0.2;
-vec2 coord= vec2((position.x-0.5)/position.y,1.0/(position.y+0.2));
+vec2 coord= vec2((position.x-0.5)/position.y,1.0/(position.y-0.3));
 coord += TIME*0.1+1000.0;
 float q = cloud(vec3(coord*1.0,0.222));
 vec3 col = vec3(0.3,0.3,0.5) + vec3(0.5*q,0.5*q,0.5*q);
