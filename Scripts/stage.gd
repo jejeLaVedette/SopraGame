@@ -3,6 +3,9 @@ extends Node
 var zoom_factor=1
 var zoomx = 1
 var zoomy = 1
+var zoom_max = 1.5
+var camera_x_min = 300
+var camera_x_max = 1060
 var coeffzoomfinal = 0.5
 var timer_thunder = 0
 onready var hud_scene = preload("res://Hud/main.tscn")
@@ -94,27 +97,27 @@ func _fixed_process(delta):
 		var p1 = get_node(node_player1)
 		var p2 = get_node(node_player2)
 		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
-		get_node("Camera2D").set_global_pos(newpos)
 		var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
 		var zoom_factor = distance * 0.005
 		var zoom = Vector2(1,1) * zoom_factor / 4
-		if (zoom.x > 1.5):
-			zoom.x = 1.5
-		if (zoom.y > 1.5):
-			zoom.y = 1.5
-
+		if (zoom.x > zoom_max or zoom.y > zoom_max):
+			zoom.x = zoom_max
+			zoom.y = zoom_max
+			# Centre de l'écran
+			newpos = Vector2(670, 690)
+		get_node("Camera2D").set_global_pos(newpos)
 		if (Vector2(1,1) < zoom):
 			get_node("Camera2D").set_zoom(zoom)
-	elif (get_node(".").has_node(node_player1)):
-		var newpos = (get_node(node_player1).get_global_pos())
-		get_node("Camera2D").set_global_pos(newpos)
-		if (get_node("Camera2D").get_zoom().x > 1):
-			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
-		if (get_node("Camera2D").get_zoom().y > 1):
-			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
-		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
-	elif (get_node(".").has_node(node_player2)):
-		var newpos = (get_node(node_player2).get_global_pos())
+	else:
+		if(get_node(".").has_node(node_player1)):
+			node_shooter = node_player1
+		elif(get_node(".").has_node(node_player2)):
+			node_shooter = node_player2
+		var newpos = (get_node(node_shooter).get_global_pos())
+		if (get_node(node_shooter).get_global_pos().x > camera_x_max):
+			newpos = Vector2(camera_x_max, get_node(node_shooter).get_global_pos().y)
+		elif (get_node(node_shooter).get_global_pos().x < camera_x_min):
+			newpos = Vector2(camera_x_min, get_node(node_shooter).get_global_pos().y)
 		get_node("Camera2D").set_global_pos(newpos)
 		if (get_node("Camera2D").get_zoom().x > 1):
 			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
