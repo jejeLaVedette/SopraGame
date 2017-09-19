@@ -14,20 +14,20 @@ func _input(event):
 	if (exit_game):
 		get_tree().quit()
 
-	if event.is_action("jump_p2") && event.is_pressed() && !event.is_echo():
+	if (event.is_action("jump_p2") and event.is_pressed() and !event.is_echo()):
 		if(index != 0):
 			index -= 1
 			var x = get_node("Selected").get_pos().x
 			var y = get_node("Selected").get_pos().y - 50
 			get_node("Selected").set_pos(Vector2(x,y))
-	if event.is_action("crouch_p2") && event.is_pressed() && !event.is_echo():
+	if (event.is_action("crouch_p2") and event.is_pressed() and !event.is_echo()):
 		if(index != 3):
 			index += 1
 			var x = get_node("Selected").get_pos().x
 			var y = get_node("Selected").get_pos().y + 50
 			get_node("Selected").set_pos(Vector2(x,y))
 
-	if event.is_action("shoot_p2") && event.is_pressed() && !event.is_echo():
+	if ((event.is_action("shoot_p2") or event.is_action("Enter")) and event.is_pressed() and !event.is_echo()):
 		if (index == 0):
 			Game.versus_player = false
 			Game.versus_bot = true
