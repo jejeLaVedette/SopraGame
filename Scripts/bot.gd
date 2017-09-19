@@ -21,6 +21,7 @@ var distanceVerticalTir = 160
 var move_left = true
 var move_right = false
 var jump
+var jumpBot
 var shoot = false
 var special
 var crouch
@@ -90,15 +91,28 @@ func _integrate_forces(s):
 			move_right = not move_right
 
 		# Si il y a du vide alors on fait demi tour
-		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
-			direction = -direction
-			move_left = false
-			move_right = true
-		elif (direction < 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
-			direction = -direction
-			move_right = false
-			move_left = true
+		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+		var currentPositionX = get_node(".").get_global_pos().x
+		var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
+		var currentPositionY = get_node(".").get_global_pos().y
 
+		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
+			if(positionJoueurX < currentPositionX and not _porter_de_tir()):
+				jump=true
+				jumpBot=true
+			else :
+				direction = -direction
+				move_left = false
+				move_right = true
+
+		elif (direction < 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
+			if(positionJoueurX > currentPositionX and not _porter_de_tir()):
+				jump=true
+				jumpBot=true
+			else :
+				direction = -direction
+				move_right = false
+				move_left = true
 
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
@@ -279,16 +293,17 @@ func _integrate_forces(s):
 		s.set_linear_velocity(lv)
 	elif (Game.fatality_running):
 		s.set_linear_velocity(Vector2(0,0))
+	
+	if jumpBot:
+		jump=false
+		jumpBot=false
 
 
 func _on_Timer_timeout():
 	if (not Game.fatality_executed):
-		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-		var currentPositionX = get_node(".").get_global_pos().x
-		var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
-		var currentPositionY = get_node(".").get_global_pos().y
-	
-		if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
+		if(_porter_de_tir()):
+			var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+			var currentPositionX = get_node(".").get_global_pos().x
 			if (positionJoueurX < currentPositionX):
 				if (move_right):
 					direction = -direction
@@ -302,6 +317,15 @@ func _on_Timer_timeout():
 	
 			shoot = true
 
+func _porter_de_tir():
+	var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+	var currentPositionX = get_node(".").get_global_pos().x
+	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
+	var currentPositionY = get_node(".").get_global_pos().y
+	
+	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
+		return true
+	return false
 
 func _ready():
 	player = ResourceLoader.load("res://player2.tscn")
