@@ -25,6 +25,7 @@ var jumpBot
 var shoot = false
 var special
 var crouch
+var nb_essai_bot = 0
 
 var rc_left = null
 var rc_right = null
@@ -85,17 +86,24 @@ func _integrate_forces(s):
 			elif (dp.x < -0.9):
 				wall_side = 1.0
 
-		if (wall_side != 0 and wall_side != direction):
-			direction = -direction
-			move_left = not move_left
-			move_right = not move_right
-
-		# Si il y a du vide alors on fait demi tour
-		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-		var currentPositionX = get_node(".").get_global_pos().x
 		var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
 		var currentPositionY = get_node(".").get_global_pos().y
+		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
+		var currentPositionX = get_node(".").get_global_pos().x
+		
+		if (wall_side != 0 and wall_side != direction):
+			print(nb_essai_bot)
+			if(positionJoueurY<currentPositionY and not _porter_de_tir() and nb_essai_bot < 6):
+				jump=true
+				jumpBot=true
+				nb_essai_bot+=1
+			else :
+				nb_essai_bot=0
+				direction = -direction
+				move_left = not move_left
+				move_right = not move_right
 
+		# Si il y a du vide alors on fait demi tour
 		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
 			if(positionJoueurX < currentPositionX and not _porter_de_tir()):
 				jump=true
@@ -104,7 +112,6 @@ func _integrate_forces(s):
 				direction = -direction
 				move_left = false
 				move_right = true
-
 		elif (direction < 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
 			if(positionJoueurX > currentPositionX and not _porter_de_tir()):
 				jump=true
@@ -301,6 +308,7 @@ func _integrate_forces(s):
 
 func _on_Timer_timeout():
 	if (not Game.fatality_executed):
+		#On tire dans la direction du player
 		if(_porter_de_tir()):
 			var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
 			var currentPositionX = get_node(".").get_global_pos().x
