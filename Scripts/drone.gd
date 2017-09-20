@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var motion = Vector2(100, 0)
+var motion = Vector2(200, 0)
 var cycle = 5
 var accum = 0.0
 var bullet = preload("res://bullet_explode.tscn")
