@@ -84,7 +84,7 @@ tracks/0/keys = {
 
 bake_interval = 5.0
 _data = {
-"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 120, 300, 0, 0, 0, 0, 280, 430, -108.794, 5.88076, -11.7615, 11.7615, 640, 590, -8.16228, 42.1718, 12.2434, -23.1265, 870, 500, 41.6899, 19.7133, -36.6449, -26.0333, 780, 380, 19.8476, -7.35095, -22.7879, 4.41057, 580, 390, -2.50114, -47.7658, 1.36038, 65.2982, 540, 450, 0, 0, 0, 0, 700, 590 )
+"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 120, 300, 0, 0, 0, 0, 280, 430, -108.794, 5.88076, -11.7615, 11.7615, 674.223, 590.736 )
 }
 
 [node name="stage" type="Node"]
@@ -296,8 +296,6 @@ transform/pos = Vector2( 494.552, 972.113 )
 
 [node name="enemies" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="Path2D" type="Path2D" parent="enemies"]
 
 curve = SubResource( 4 )
@@ -318,7 +316,7 @@ lookahead = 4.0
 [node name="TimerDrone" type="Timer" parent="enemies/Path2D/PathFollow2D"]
 
 process_mode = 1
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 autostart = false
 
@@ -371,7 +369,7 @@ visibility/blend_mode = 1
 transform/pos = Vector2( 297.643, 1137.41 )
 transform/rot = -180.0
 transform/scale = Vector2( 100, 100 )
-color = Color( 0.69, 0.64, 0.55, 1 )
+color = Color( 0.6875, 0.631901, 0.553223, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
