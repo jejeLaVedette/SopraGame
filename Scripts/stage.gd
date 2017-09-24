@@ -35,7 +35,7 @@ var node_shooter
 var node_target_opacity = 1
 var target_frame = 27
 var fatality_function_name
-var node_drone = "enemies/Path2D/PathFollow2D"
+var node_drone = "Enemies/Path2D/PathFollow2D"
 var timer_drone_appear
 var timer_drone = false
 var drone_attack = false

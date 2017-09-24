@@ -38,21 +38,6 @@ func _fixed_process(delta):
 
 
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
-#	if (body.get_name()=="Player"):
-#		if Game.munitions < Game.munitions_total:
-#			Game.munitions += 1
-#		get_node(".").queue_free()
-
-	# Destruction TileMap
-	if (first_contact and body.get_name() == "TileMap"):
-		if (get_node("Sprite").get_rotd() > 90):
-			global_pos = get_node(".").get_global_pos() - Vector2(10, 0)
-		else:
-			global_pos = get_node(".").get_global_pos() + Vector2(10, 0)
-		var tile = get_parent().get_node("/root/stage/TileMaps/TileMap").world_to_map(global_pos)
-		get_parent().get_node("/root/stage/TileMaps/TileMap").set_cell(tile.x, tile.y, -1)
-		first_contact = false
-
 	if (body.has_method("damage") and isAlreadyColliding == false):
 		body.damage(Game.bullet_damage)
 		if(Game.health_p2 > 0):
