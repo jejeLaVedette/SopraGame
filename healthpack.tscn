@@ -3,12 +3,12 @@
 [ext_resource path="res://Scripts/healthpack.gd" type="Script" id=1]
 [ext_resource path="res://Images/Parachute.png" type="Texture" id=2]
 [ext_resource path="res://Images/HealthPack_nm.png" type="Texture" id=3]
-[ext_resource path="res://Images/HealthPack.png" type="Texture" id=4]
+[ext_resource path="res://Images/Healthpack.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 15, 15 )
+extents = Vector2( 15, 16 )
 
 [sub_resource type="CanvasItemShader" id=2]
 
@@ -33,7 +33,7 @@ shader_param/normal = ExtResource( 3 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 1 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -63,11 +63,12 @@ texture = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 
 material/material = SubResource( 3 )
-transform/scale = Vector2( 0.2, 0.2 )
+transform/scale = Vector2( 0.236735, 0.236735 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
+transform/pos = Vector2( 0, 1 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
