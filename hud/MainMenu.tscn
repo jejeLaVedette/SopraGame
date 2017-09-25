@@ -1,10 +1,36 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Images/menu_background.png" type="Texture" id=2]
 [ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://Images/menu_selected.png" type="Texture" id=4]
-[ext_resource path="res://Images/menu_player.png" type="Texture" id=5]
+[ext_resource path="res://Images/menu_player.png" type="Texture" id=4]
+
+[sub_resource type="CanvasItemShader" id=1]
+
+_code = {
+"fragment": "
+uniform vec2 offset=vec2(8,8);
+uniform color modulate=color(0.5,0,0.1,0.5);
+
+vec2 ps = TEXTURE_PIXEL_SIZE;
+
+vec4 shadow = vec4(modulate.rgb,tex(TEXTURE,UV-offset*ps).a*modulate.a);
+vec4 col = tex(TEXTURE,UV);
+
+COLOR=mix(shadow,col,col.a);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+shader_param/offset = Vector2( 5, 10 )
+shader_param/modulate = Color( 0, 0, 0, 0.2 )
 
 [node name="MainMenu" type="Node2D"]
 
@@ -27,6 +53,9 @@ margin/top = 21.0
 margin/right = 905.0
 margin/bottom = 128.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
 text = "OfficeFIght"
 percent_visible = 1.0
 lines_skipped = 0
@@ -39,11 +68,14 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 10.0
+margin/left = 50.0
 margin/top = 200.0
-margin/right = 945.0
+margin/right = 985.0
 margin/bottom = 307.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
 text = "SinglePlayer"
 percent_visible = 1.0
 lines_skipped = 0
@@ -56,11 +88,14 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 10.0
+margin/left = 50.0
 margin/top = 250.0
-margin/right = 878.0
+margin/right = 918.0
 margin/bottom = 357.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
 text = "MulitPlayer"
 percent_visible = 1.0
 lines_skipped = 0
@@ -73,11 +108,14 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 10.0
+margin/left = 50.0
 margin/top = 300.0
-margin/right = 536.0
+margin/right = 576.0
 margin/bottom = 407.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
 text = "Credits"
 percent_visible = 1.0
 lines_skipped = 0
@@ -90,27 +128,44 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 10.0
+margin/left = 50.0
 margin/top = 350.0
-margin/right = 285.0
+margin/right = 325.0
 margin/bottom = 457.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
 text = "Exit"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Selected" type="Sprite" parent="."]
+[node name="Selected" type="Label" parent="."]
 
-visibility/opacity = 0.5
-transform/pos = Vector2( 197.355, 222.244 )
-transform/scale = Vector2( 11.7097, 1.07967 )
-texture = ExtResource( 4 )
+rect/scale = Vector2( 0.4, 0.4 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 200.0
+margin/right = 93.0
+margin/bottom = 307.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = ">"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="Player" type="Sprite" parent="."]
 
-transform/pos = Vector2( 717.648, 387.839 )
+material/material = SubResource( 2 )
+transform/pos = Vector2( 717.648, 388.947 )
 transform/scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 
 
