@@ -73,10 +73,10 @@ tracks/0/path = NodePath("../CanvasModulate:color")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.5, 1 ),
-"transitions": FloatArray( 1, 1, 1 ),
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.6875, 0.631901, 0.553223, 1 ), Color( 0.359375, 0.329149, 0.286377, 1 ), Color( 0.371094, 0.26122, 0.227585, 1 ) ]
+"values": [ Color( 0.6875, 0.631901, 0.553223, 1 ), Color( 0.359375, 0.329149, 0.286377, 1 ) ]
 }
 
 [sub_resource type="Curve2D" id=4]
@@ -142,8 +142,8 @@ autoplay = ""
 [node name="Thunder" type="Sprite" parent="Fatality"]
 
 visibility/visible = false
-transform/pos = Vector2( 0, 765 )
-transform/scale = Vector2( 2.4, 4 )
+transform/pos = Vector2( 0, 517 )
+transform/scale = Vector2( 2, 2 )
 
 [node name="Particles2D Left" type="Particles2D" parent="Fatality"]
 
@@ -329,7 +329,7 @@ visibility/blend_mode = 1
 transform/pos = Vector2( 297.643, 1137.41 )
 transform/rot = -180.0
 transform/scale = Vector2( 100, 100 )
-color = Color( 0.6875, 0.631901, 0.553223, 1 )
+color = Color( 0.563009, 0.555771, 0.667969, 1 )
 __meta__ = {
 "_edit_lock_": true
 }

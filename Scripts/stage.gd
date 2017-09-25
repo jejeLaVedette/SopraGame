@@ -166,21 +166,21 @@ func _fixed_process(delta):
 		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1):
 			if (!get_node("Fatality/Thunder").is_visible()):
 				randomize()
-				var posx = randi()%1000+100
+				var posx = randi()%300+600
 				get_node("Fatality/Thunder").move_local_x(posx)
 				var image_idx = randi()%2+1
 				var full_path_image = ("res://Images/Thunder" + str(image_idx) + ".png")
 				var texture_thunder = load(full_path_image)
 				get_node("Fatality/Thunder").set_texture(texture_thunder)
 			get_node("Fatality/Thunder").show()
-			get_node("CanvasModulate").set_color(Color("02001f"))
+			get_node("CanvasModulate").set_color(Color("8f8daa"))
 			if (get_node("Fatality/Thunder").get_opacity() == 0):
 				get_node("Fatality/Thunder").set_opacity(1)
 			else:
 				get_node("Fatality/Thunder").set_opacity(0)
 		else:
 			get_node("Fatality/Thunder").hide()
-			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,2)))
+			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,1)))
 		call(fatality_function_name)
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
