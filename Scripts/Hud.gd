@@ -2,8 +2,6 @@ extends CanvasLayer
 
 var rounded_timer = 0
 var opacity = 1
-var tex_ultimate_ready = preload("res://Images/UltimateReady.png")
-var tex_loading_ultimate = preload("res://Images/UltimateBar.png")
 var gatlinggun_scene = preload("res://gatlinggun.tscn")
 var healthpack_scene = preload("res://healthpack.tscn")
 var spawn_object_flag
@@ -84,14 +82,14 @@ func _process(delta):
 func _on_UltimatePlayer1_value_changed( value ):
 	if(value >= Game.ultimate_limit):
 		get_node("Control/UltimatePlayer1").set_value(Game.ultimate_limit)
-		get_node("Control/UltimatePlayer1").set_progress_texture(tex_ultimate_ready)
+		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 0.8)
 	else:
-		get_node("Control/UltimatePlayer1").set_progress_texture(tex_loading_ultimate)
+		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 0.1)
 
 
 func _on_UltimatePlayer2_value_changed( value ):
 	if(value >= Game.ultimate_limit):
 		get_node("Control/UltimatePlayer2").set_value(Game.ultimate_limit)
-		get_node("Control/UltimatePlayer2").set_progress_texture(tex_ultimate_ready)
+		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 0.8)
 	else:
-		get_node("Control/UltimatePlayer2").set_progress_texture(tex_loading_ultimate)
+		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 0.1)
