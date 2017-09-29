@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
@@ -6,15 +6,33 @@
 [ext_resource path="res://Images/HealthBar.png" type="Texture" id=4]
 [ext_resource path="res://Images/UltimateBar.png" type="Texture" id=5]
 
+[sub_resource type="CanvasItemShader" id=1]
+
+_code = {
+"fragment": "vec2 ST = UV;
+ST.x += abs(sin(TIME));
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+
 [sub_resource type="CanvasItemShader" id=3]
 
 _code = {
 "fragment": "vec2 uv = UV;
 vec2 p = (uv*2.0 - vec2(1.0))*15;
-vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*TIME));
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10+sin(TIME)));
 sfunc.y *= uv.x*2.0+0.05;
 sfunc.y *= 2.0 - uv.x*2.0+0.05;
-sfunc.y /= 1;
+sfunc.y /= 10;
 
 vec3 c = vec3(abs(sfunc.y));
 c = pow(c, vec3(-0.5));
@@ -39,10 +57,10 @@ shader/shading_mode = 0
 _code = {
 "fragment": "vec2 uv = UV;
 vec2 p = (uv*2.0 - vec2(1.0))*15;
-vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*TIME));
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10+sin(TIME)));
 sfunc.y *= uv.x*2.0+0.05;
 sfunc.y *= 2.0 - uv.x*2.0+0.05;
-sfunc.y /= 1;
+sfunc.y /= 10;
 
 vec3 c = vec3(abs(sfunc.y));
 c = pow(c, vec3(-0.5));
@@ -62,41 +80,10 @@ COLOR.rgb = c;
 shader/shader = SubResource( 5 )
 shader/shading_mode = 0
 
-[sub_resource type="CanvasItemShader" id=1]
-
-_code = {
-"fragment": "uniform float intensity = 0.1;
-vec2 uv = UV;
-vec2 p = (uv*2.0 - vec2(1.0))*15;
-vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10.0-TIME*10 + cos(TIME*7.0))+2.0*cos(uv.x*25.0+TIME*10));
-
-sfunc.y *= uv.x*2.0+0.05;
-sfunc.y *= 2.0 - uv.x*2.0+0.05;
-sfunc.y /= intensity;
-
-vec3 c = vec3(abs(sfunc.y));
-c = pow(c, vec3(-0.5));
-c *= vec3(0,0.5,1.0);
-
-COLOR.rgb = c;
-",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=2]
-
-shader/shader = SubResource( 1 )
-shader/shading_mode = 0
-shader_param/intensity = 0.1
-
 [sub_resource type="CanvasItemShader" id=7]
 
 _code = {
-"fragment": "uniform float intensity = 0.1;
+"fragment": "uniform float intensity = 2;
 vec2 uv = UV;
 vec2 p = (uv*2.0 - vec2(1.0))*15;
 vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10.0-TIME*10 + cos(TIME*7.0))+2.0*cos(uv.x*25.0+TIME*10));
@@ -122,7 +109,38 @@ COLOR.rgb = c;
 
 shader/shader = SubResource( 7 )
 shader/shading_mode = 0
-shader_param/intensity = 0.1
+shader_param/intensity = 2.0
+
+[sub_resource type="CanvasItemShader" id=9]
+
+_code = {
+"fragment": "uniform float intensity = 2;
+vec2 uv = UV;
+vec2 p = (uv*2.0 - vec2(1.0))*15;
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10.0-TIME*10 + cos(TIME*7.0))+2.0*cos(uv.x*25.0+TIME*10));
+
+sfunc.y *= uv.x*2.0+0.05;
+sfunc.y *= 2.0 - uv.x*2.0+0.05;
+sfunc.y /= intensity;
+
+vec3 c = vec3(abs(sfunc.y));
+c = pow(c, vec3(-0.5));
+c *= vec3(0,0.5,1.0);
+
+COLOR.rgb = c;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=10]
+
+shader/shader = SubResource( 9 )
+shader/shading_mode = 0
+shader_param/intensity = 2.0
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -138,6 +156,7 @@ __meta__ = {
 [node name="Timer" type="Label" parent="."]
 
 visibility/visible = false
+material/material = SubResource( 2 )
 rect/scale = Vector2( 0.3, 0.3 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -154,6 +173,9 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Round" type="Label" parent="."]
 
@@ -184,9 +206,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 12.0
-margin/top = 32.0
+margin/top = 38.0
 margin/right = 204.0
-margin/bottom = 139.0
+margin/bottom = 145.0
 custom_fonts/font = ExtResource( 2 )
 text = "W:1"
 align = 1
@@ -206,9 +228,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 948.0
-margin/top = 32.0
+margin/top = 38.0
 margin/right = 1140.0
-margin/bottom = 139.0
+margin/bottom = 145.0
 custom_fonts/font = ExtResource( 2 )
 text = "W:1"
 align = 1
@@ -248,7 +270,7 @@ margin/right = 1281.0
 margin/bottom = 681.0
 bbcode/enabled = true
 bbcode/bbcode = ""
-visible_characters = 1
+visible_characters = -1
 percent_visible = 1.0
 __meta__ = {
 "_edit_lock_": true
@@ -287,6 +309,7 @@ margin/bottom = 640.0
 [node name="HealthPlayer1" type="TextureProgress" parent="Control"]
 
 material/material = SubResource( 4 )
+rect/scale = Vector2( 1, 1.5 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -299,7 +322,7 @@ range/min = 0.0
 range/max = 100.0
 range/step = 1.0
 range/page = 0.0
-range/value = 1.0
+range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 texture/under = ExtResource( 3 )
@@ -314,7 +337,7 @@ __meta__ = {
 [node name="HealthPlayer2" type="TextureProgress" parent="Control"]
 
 material/material = SubResource( 6 )
-rect/scale = Vector2( -1, 1 )
+rect/scale = Vector2( -1, 1.5 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -327,7 +350,7 @@ range/min = 0.0
 range/max = 100.0
 range/step = 1.0
 range/page = 0.0
-range/value = 1.0
+range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 texture/under = ExtResource( 3 )
@@ -341,20 +364,21 @@ __meta__ = {
 
 [node name="UltimatePlayer1" type="TextureProgress" parent="Control"]
 
-material/material = SubResource( 2 )
+material/material = SubResource( 8 )
+rect/scale = Vector2( 1, 1.5 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 12.0
-margin/top = 20.0
+margin/top = 25.0
 margin/right = 272.0
-margin/bottom = 28.0
+margin/bottom = 33.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
 range/page = 0.0
-range/value = 1.0
+range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 texture/under = ExtResource( 3 )
@@ -368,21 +392,21 @@ __meta__ = {
 
 [node name="UltimatePlayer2" type="TextureProgress" parent="Control"]
 
-material/material = SubResource( 8 )
-rect/scale = Vector2( -1, 1 )
+material/material = SubResource( 10 )
+rect/scale = Vector2( -1, 1.5 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 1012.0
-margin/top = 20.0
+margin/top = 25.0
 margin/right = 1272.0
-margin/bottom = 28.0
+margin/bottom = 33.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
 range/page = 0.0
-range/value = 1.0
+range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 texture/under = ExtResource( 3 )

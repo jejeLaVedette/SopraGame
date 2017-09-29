@@ -82,14 +82,14 @@ func _process(delta):
 func _on_UltimatePlayer1_value_changed( value ):
 	if(value >= Game.ultimate_limit):
 		get_node("Control/UltimatePlayer1").set_value(Game.ultimate_limit)
-		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 0.8)
+		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 10)
 	else:
-		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 0.1)
+		get_node("Control/UltimatePlayer1").get_material().set_shader_param("intensity", 2)
 
 
 func _on_UltimatePlayer2_value_changed( value ):
 	if(value >= Game.ultimate_limit):
 		get_node("Control/UltimatePlayer2").set_value(Game.ultimate_limit)
-		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 0.8)
+		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 10)
 	else:
-		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 0.1)
+		get_node("Control/UltimatePlayer2").get_material().set_shader_param("intensity", 2)
