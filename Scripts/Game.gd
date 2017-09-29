@@ -29,6 +29,7 @@ onready var fatality_running = false
 onready var defeat_p1 = false
 onready var defeat_p2 = false
 onready var drone_straffing = false
+onready var drone_timer = 0
 
 # Player stats
 onready var number_victory_p1 = 0
