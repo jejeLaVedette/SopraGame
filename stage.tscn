@@ -84,7 +84,7 @@ COLOR = vec4( col, 0.5);",
 shader/shader = SubResource( 3 )
 shader/shading_mode = 0
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 
 length = 1.0
 loop = false
@@ -100,7 +100,7 @@ tracks/0/keys = {
 "values": [ Color( 0.6875, 0.631901, 0.553223, 1 ), Color( 0.359375, 0.329149, 0.286377, 1 ) ]
 }
 
-[sub_resource type="Curve2D" id=8]
+[sub_resource type="Curve2D" id=6]
 
 bake_interval = 5.0
 _data = {
@@ -157,11 +157,6 @@ transform/scale = Vector2( 0.2, 0.2 )
 transform/pos = Vector2( 553.055, 850.664 )
 transform/scale = Vector2( 0.5, 0.5 )
 
-[node name="herb2" parent="Ground" instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 1052.71, 716.477 )
-transform/scale = Vector2( 0.5, 0.5 )
-
 [node name="Fatality" type="Node" parent="."]
 
 editor/display_folded = true
@@ -171,7 +166,7 @@ editor/display_folded = true
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/CanvasModulateFatality = SubResource( 7 )
+anims/CanvasModulateFatality = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -294,7 +289,7 @@ editor/display_folded = true
 
 [node name="Path2D" type="Path2D" parent="Enemies"]
 
-curve = SubResource( 8 )
+curve = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
