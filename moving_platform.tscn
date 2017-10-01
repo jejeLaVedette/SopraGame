@@ -6,7 +6,7 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -51, -4, 57, -4, 65, 1, 65, 8, -59, 8, -59, 1 )
+points = Vector2Array( -27, 0, 88, 0, 92, 3, 92, 5, -39, 5, -36, 3 )
 
 [node name="moving_platform" type="Node2D"]
 
@@ -40,14 +40,14 @@ damp_override/angular = -1.0
 
 [node name="Sprite" type="Sprite" parent="platform"]
 
-transform/pos = Vector2( 0, -35 )
+transform/pos = Vector2( 50, -24 )
 transform/scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform"]
 
 build_mode = 0
-polygon = Vector2Array( -51, -4, 57, -4, 65, 1, 65, 8, -59, 8, -59, 1 )
+polygon = Vector2Array( -27, 0, 88, 0, 92, 3, 92, 5, -39, 5, -36, 3 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

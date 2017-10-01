@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://Images/herb.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemShader" id=1]
+
+_code = {
+"fragment": "vec2 ST = UV;
+float dist = distance(ST, vec2(0.5, 0.8));
+ST.x += sin(4*TIME)*pow(dist, 4 + 3*sin(TIME))/16;
+COLOR = tex(TEXTURE, ST);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+
+[node name="herb" type="Sprite"]
+
+material/material = SubResource( 2 )
+texture = ExtResource( 1 )
+
+
