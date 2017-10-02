@@ -544,6 +544,8 @@ visibility_mode = 1
 
 [node name="NodeBot" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="raycast_left" type="RayCast2D" parent="NodeBot"]
 
 transform/pos = Vector2( -32, 8 )
@@ -567,6 +569,15 @@ wait_time = 2.0
 one_shot = false
 autostart = true
 
+[node name="Reloading_Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
 [connection signal="timeout" from="NodeBot/Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 
 

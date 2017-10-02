@@ -331,6 +331,7 @@ script/script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( -0.237823, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 7 )
@@ -537,5 +538,14 @@ shape_visible = true
 passby_press = false
 action = "shoot"
 visibility_mode = 1
+
+[node name="Reloading_Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 
 

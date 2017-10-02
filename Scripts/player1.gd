@@ -82,6 +82,12 @@ func _integrate_forces(s):
 				linear_velocity_y = -(randi()%150+50)
 			else:
 				GatlingGun_Tempo = GatlingGun_Modulo
+				if (Game.ammo_p1 > 0):
+					Game.ammo_p1 -= 1
+					var node_ammo = "/root/stage/HUD/Control/Ammo_p1/Ammo_p1_sprite_" + str(Game.ammo_p1+1)
+					get_node(node_ammo).hide()
+					if (Game.ammo_p1 == 0):
+						get_node("Reloading_Timer").start()
 				shoot_time = 0
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
@@ -93,7 +99,7 @@ func _integrate_forces(s):
 				birot = 0
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
-			if(modulo == 0 and not Game.fatality_ready):
+			if(modulo == 0 and not Game.fatality_ready and (Game.ammo_p1 > 0 or Game.gatlinggun_p1)):
 				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(direction, -6.0)
 				bi.set_pos(pos)
@@ -296,3 +302,12 @@ func die_p1():
 		get_node("anim").play("defeat")
 		get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
 		get_node("CollisionPolygon2D").set_pos(Vector2(5*direction, 20))
+
+
+func _on_Reloading_Timer_timeout():
+	get_node("Reloading_Timer").stop()
+	Game.ammo_p1 = Game.SHOOT_MAX
+	for node_index in range(Game.SHOOT_MAX):
+		node_index += 1
+		var node_ammo = "/root/stage/HUD/Control/Ammo_p1/Ammo_p1_sprite_" + str(node_index)
+		get_node(node_ammo).show()

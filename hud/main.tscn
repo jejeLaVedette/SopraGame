@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
 [ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=3]
 [ext_resource path="res://Images/HealthBar.png" type="Texture" id=4]
 [ext_resource path="res://Images/UltimateBar.png" type="Texture" id=5]
+[ext_resource path="res://Images/bullet.png" type="Texture" id=6]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -417,6 +418,100 @@ radial_fill/center_offset = Vector2( 0, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Ammo_p1" type="Control" parent="Control"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Ammo_p1_sprite_1" type="Sprite" parent="Control/Ammo_p1"]
+
+transform/pos = Vector2( 230, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p1_sprite_2" type="Sprite" parent="Control/Ammo_p1"]
+
+transform/pos = Vector2( 240, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p1_sprite_3" type="Sprite" parent="Control/Ammo_p1"]
+
+transform/pos = Vector2( 250, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p1_sprite_4" type="Sprite" parent="Control/Ammo_p1"]
+
+transform/pos = Vector2( 260, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p1_sprite_5" type="Sprite" parent="Control/Ammo_p1"]
+
+transform/pos = Vector2( 270, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p2" type="Control" parent="Control"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Ammo_p2_sprite_1" type="Sprite" parent="Control/Ammo_p2"]
+
+transform/pos = Vector2( 794, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p2_sprite_2" type="Sprite" parent="Control/Ammo_p2"]
+
+transform/pos = Vector2( 784, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p2_sprite_3" type="Sprite" parent="Control/Ammo_p2"]
+
+transform/pos = Vector2( 774, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p2_sprite_4" type="Sprite" parent="Control/Ammo_p2"]
+
+transform/pos = Vector2( 764, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="Ammo_p2_sprite_5" type="Sprite" parent="Control/Ammo_p2"]
+
+transform/pos = Vector2( 754, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
 
 [connection signal="value_changed" from="Control/HealthPlayer1" to="." method="_on_HealthPlayer1_value_changed"]
 

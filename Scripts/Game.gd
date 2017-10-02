@@ -3,9 +3,10 @@ extends Node
 # Game stats (maximal)
 const HEALTH_MAX = 100.0
 const ARMOR_MAX = 100.0
-const SHOOT_MAX = 3
+const SHOOT_MAX = 5
 onready var armor = 0.0
-onready var ammo = 4
+onready var ammo_p1 = 5
+onready var ammo_p2 = 5
 onready var health_limit = 100
 onready var ultimate_limit = 100
 
