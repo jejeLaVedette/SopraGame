@@ -85,7 +85,7 @@ func _integrate_forces(s):
 				if (Game.ammo_p2 > 0):
 					Game.ammo_p2 -= 1
 					var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(Game.ammo_p2+1)
-					get_node(node_ammo).hide()
+					get_node(node_ammo).get_material().set_shader_param("shadow", 0)
 					if (Game.ammo_p2 == 0):
 						get_node("Reloading_Timer").start()
 				shoot_time = 0
@@ -314,4 +314,4 @@ func _on_Reloading_Timer_timeout():
 	for node_index in range(Game.SHOOT_MAX):
 		node_index += 1
 		var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(node_index)
-		get_node(node_ammo).show()
+		get_node(node_ammo).get_material().set_shader_param("shadow", 1)

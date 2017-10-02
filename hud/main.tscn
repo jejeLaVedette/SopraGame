@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=37 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
@@ -142,6 +142,186 @@ COLOR.rgb = c;
 shader/shader = SubResource( 9 )
 shader/shading_mode = 0
 shader_param/intensity = 2.0
+
+[sub_resource type="CanvasItemShader" id=13]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=14]
+
+shader/shader = SubResource( 13 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=15]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=16]
+
+shader/shader = SubResource( 15 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=17]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=18]
+
+shader/shader = SubResource( 17 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=19]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=20]
+
+shader/shader = SubResource( 19 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=21]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=22]
+
+shader/shader = SubResource( 21 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=23]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=24]
+
+shader/shader = SubResource( 23 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=25]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=26]
+
+shader/shader = SubResource( 25 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=27]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=28]
+
+shader/shader = SubResource( 27 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=29]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=30]
+
+shader/shader = SubResource( 29 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
+
+[sub_resource type="CanvasItemShader" id=11]
+
+_code = {
+"fragment": "uniform float shadow = 1;
+COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=12]
+
+shader/shader = SubResource( 11 )
+shader/shading_mode = 0
+shader_param/shadow = 1.0
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -433,6 +613,7 @@ margin/bottom = 40.0
 
 [node name="Ammo_p1_sprite_1" type="Sprite" parent="Control/Ammo_p1"]
 
+material/material = SubResource( 14 )
 transform/pos = Vector2( 230, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -440,6 +621,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p1_sprite_2" type="Sprite" parent="Control/Ammo_p1"]
 
+material/material = SubResource( 16 )
 transform/pos = Vector2( 240, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -447,6 +629,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p1_sprite_3" type="Sprite" parent="Control/Ammo_p1"]
 
+material/material = SubResource( 18 )
 transform/pos = Vector2( 250, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -454,6 +637,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p1_sprite_4" type="Sprite" parent="Control/Ammo_p1"]
 
+material/material = SubResource( 20 )
 transform/pos = Vector2( 260, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -461,6 +645,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p1_sprite_5" type="Sprite" parent="Control/Ammo_p1"]
 
+material/material = SubResource( 22 )
 transform/pos = Vector2( 270, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -480,6 +665,7 @@ margin/bottom = 40.0
 
 [node name="Ammo_p2_sprite_1" type="Sprite" parent="Control/Ammo_p2"]
 
+material/material = SubResource( 24 )
 transform/pos = Vector2( 794, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -487,6 +673,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p2_sprite_2" type="Sprite" parent="Control/Ammo_p2"]
 
+material/material = SubResource( 26 )
 transform/pos = Vector2( 784, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -494,6 +681,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p2_sprite_3" type="Sprite" parent="Control/Ammo_p2"]
 
+material/material = SubResource( 28 )
 transform/pos = Vector2( 774, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -501,6 +689,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p2_sprite_4" type="Sprite" parent="Control/Ammo_p2"]
 
+material/material = SubResource( 30 )
 transform/pos = Vector2( 764, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
@@ -508,6 +697,7 @@ texture = ExtResource( 6 )
 
 [node name="Ammo_p2_sprite_5" type="Sprite" parent="Control/Ammo_p2"]
 
+material/material = SubResource( 12 )
 transform/pos = Vector2( 754, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
