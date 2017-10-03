@@ -1,0 +1,577 @@
+[gd_scene load_steps=19 format=1]
+
+[ext_resource path="res://scripts/hud.gd" type="Script" id=1]
+[ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://images/healthbarempty.png" type="Texture" id=3]
+[ext_resource path="res://images/healthbar.png" type="Texture" id=4]
+[ext_resource path="res://images/ultimatebar.png" type="Texture" id=5]
+[ext_resource path="res://images/bullet.png" type="Texture" id=6]
+
+[sub_resource type="CanvasItemShader" id=1]
+
+_code = {
+"fragment": "vec2 ST = UV;
+ST.x += abs(sin(TIME));
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+
+[sub_resource type="CanvasItemShader" id=3]
+
+_code = {
+"fragment": "vec2 uv = UV;
+vec2 p = (uv*2.0 - vec2(1.0))*15;
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10+sin(TIME)));
+sfunc.y *= uv.x*2.0+0.05;
+sfunc.y *= 2.0 - uv.x*2.0+0.05;
+sfunc.y /= 10;
+
+vec3 c = vec3(abs(sfunc.y));
+c = pow(c, vec3(-0.5));
+c *= vec3(1,0.25,0);
+
+COLOR.rgb = c;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+shader/shader = SubResource( 3 )
+shader/shading_mode = 0
+
+[sub_resource type="CanvasItemShader" id=5]
+
+_code = {
+"fragment": "vec2 uv = UV;
+vec2 p = (uv*2.0 - vec2(1.0))*15;
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10+sin(TIME)));
+sfunc.y *= uv.x*2.0+0.05;
+sfunc.y *= 2.0 - uv.x*2.0+0.05;
+sfunc.y /= 10;
+
+vec3 c = vec3(abs(sfunc.y));
+c = pow(c, vec3(-0.5));
+c *= vec3(1,0.25,0);
+
+COLOR.rgb = c;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=6]
+
+shader/shader = SubResource( 5 )
+shader/shading_mode = 0
+
+[sub_resource type="CanvasItemShader" id=7]
+
+_code = {
+"fragment": "uniform float intensity = 2;
+vec2 uv = UV;
+vec2 p = (uv*2.0 - vec2(1.0))*15;
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10.0-TIME*10 + cos(TIME*7.0))+2.0*cos(uv.x*25.0+TIME*10));
+
+sfunc.y *= uv.x*2.0+0.05;
+sfunc.y *= 2.0 - uv.x*2.0+0.05;
+sfunc.y /= intensity;
+
+vec3 c = vec3(abs(sfunc.y));
+c = pow(c, vec3(-0.5));
+c *= vec3(0,0.5,1.0);
+
+COLOR.rgb = c;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=8]
+
+shader/shader = SubResource( 7 )
+shader/shading_mode = 0
+shader_param/intensity = 2.0
+
+[sub_resource type="CanvasItemShader" id=9]
+
+_code = {
+"fragment": "uniform float intensity = 2;
+vec2 uv = UV;
+vec2 p = (uv*2.0 - vec2(1.0))*15;
+vec2 sfunc = vec2(p.x, p.y + 5.0*sin(uv.x*10.0-TIME*10 + cos(TIME*7.0))+2.0*cos(uv.x*25.0+TIME*10));
+
+sfunc.y *= uv.x*2.0+0.05;
+sfunc.y *= 2.0 - uv.x*2.0+0.05;
+sfunc.y /= intensity;
+
+vec3 c = vec3(abs(sfunc.y));
+c = pow(c, vec3(-0.5));
+c *= vec3(0,0.5,1.0);
+
+COLOR.rgb = c;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=10]
+
+shader/shader = SubResource( 9 )
+shader/shading_mode = 0
+shader_param/intensity = 2.0
+
+[sub_resource type="CanvasItemShader" id=11]
+
+_code = {
+"fragment": "vec2 uv = SCREEN_UV;
+COLOR.a = abs(sin(TIME*8));
+
+if (COLOR.rgb == vec3(0)) {COLOR.a = 0;}",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=12]
+
+shader/shader = SubResource( 11 )
+shader/shading_mode = 0
+
+[node name="HUD" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+script/script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="Timer" type="Label" parent="."]
+
+visibility/visible = false
+material/material = SubResource( 2 )
+rect/scale = Vector2( 0.3, 0.3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 3414.0
+margin/bottom = 107.0
+custom_fonts/font = ExtResource( 2 )
+text = "01"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Round" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1024.0
+margin/bottom = 328.0
+custom_fonts/font = ExtResource( 2 )
+text = "Round"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NbVictoryP1" type="Label" parent="."]
+
+rect/scale = Vector2( 0.25, 0.25 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 12.0
+margin/top = 38.0
+margin/right = 204.0
+margin/bottom = 145.0
+custom_fonts/font = ExtResource( 2 )
+text = "W:1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NbVictoryP2" type="Label" parent="."]
+
+rect/scale = Vector2( 0.25, 0.25 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 948.0
+margin/top = 38.0
+margin/right = 1140.0
+margin/bottom = 145.0
+custom_fonts/font = ExtResource( 2 )
+text = "W:1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Notices" type="Control" parent="."]
+
+visibility/self_opacity = 0.0
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 640.0
+margin/top = 360.0
+margin/right = 608.0
+margin/bottom = 328.0
+
+[node name="NoticesLabel" type="RichTextLabel" parent="Notices"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 128.0
+margin/top = 40.0
+margin/right = 1152.0
+margin/bottom = 680.0
+bbcode/enabled = true
+bbcode/bbcode = ""
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="FPS" type="Control" parent="."]
+
+visibility/self_opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 224.0
+margin/bottom = 64.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Control" type="Control" parent="."]
+
+anchor/left = 3
+anchor/top = 1
+anchor/right = 3
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 512.0
+margin/top = 640.0
+margin/right = 512.0
+margin/bottom = 640.0
+
+[node name="HealthPlayer1" type="TextureProgress" parent="Control"]
+
+material/material = SubResource( 4 )
+rect/scale = Vector2( 1, 1.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 12.0
+margin/top = 8.0
+margin/right = 272.0
+margin/bottom = 16.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 3 )
+texture/over = null
+texture/progress = ExtResource( 4 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HealthPlayer2" type="TextureProgress" parent="Control"]
+
+material/material = SubResource( 6 )
+rect/scale = Vector2( -1, 1.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1012.0
+margin/top = 8.0
+margin/right = 1272.0
+margin/bottom = 16.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 3 )
+texture/over = null
+texture/progress = ExtResource( 4 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UltimatePlayer1" type="TextureProgress" parent="Control"]
+
+material/material = SubResource( 8 )
+rect/scale = Vector2( 1, 1.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 12.0
+margin/top = 25.0
+margin/right = 272.0
+margin/bottom = 33.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 3 )
+texture/over = null
+texture/progress = ExtResource( 5 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UltimatePlayer2" type="TextureProgress" parent="Control"]
+
+material/material = SubResource( 10 )
+rect/scale = Vector2( -1, 1.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 1012.0
+margin/top = 25.0
+margin/right = 1272.0
+margin/bottom = 33.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 3 )
+texture/over = null
+texture/progress = ExtResource( 5 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AmmoPlayer1" type="Control" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="AmmoSprite1" type="Sprite" parent="Control/AmmoPlayer1"]
+
+transform/pos = Vector2( 230, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer1"]
+
+transform/pos = Vector2( 240, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer1"]
+
+transform/pos = Vector2( 250, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer1"]
+
+transform/pos = Vector2( 260, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer1"]
+
+transform/pos = Vector2( 270, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="ReloadingPlayer1" type="Label" parent="Control/AmmoPlayer1"]
+
+visibility/visible = false
+material/material = SubResource( 12 )
+rect/scale = Vector2( 0.15, 0.15 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 163.0
+margin/top = 42.0
+margin/right = 889.0
+margin/bottom = 149.0
+custom_fonts/font = ExtResource( 2 )
+text = "RELOADING"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AmmoPlayer2" type="Control" parent="Control"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="AmmoSprite1" type="Sprite" parent="Control/AmmoPlayer2"]
+
+transform/pos = Vector2( 794, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer2"]
+
+transform/pos = Vector2( 784, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer2"]
+
+transform/pos = Vector2( 774, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer2"]
+
+transform/pos = Vector2( 764, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer2"]
+
+transform/pos = Vector2( 754, 50 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 6 )
+
+[node name="ReloadingPlayer2" type="Label" parent="Control/AmmoPlayer2"]
+
+visibility/visible = false
+material/material = SubResource( 12 )
+rect/scale = Vector2( 0.15, 0.15 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 752.0
+margin/top = 42.0
+margin/right = 1577.0
+margin/bottom = 149.0
+custom_fonts/font = ExtResource( 2 )
+text = "RELOADING"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="value_changed" from="Control/HealthPlayer1" to="." method="_on_HealthPlayer1_value_changed"]
+
+[connection signal="value_changed" from="Control/HealthPlayer2" to="." method="_on_HealthPlayer2_value_changed"]
+
+[connection signal="value_changed" from="Control/UltimatePlayer1" to="." method="_on_UltimatePlayer1_value_changed"]
+
+[connection signal="value_changed" from="Control/UltimatePlayer2" to="." method="_on_UltimatePlayer2_value_changed"]
+
+
