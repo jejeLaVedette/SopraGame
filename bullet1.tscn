@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://Scripts/bullet1.gd" type="Script" id=1]
-[ext_resource path="res://Images/bullet.png" type="Texture" id=2]
+[ext_resource path="res://scripts/bullet1.gd" type="Script" id=1]
+[ext_resource path="res://images/bullet.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 

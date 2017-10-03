@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://Scripts/bullet_explode.gd" type="Script" id=1]
-[ext_resource path="res://Images/bullet.png" type="Texture" id=2]
-[ext_resource path="res://Images/fire_particle.png" type="Texture" id=3]
+[ext_resource path="res://scripts/bullet_explode.gd" type="Script" id=1]
+[ext_resource path="res://images/bullet.png" type="Texture" id=2]
+[ext_resource path="res://images/fire_particle.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 

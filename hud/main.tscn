@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=1]
 
-[ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
-[ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://Images/HealthBarEmpty.png" type="Texture" id=3]
-[ext_resource path="res://Images/HealthBar.png" type="Texture" id=4]
-[ext_resource path="res://Images/UltimateBar.png" type="Texture" id=5]
-[ext_resource path="res://Images/bullet.png" type="Texture" id=6]
+[ext_resource path="res://scripts/hud.gd" type="Script" id=1]
+[ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://images/healthbarempty.png" type="Texture" id=3]
+[ext_resource path="res://images/healthbar.png" type="Texture" id=4]
+[ext_resource path="res://images/ultimatebar.png" type="Texture" id=5]
+[ext_resource path="res://images/bullet.png" type="Texture" id=6]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -143,7 +143,7 @@ shader/shader = SubResource( 9 )
 shader/shading_mode = 0
 shader_param/intensity = 2.0
 
-[sub_resource type="CanvasItemShader" id=21]
+[sub_resource type="CanvasItemShader" id=11]
 
 _code = {
 "fragment": "vec2 uv = SCREEN_UV;
@@ -157,9 +157,9 @@ if (COLOR.rgb == vec3(0)) {COLOR.a = 0;}",
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=22]
+[sub_resource type="CanvasItemMaterial" id=12]
 
-shader/shader = SubResource( 21 )
+shader/shader = SubResource( 11 )
 shader/shading_mode = 0
 
 [node name="HUD" type="CanvasLayer"]
@@ -284,17 +284,14 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 1.0
-margin/top = 39.0
-margin/right = 1281.0
-margin/bottom = 681.0
+margin/left = 128.0
+margin/top = 40.0
+margin/right = 1152.0
+margin/bottom = 680.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = -1
 percent_visible = 1.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="FPS" type="Control" parent="."]
 
@@ -487,7 +484,7 @@ texture = ExtResource( 6 )
 [node name="ReloadingPlayer1" type="Label" parent="Control/AmmoPlayer1"]
 
 visibility/visible = false
-material/material = SubResource( 22 )
+material/material = SubResource( 12 )
 rect/scale = Vector2( 0.15, 0.15 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -553,7 +550,7 @@ texture = ExtResource( 6 )
 [node name="ReloadingPlayer2" type="Label" parent="Control/AmmoPlayer2"]
 
 visibility/visible = false
-material/material = SubResource( 22 )
+material/material = SubResource( 12 )
 rect/scale = Vector2( 0.15, 0.15 )
 focus/ignore_mouse = true
 focus/stop_mouse = true

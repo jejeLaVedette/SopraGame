@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://Scripts/fatality.gd" type="Script" id=1]
-[ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://scripts/fatality.gd" type="Script" id=1]
+[ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=2]
 
 [node name="Fatality" type="CanvasLayer"]
 
