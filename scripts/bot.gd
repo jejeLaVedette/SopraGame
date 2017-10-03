@@ -23,7 +23,6 @@ var move_right = false
 var jump
 var jumpBot
 var shoot = false
-var special
 var crouch
 var nb_essai_bot = 0
 
@@ -61,9 +60,6 @@ func _integrate_forces(s):
 		var new_anim = anim
 		new_siding_right = siding_right
 		var wall_side = 0.0
-
-		if (special):
-			lv.y -= 100
 
 		# Deapply prev floor velocity
 		lv.x -= floor_h_velocity

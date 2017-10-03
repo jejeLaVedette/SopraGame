@@ -49,11 +49,7 @@ func _integrate_forces(s):
 		var move_right = Input.is_action_pressed("move_right_p2")
 		var jump = Input.is_action_pressed("jump_p2")
 		var shoot = Input.is_action_pressed("shoot_p2")
-		var special = Input.is_action_pressed("special_p2")
 		var crouch = Input.is_action_pressed("crouch_p2")
-
-		if (special):
-			lv.y -= 100
 
 		# Deapply prev floor velocity
 		lv.x -= floor_h_velocity

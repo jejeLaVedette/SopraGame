@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=1]
+[gd_scene load_steps=57 format=1]
 
 [ext_resource path="res://scripts/player2.gd" type="Script" id=1]
 [ext_resource path="res://images/player2/playeridle.png" type="Texture" id=2]
@@ -35,10 +35,6 @@
 [ext_resource path="res://images/fire_particle.png" type="Texture" id=33]
 [ext_resource path="res://images/smokeparticle.png" type="Texture" id=34]
 [ext_resource path="res://player2.tres" type="Animation" id=35]
-[ext_resource path="res://images/osb_left.png" type="Texture" id=36]
-[ext_resource path="res://images/osb_right.png" type="Texture" id=37]
-[ext_resource path="res://images/osb_jump.png" type="Texture" id=38]
-[ext_resource path="res://images/osb_fire.png" type="Texture" id=39]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -343,6 +339,7 @@ transform/pos = Vector2( -0.237823, 0 )
 transform/scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 8 )
 animation = "Player2"
+frame = 1
 __meta__ = {
 "_edit_lock_": true
 }
@@ -474,76 +471,7 @@ shape = SubResource( 7 )
 trigger = false
 _update_shape_index = 6
 
-[node name="ui" type="CanvasLayer" parent="."]
-
-layer = 0
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-
-[node name="left" type="TouchScreenButton" parent="ui"]
-
-visibility/visible = false
-transform/pos = Vector2( 27.7593, 360.87 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 36 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = true
-action = "move_left"
-visibility_mode = 1
-
-[node name="right" type="TouchScreenButton" parent="ui"]
-
-visibility/visible = false
-transform/pos = Vector2( 121.542, 361.415 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 37 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = true
-action = "move_right"
-visibility_mode = 1
-
-[node name="jump" type="TouchScreenButton" parent="ui"]
-
-visibility/visible = false
-transform/pos = Vector2( 666.224, 359.02 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 38 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "jump"
-visibility_mode = 1
-
-[node name="fire" type="TouchScreenButton" parent="ui"]
-
-visibility/visible = false
-transform/pos = Vector2( 668.073, 262.788 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 39 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "shoot"
-visibility_mode = 1
-
 [node name="NodeBot" type="Node2D" parent="."]
-
-editor/display_folded = true
 
 [node name="raycast_left" type="RayCast2D" parent="NodeBot"]
 
