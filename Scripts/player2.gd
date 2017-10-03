@@ -32,6 +32,7 @@ var MAX_SHOOT_POSE_TIME = 0.3
 var bullet = preload("res://bullet2.tscn")
 var fatality_hud = preload("res://fatality.tscn")
 var floor_h_velocity = 0.0
+var node_path_ammo = "/root/stage/HUD/Control/AmmoPlayer2"
 var player
 
 
@@ -84,10 +85,11 @@ func _integrate_forces(s):
 				GatlingGun_Tempo = GatlingGun_Modulo
 				if (Game.ammo_p2 > 0):
 					Game.ammo_p2 -= 1
-					var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(Game.ammo_p2+1)
-					get_node(node_ammo).get_material().set_shader_param("shadow", 0)
+					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p2+1)
+					get_node(node_ammo).hide()
 					if (Game.ammo_p2 == 0):
 						get_node("Reloading_Timer").start()
+						get_node(node_path_ammo). get_node("ReloadingPlayer2").show()
 				shoot_time = 0
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
@@ -310,8 +312,9 @@ func _on_Timer_timeout():
 
 func _on_Reloading_Timer_timeout():
 	get_node("Reloading_Timer").stop()
+	get_node(node_path_ammo). get_node("ReloadingPlayer2").hide()
 	Game.ammo_p2 = Game.SHOOT_MAX
 	for node_index in range(Game.SHOOT_MAX):
 		node_index += 1
-		var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(node_index)
-		get_node(node_ammo).get_material().set_shader_param("shadow", 1)
+		var node_ammo = node_path_ammo + "/AmmoSprite" + str(node_index)
+		get_node(node_ammo).show()

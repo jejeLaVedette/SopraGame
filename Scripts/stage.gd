@@ -78,15 +78,15 @@ func _input(event):
 		Game.fatality_executed = false
 		Game.fatality_running = false
 		Game.ammo_p1 = Game.SHOOT_MAX
-		for node_index in range(Game.SHOOT_MAX):
-			node_index += 1
-			var node_ammo = "/root/stage/HUD/Control/Ammo_p1/Ammo_p1_sprite_" + str(node_index)
-			get_node(node_ammo).get_material().set_shader_param("shadow", 1)
-		Game.ammo_p2 = Game.SHOOT_MAX
-		for node_index in range(Game.SHOOT_MAX):
-			node_index += 1
-			var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(node_index)
-			get_node(node_ammo).get_material().set_shader_param("shadow", 1)
+#		for node_index in range(Game.SHOOT_MAX):
+#			node_index += 1
+#			var node_ammo = "/root/stage/HUD/Control/Ammo_p1/Ammo_p1_sprite_" + str(node_index)
+#			get_node(node_ammo).show()
+#		Game.ammo_p2 = Game.SHOOT_MAX
+#		for node_index in range(Game.SHOOT_MAX):
+#			node_index += 1
+#			var node_ammo = "/root/stage/HUD/Control/Ammo_p2/Ammo_p2_sprite_" + str(node_index)
+#			get_node(node_ammo).show()
 		randomize()
 		for i in range(0, Game.spawn_timer_array.size()):
 			Game.spawn_timer_array[i] = randi()%12+2

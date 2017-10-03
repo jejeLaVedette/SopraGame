@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=1]
+[gd_scene load_steps=19 format=1]
 
 [ext_resource path="res://Scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://Polices/GoodTimes.fnt" type="BitmapFont" id=2]
@@ -143,83 +143,13 @@ shader/shader = SubResource( 9 )
 shader/shading_mode = 0
 shader_param/intensity = 2.0
 
-[sub_resource type="CanvasItemShader" id=13]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=14]
-
-shader/shader = SubResource( 13 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=15]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=16]
-
-shader/shader = SubResource( 15 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=17]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=18]
-
-shader/shader = SubResource( 17 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=19]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=20]
-
-shader/shader = SubResource( 19 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
 [sub_resource type="CanvasItemShader" id=21]
 
 _code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
+"fragment": "vec2 uv = SCREEN_UV;
+COLOR.a = abs(sin(TIME*8));
+
+if (COLOR.rgb == vec3(0)) {COLOR.a = 0;}",
 "fragment_ofs": 0,
 "light": "",
 "light_ofs": 0,
@@ -231,97 +161,6 @@ COLOR.rgb = vec3(shadow)*COLOR.rgb;",
 
 shader/shader = SubResource( 21 )
 shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=23]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=24]
-
-shader/shader = SubResource( 23 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=25]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=26]
-
-shader/shader = SubResource( 25 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=27]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=28]
-
-shader/shader = SubResource( 27 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=29]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=30]
-
-shader/shader = SubResource( 29 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
-
-[sub_resource type="CanvasItemShader" id=11]
-
-_code = {
-"fragment": "uniform float shadow = 1;
-COLOR.rgb = vec3(shadow)*COLOR.rgb;",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=12]
-
-shader/shader = SubResource( 11 )
-shader/shading_mode = 0
-shader_param/shadow = 1.0
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -599,9 +438,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Ammo_p1" type="Control" parent="Control"]
+[node name="AmmoPlayer1" type="Control" parent="Control"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -611,47 +449,61 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
 
-[node name="Ammo_p1_sprite_1" type="Sprite" parent="Control/Ammo_p1"]
+[node name="AmmoSprite1" type="Sprite" parent="Control/AmmoPlayer1"]
 
-material/material = SubResource( 14 )
 transform/pos = Vector2( 230, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p1_sprite_2" type="Sprite" parent="Control/Ammo_p1"]
+[node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer1"]
 
-material/material = SubResource( 16 )
 transform/pos = Vector2( 240, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p1_sprite_3" type="Sprite" parent="Control/Ammo_p1"]
+[node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer1"]
 
-material/material = SubResource( 18 )
 transform/pos = Vector2( 250, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p1_sprite_4" type="Sprite" parent="Control/Ammo_p1"]
+[node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer1"]
 
-material/material = SubResource( 20 )
 transform/pos = Vector2( 260, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p1_sprite_5" type="Sprite" parent="Control/Ammo_p1"]
+[node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer1"]
 
-material/material = SubResource( 22 )
 transform/pos = Vector2( 270, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p2" type="Control" parent="Control"]
+[node name="ReloadingPlayer1" type="Label" parent="Control/AmmoPlayer1"]
+
+visibility/visible = false
+material/material = SubResource( 22 )
+rect/scale = Vector2( 0.15, 0.15 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 163.0
+margin/top = 42.0
+margin/right = 889.0
+margin/bottom = 149.0
+custom_fonts/font = ExtResource( 2 )
+text = "RELOADING"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="AmmoPlayer2" type="Control" parent="Control"]
 
 editor/display_folded = true
 focus/ignore_mouse = false
@@ -663,45 +515,59 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
 
-[node name="Ammo_p2_sprite_1" type="Sprite" parent="Control/Ammo_p2"]
+[node name="AmmoSprite1" type="Sprite" parent="Control/AmmoPlayer2"]
 
-material/material = SubResource( 24 )
 transform/pos = Vector2( 794, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p2_sprite_2" type="Sprite" parent="Control/Ammo_p2"]
+[node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer2"]
 
-material/material = SubResource( 26 )
 transform/pos = Vector2( 784, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p2_sprite_3" type="Sprite" parent="Control/Ammo_p2"]
+[node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer2"]
 
-material/material = SubResource( 28 )
 transform/pos = Vector2( 774, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p2_sprite_4" type="Sprite" parent="Control/Ammo_p2"]
+[node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer2"]
 
-material/material = SubResource( 30 )
 transform/pos = Vector2( 764, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
 
-[node name="Ammo_p2_sprite_5" type="Sprite" parent="Control/Ammo_p2"]
+[node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer2"]
 
-material/material = SubResource( 12 )
 transform/pos = Vector2( 754, 50 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 6 )
+
+[node name="ReloadingPlayer2" type="Label" parent="Control/AmmoPlayer2"]
+
+visibility/visible = false
+material/material = SubResource( 22 )
+rect/scale = Vector2( 0.15, 0.15 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 752.0
+margin/top = 42.0
+margin/right = 1577.0
+margin/bottom = 149.0
+custom_fonts/font = ExtResource( 2 )
+text = "RELOADING"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="value_changed" from="Control/HealthPlayer1" to="." method="_on_HealthPlayer1_value_changed"]
 
