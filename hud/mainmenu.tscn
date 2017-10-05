@@ -1,11 +1,167 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=33 format=1]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://images/menu_background.png" type="Texture" id=2]
 [ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://images/menu_player.png" type="Texture" id=4]
+[ext_resource path="res://images/bullet.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=21]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
 
 [sub_resource type="CanvasItemShader" id=1]
+
+_code = {
+"fragment": "COLOR.rgb=COLOR.gbr;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = SubResource( 1 )
+shader/shading_mode = 0
+
+[sub_resource type="CanvasItemShader" id=3]
 
 _code = {
 "fragment": "uniform float amplitude = 60;
@@ -21,39 +177,60 @@ COLOR.rgb=COLOR.gbr;",
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=2]
-
-shader/shader = SubResource( 1 )
-shader/shading_mode = 0
-shader_param/amplitude = 60.0
-shader_param/vitesse = 1.5
-
-[sub_resource type="CanvasItemShader" id=3]
-
-_code = {
-"fragment": "
-uniform vec2 offset=vec2(8,8);
-uniform color modulate=color(0.5,0,0.1,0.5);
-
-vec2 ps = TEXTURE_PIXEL_SIZE;
-
-vec4 shadow = vec4(modulate.rgb,tex(TEXTURE,UV-offset*ps).a*modulate.a);
-vec4 col = tex(TEXTURE,UV);
-
-COLOR=mix(shadow,col,col.a);",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
 [sub_resource type="CanvasItemMaterial" id=4]
 
 shader/shader = SubResource( 3 )
 shader/shading_mode = 0
-shader_param/offset = Vector2( 5, 10 )
-shader_param/modulate = Color( 0, 0, 0, 0.2 )
+shader_param/amplitude = 60.0
+shader_param/vitesse = 1.5
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxTexture" id=26]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 4 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="Animation" id=28]
+
+resource/name = "AnimationFight"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.5 ]
+}
 
 [node name="MainMenu" type="Node2D"]
 
@@ -64,6 +241,123 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 512, 320 )
 transform/scale = Vector2( 32, 20 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+
+rect/scale = Vector2( 0.4, 0.4 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 56.0
+margin/top = 201.0
+margin/right = 1003.0
+margin/bottom = 665.0
+custom_constants/separation = 50
+alignment = 0
+
+[node name="SinglePlayer" type="MenuButton" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 947.0
+margin/bottom = 107.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 29 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "SINGLEPLAYER"
+flat = false
+align = 0
+items = [  ]
+
+[node name="Multiplayer" type="MenuButton" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 157.0
+margin/right = 947.0
+margin/bottom = 264.0
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 14 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "MULTIPLAYER"
+flat = true
+align = 0
+items = [  ]
+
+[node name="Credits" type="MenuButton" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 314.0
+margin/right = 947.0
+margin/bottom = 421.0
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/focus = SubResource( 17 )
+custom_styles/disabled = SubResource( 18 )
+custom_styles/normal = SubResource( 19 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "CREDITS"
+flat = true
+align = 0
+items = [  ]
+
+[node name="Exit" type="MenuButton" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 471.0
+margin/right = 947.0
+margin/bottom = 578.0
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 21 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
+custom_styles/normal = SubResource( 24 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "EXIT"
+flat = true
+align = 0
+items = [  ]
 
 [node name="Title" type="Label" parent="."]
 
@@ -83,89 +377,14 @@ text = "OfficeFIght"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-[node name="SinglePlayer" type="Label" parent="."]
-
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 200.0
-margin/right = 1002.0
-margin/bottom = 307.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 10
-text = "SinglePlayer"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="MultiPlayer" type="Label" parent="."]
-
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 250.0
-margin/right = 935.0
-margin/bottom = 357.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 10
-text = "MulitPlayer"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Credits" type="Label" parent="."]
-
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 300.0
-margin/right = 593.0
-margin/bottom = 407.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 10
-text = "Credits"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Exit" type="Label" parent="."]
-
-rect/scale = Vector2( 0.4, 0.4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 67.0
-margin/top = 350.0
-margin/right = 342.0
-margin/bottom = 457.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
-custom_constants/shadow_offset_x = 5
-custom_constants/shadow_offset_y = 10
-text = "Exit"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Selected" type="Label" parent="."]
 
+editor/display_folded = true
+material/material = SubResource( 2 )
 rect/scale = Vector2( 0.4, 0.4 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -183,20 +402,66 @@ text = ">"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Shader" type="Sprite" parent="Selected"]
 
-material/material = SubResource( 2 )
-transform/pos = Vector2( 720.536, 56.0936 )
+material/material = SubResource( 4 )
+transform/pos = Vector2( 772.5, 54.9999 )
 transform/rot = -0.000568611
-transform/scale = Vector2( 36.0984, 3.37172 )
+transform/scale = Vector2( 41.25, 5.07759 )
 texture = ExtResource( 2 )
 
-[node name="Player" type="Sprite" parent="."]
+[node name="Fight" type="Button" parent="."]
 
-material/material = SubResource( 4 )
-transform/pos = Vector2( 717.648, 388.947 )
-transform/scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 4 )
+rect/scale = Vector2( 0.4, 0.4 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 825.0
+margin/top = 489.0
+margin/right = 1180.0
+margin/bottom = 844.0
+custom_styles/hover = SubResource( 25 )
+custom_styles/pressed = SubResource( 26 )
+custom_styles/focus = SubResource( 27 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "FIGHT"
+flat = true
+
+[node name="AnimationFight" type="AnimationPlayer" parent="Fight"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/AnimationFight = SubResource( 28 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "AnimationFight"
+
+[connection signal="mouse_enter" from="VBoxContainer/SinglePlayer" to="." method="_on_SinglePlayer_mouse_enter"]
+
+[connection signal="released" from="VBoxContainer/SinglePlayer" to="." method="_on_SinglePlayer_released"]
+
+[connection signal="mouse_enter" from="VBoxContainer/Multiplayer" to="." method="_on_Multiplayer_mouse_enter"]
+
+[connection signal="released" from="VBoxContainer/Multiplayer" to="." method="_on_Multiplayer_released"]
+
+[connection signal="mouse_enter" from="VBoxContainer/Credits" to="." method="_on_Credits_mouse_enter"]
+
+[connection signal="released" from="VBoxContainer/Credits" to="." method="_on_Credits_released"]
+
+[connection signal="mouse_enter" from="VBoxContainer/Exit" to="." method="_on_Exit_mouse_enter"]
+
+[connection signal="released" from="VBoxContainer/Exit" to="." method="_on_Exit_released"]
+
+[connection signal="pressed" from="Fight" to="." method="_on_Fight_pressed"]
 
 

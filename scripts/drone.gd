@@ -18,7 +18,7 @@ func _fixed_process(delta):
 	var xf = Matrix32()
 	xf[2]= motion*d 
 	get_node("Drone").set_transform(xf)
-	get_node("Drone").set_scale(Vector2(0.05, 0.05))
+	get_node("Drone").set_scale(Vector2(0.25, 0.25))
 
 
 func _on_TimerBullet_timeout():

@@ -6,7 +6,10 @@ var index = 0
 
 func _ready():
 	set_process_input(true)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/SinglePlayer").get_global_pos().y))
+	index = 0
+	Game.versus_player = false
+	Game.versus_bot = true
 
 
 func _input(event):
@@ -14,29 +17,72 @@ func _input(event):
 	if (exit_game):
 		get_tree().quit()
 
-	if (event.is_action("jump_p2") and event.is_pressed() and !event.is_echo()):
+	if (event.is_action("jump_p2") and event.is_pressed()):
 		if(index != 0):
 			index -= 1
 			var x = get_node("Selected").get_pos().x
-			var y = get_node("Selected").get_pos().y - 50
+			var y = get_node("Selected").get_pos().y - 65
 			get_node("Selected").set_pos(Vector2(x,y))
-	if (event.is_action("crouch_p2") and event.is_pressed() and !event.is_echo()):
+	if (event.is_action("crouch_p2") and event.is_pressed()):
 		if(index != 3):
 			index += 1
 			var x = get_node("Selected").get_pos().x
-			var y = get_node("Selected").get_pos().y + 50
+			var y = get_node("Selected").get_pos().y + 65
 			get_node("Selected").set_pos(Vector2(x,y))
 
-	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed() and !event.is_echo()):
+	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed()):
 		if (index == 0):
-			Game.versus_player = false
-			Game.versus_bot = true
-			get_tree().change_scene("res://stage.tscn")
+			_on_SinglePlayer_released()
+			_on_Fight_pressed()
 		if (index == 1):
-			Game.versus_player = true
-			Game.versus_bot = false
-			get_tree().change_scene("res://stage.tscn")
+			_on_Multiplayer_released()
+			_on_Fight_pressed()
 		if (index == 2):
-			print("Credits")
+			_on_Credits_released()
 		if(index == 3):
-			get_tree().quit()
+			_on_Exit_released()
+
+
+func _on_SinglePlayer_released():
+	_on_SinglePlayer_mouse_enter()
+
+
+func _on_Multiplayer_released():
+	_on_Multiplayer_mouse_enter()
+
+
+func _on_Credits_released():
+	print("Credits")
+
+
+func _on_Exit_released():
+	get_tree().quit()
+
+
+func _on_SinglePlayer_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/SinglePlayer").get_global_pos().y))
+	index = 0
+	Game.versus_player = false
+	Game.versus_bot = true
+
+
+func _on_Multiplayer_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Multiplayer").get_global_pos().y))
+	index = 1
+	Game.versus_player = true
+	Game.versus_bot = false
+
+
+func _on_Credits_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Credits").get_global_pos().y))
+	index = 2
+
+
+func _on_Exit_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Exit").get_global_pos().y))
+	index = 3
+
+
+func _on_Fight_pressed():
+	if (index < 2):
+		get_tree().change_scene("res://stage.tscn")
