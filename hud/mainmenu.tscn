@@ -5,6 +5,41 @@
 [ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://images/bullet.png" type="Texture" id=4]
 
+[sub_resource type="StyleBoxEmpty" id=1]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
 [sub_resource type="StyleBoxEmpty" id=6]
 
 content_margin/left = -1.0
@@ -13,27 +48,6 @@ content_margin/top = -1.0
 content_margin/bottom = -1.0
 
 [sub_resource type="StyleBoxEmpty" id=7]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=29]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=12]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -55,6 +69,20 @@ content_margin/top = -1.0
 content_margin/bottom = -1.0
 
 [sub_resource type="StyleBoxEmpty" id=10]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxEmpty" id=12]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -117,35 +145,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=21]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=22]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=23]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=24]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="CanvasItemShader" id=1]
+[sub_resource type="CanvasItemShader" id=21]
 
 _code = {
 "fragment": "COLOR.rgb=COLOR.gbr;",
@@ -156,12 +156,12 @@ _code = {
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=22]
 
-shader/shader = SubResource( 1 )
+shader/shader = SubResource( 21 )
 shader/shading_mode = 0
 
-[sub_resource type="CanvasItemShader" id=3]
+[sub_resource type="CanvasItemShader" id=23]
 
 _code = {
 "fragment": "uniform float amplitude = 60;
@@ -177,9 +177,9 @@ COLOR.rgb=COLOR.gbr;",
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=24]
 
-shader/shader = SubResource( 3 )
+shader/shader = SubResource( 23 )
 shader/shading_mode = 0
 shader_param/amplitude = 60.0
 shader_param/vitesse = 1.5
@@ -269,11 +269,11 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 947.0
 margin/bottom = 107.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 29 )
-custom_styles/disabled = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 click_on_press = true
@@ -294,11 +294,11 @@ margin/left = 0.0
 margin/top = 157.0
 margin/right = 947.0
 margin/bottom = 264.0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 14 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 click_on_press = true
@@ -319,11 +319,11 @@ margin/left = 0.0
 margin/top = 314.0
 margin/right = 947.0
 margin/bottom = 421.0
-custom_styles/hover = SubResource( 15 )
-custom_styles/pressed = SubResource( 16 )
-custom_styles/focus = SubResource( 17 )
-custom_styles/disabled = SubResource( 18 )
-custom_styles/normal = SubResource( 19 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 click_on_press = true
@@ -344,11 +344,11 @@ margin/left = 0.0
 margin/top = 471.0
 margin/right = 947.0
 margin/bottom = 578.0
-custom_styles/hover = SubResource( 20 )
-custom_styles/pressed = SubResource( 21 )
-custom_styles/focus = SubResource( 22 )
-custom_styles/disabled = SubResource( 23 )
-custom_styles/normal = SubResource( 24 )
+custom_styles/hover = SubResource( 16 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 20 )
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
 click_on_press = true
@@ -384,7 +384,7 @@ __meta__ = {
 [node name="Selected" type="Label" parent="."]
 
 editor/display_folded = true
-material/material = SubResource( 2 )
+material/material = SubResource( 22 )
 rect/scale = Vector2( 0.4, 0.4 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -408,7 +408,7 @@ __meta__ = {
 
 [node name="Shader" type="Sprite" parent="Selected"]
 
-material/material = SubResource( 4 )
+material/material = SubResource( 24 )
 transform/pos = Vector2( 772.5, 54.9999 )
 transform/rot = -0.000568611
 transform/scale = Vector2( 41.25, 5.07759 )

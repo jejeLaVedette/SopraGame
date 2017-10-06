@@ -471,6 +471,13 @@ shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 5
 
+[node name="Reloading_Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 layer = 0
@@ -480,8 +487,7 @@ scale = Vector2( 1, 1 )
 
 [node name="move_left_p1" type="TouchScreenButton" parent="ui"]
 
-visibility/visible = false
-transform/pos = Vector2( 27.7593, 360.87 )
+transform/pos = Vector2( 18.7783, 523.726 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 36 )
 pressed = null
@@ -490,13 +496,12 @@ shape = null
 shape_centered = true
 shape_visible = true
 passby_press = true
-action = "move_left"
+action = "move_left_p1"
 visibility_mode = 1
 
 [node name="move_right_p1" type="TouchScreenButton" parent="ui"]
 
-visibility/visible = false
-transform/pos = Vector2( 121.542, 361.415 )
+transform/pos = Vector2( 159.861, 525.469 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 37 )
 pressed = null
@@ -505,13 +510,12 @@ shape = null
 shape_centered = true
 shape_visible = true
 passby_press = true
-action = "move_right"
+action = "move_right_p1"
 visibility_mode = 1
 
 [node name="jump_p1" type="TouchScreenButton" parent="ui"]
 
-visibility/visible = false
-transform/pos = Vector2( 666.224, 359.02 )
+transform/pos = Vector2( 869.196, 516.488 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 38 )
 pressed = null
@@ -520,13 +524,12 @@ shape = null
 shape_centered = true
 shape_visible = true
 passby_press = false
-action = "jump"
+action = "jump_p1"
 visibility_mode = 1
 
 [node name="shoot_p1" type="TouchScreenButton" parent="ui"]
 
-visibility/visible = false
-transform/pos = Vector2( 668.073, 262.788 )
+transform/pos = Vector2( 869.847, 401.695 )
 transform/scale = Vector2( 1.49157, 1.46265 )
 normal = ExtResource( 39 )
 pressed = null
@@ -535,15 +538,8 @@ shape = null
 shape_centered = true
 shape_visible = true
 passby_press = false
-action = "shoot"
+action = "shoot_p1"
 visibility_mode = 1
-
-[node name="Reloading_Timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 2.0
-one_shot = false
-autostart = false
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 
