@@ -6,7 +6,7 @@ var index = 0
 
 func _ready():
 	set_process_input(true)
-	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/SinglePlayer").get_global_pos().y))
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Singleplayer").get_global_pos().y))
 	index = 0
 	Game.versus_player = false
 	Game.versus_bot = true
@@ -43,8 +43,8 @@ func _input(event):
 			_on_Exit_released()
 
 
-func _on_SinglePlayer_released():
-	_on_SinglePlayer_mouse_enter()
+func _on_Singleplayer_released():
+	_on_Singleplayer_mouse_enter()
 
 
 func _on_Multiplayer_released():
@@ -59,8 +59,8 @@ func _on_Exit_released():
 	get_tree().quit()
 
 
-func _on_SinglePlayer_mouse_enter():
-	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/SinglePlayer").get_global_pos().y))
+func _on_Singleplayer_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Singleplayer").get_global_pos().y))
 	index = 0
 	Game.versus_player = false
 	Game.versus_bot = true
