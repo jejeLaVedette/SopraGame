@@ -39,6 +39,7 @@ var node_drone = "Enemies/Path2D/PathFollow2D"
 var timer_drone_appear
 var timer_drone = false
 var drone_attack = false
+var scale_player = 0.5
 
 
 func _ready():
@@ -216,15 +217,15 @@ func fatality_animation_1():
 		if (deplacement_x < 0):
 			direction = 1
 			if (Game.health_p2 <= 0):
-				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
 			elif (Game.health_p1 <= 0):
-				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
 		else:
 			direction = -1
 			if (Game.health_p2 <= 0):
-				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
 			elif (Game.health_p1 <= 0):
-				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
 
 		curve1 = Curve2D.new()
 		curve2 = Curve2D.new()
@@ -265,7 +266,7 @@ func fatality_animation_1():
 		pathfollow_node.set_rotate(true)
 		pathfollow_node.set_offset(0)
 		sprite_node.set_pos(Vector2(0, 0))
-		sprite_node.set_scale(Vector2(0.025769, 0.034305))
+		sprite_node.set_scale(Vector2(0.5, 0.5))
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):
@@ -330,15 +331,15 @@ func fatality_animation_2():
 		if (deplacement_x < 0):
 			direction = 1
 			if (Game.health_p2 <= 0):
-				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
 			elif (Game.health_p1 <= 0):
-				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
 		else:
 			direction = -1
 			if (Game.health_p2 <= 0):
-				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(0.2, 0.2))
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
 			elif (Game.health_p1 <= 0):
-				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-0.2, 0.2))
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
 
 		curve1 = Curve2D.new()
 		path_node = Path2D.new()
@@ -366,7 +367,7 @@ func fatality_animation_2():
 		pathfollow_node.set_rotate(true)
 		pathfollow_node.set_offset(0)
 		sprite_node.set_pos(Vector2(0, 0))
-		sprite_node.set_scale(Vector2(0.025769, 0.034305))
+		sprite_node.set_scale(Vector2(0.5, 0.5))
 		path_node_exist = true
 
 	if (Game.fatality_executed and Game.fatality_timer <= 5):

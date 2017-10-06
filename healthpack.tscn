@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 15, 16 )
+extents = Vector2( 13, 13 )
 
 [node name="HealthPack" type="RigidBody2D"]
 
@@ -33,16 +33,19 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Parachute" type="Sprite" parent="."]
 
-transform/pos = Vector2( 0, -85 )
-transform/scale = Vector2( 0.3, 0.3 )
+transform/pos = Vector2( 0, -64 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.236735, 0.236735 )
+transform/scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

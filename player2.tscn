@@ -336,23 +336,23 @@ script/script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
 transform/pos = Vector2( -0.237823, 0 )
-transform/scale = Vector2( 0.2, 0.2 )
+transform/scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 8 )
 animation = "Player2"
-frame = 1
+frame = 17
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Sparks" type="Particles2D" parent="AnimatedSprite"]
 
-transform/pos = Vector2( -303.811, 10 )
+transform/pos = Vector2( -124, 2 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.846876, 0.846876 )
-config/amount = 32
+transform/scale = Vector2( 0.8, 0.8 )
+config/amount = 18
 config/lifetime = 1.0
 config/process_mode = 1
-config/half_extents = Vector2( 20, 0 )
+config/half_extents = Vector2( 10, 0 )
 config/texture = ExtResource( 33 )
 params/direction = 180.0
 params/spread = 50.0
@@ -377,7 +377,7 @@ color/color = Color( 0.96875, 1, 0, 1 )
 [node name="Smoke" type="Particles2D" parent="AnimatedSprite"]
 
 visibility/opacity = 0.5
-transform/pos = Vector2( -88.8109, 5 )
+transform/pos = Vector2( -30, 8 )
 config/amount = 10
 config/lifetime = 1.0
 config/time_scale = 0.5

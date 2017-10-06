@@ -190,7 +190,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=29]
+[sub_resource type="StyleBoxEmpty" id=26]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -411,7 +411,7 @@ margin/top = 496.0
 margin/right = 1172.0
 margin/bottom = 851.0
 custom_styles/hover = SubResource( 25 )
-custom_styles/pressed = SubResource( 29 )
+custom_styles/pressed = SubResource( 26 )
 custom_styles/focus = SubResource( 27 )
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = false
@@ -447,6 +447,6 @@ autoplay = "AnimationFight"
 
 [connection signal="released" from="VBoxContainer/Exit" to="." method="_on_Exit_released"]
 
-[connection signal="pressed" from="Play" to="." method="_on_Fight_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 
 

@@ -437,6 +437,7 @@ __meta__ = {
 
 [node name="AmmoPlayer1" type="Control" parent="Control"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -450,35 +451,35 @@ margin/bottom = 40.0
 
 transform/pos = Vector2( 230, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer1"]
 
 transform/pos = Vector2( 240, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer1"]
 
 transform/pos = Vector2( 250, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer1"]
 
 transform/pos = Vector2( 260, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer1"]
 
 transform/pos = Vector2( 270, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="ReloadingPlayer1" type="Label" parent="Control/AmmoPlayer1"]
@@ -516,35 +517,35 @@ margin/bottom = 40.0
 
 transform/pos = Vector2( 794, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite2" type="Sprite" parent="Control/AmmoPlayer2"]
 
 transform/pos = Vector2( 784, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite3" type="Sprite" parent="Control/AmmoPlayer2"]
 
 transform/pos = Vector2( 774, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite4" type="Sprite" parent="Control/AmmoPlayer2"]
 
 transform/pos = Vector2( 764, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="AmmoSprite5" type="Sprite" parent="Control/AmmoPlayer2"]
 
 transform/pos = Vector2( 754, 50 )
 transform/rot = 90.0
-transform/scale = Vector2( 0.025, 0.025 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [node name="ReloadingPlayer2" type="Label" parent="Control/AmmoPlayer2"]

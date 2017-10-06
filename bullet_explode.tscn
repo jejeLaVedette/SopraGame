@@ -7,8 +7,8 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 1.4
-height = 10.0
+radius = 1.6
+height = 13.0
 
 [node name="bullet" type="RigidBody2D"]
 
@@ -34,21 +34,24 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.0257689, 0.0343047 )
+transform/scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 
-transform/pos = Vector2( -310.452, 0 )
-transform/scale = Vector2( 19.4032, 5.8301 )
+transform/pos = Vector2( -16, 0 )
+transform/scale = Vector2( 0.5, 0.25 )
 config/amount = 10
 config/lifetime = 1.0
-config/emit_timeout = 0.2
+config/emit_timeout = 1.0
 config/emitting = false
-config/process_mode = 1
+config/process_mode = 0
 config/texture = ExtResource( 3 )
 params/direction = 270.0
 params/spread = 10.0

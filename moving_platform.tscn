@@ -6,11 +6,14 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -27, 0, 88, 0, 92, 3, 92, 5, -39, 5, -36, 3 )
+points = Vector2Array( -13, -5, 81, -5, 84, -2, 84, 4, -19, 4, -19, -2 )
 
 [node name="moving_platform" type="Node2D"]
 
 script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 motion = Vector2( 0, 0 )
 cycle = 1.0
 
@@ -37,17 +40,23 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="platform"]
 
-transform/pos = Vector2( 50, -24 )
-transform/scale = Vector2( 0.3, 0.3 )
+transform/pos = Vector2( 50, -25 )
+transform/scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform"]
 
 build_mode = 0
-polygon = Vector2Array( -27, 0, 88, 0, 92, 3, 92, 5, -39, 5, -36, 3 )
+polygon = Vector2Array( -13, -5, 81, -5, 84, -2, 84, 4, -19, 4, -19, -2 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

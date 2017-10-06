@@ -218,9 +218,9 @@ func _integrate_forces(s):
 		# Update siding
 		if (new_siding_right != siding_right):
 			if (new_siding_right):
-				get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
+				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
 			else:
-				get_node("AnimatedSprite").set_scale(Vector2(0.2*direction, 0.2))
+				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
 			siding_right = new_siding_right
 
 		if (Game.gatlinggun_p2):

@@ -33,10 +33,10 @@ func _input(event):
 	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed()):
 		if (index == 0):
 			_on_SinglePlayer_released()
-			_on_Fight_pressed()
+			_on_Play_pressed()
 		if (index == 1):
 			_on_Multiplayer_released()
-			_on_Fight_pressed()
+			_on_Play_pressed()
 		if (index == 2):
 			_on_Credits_released()
 		if(index == 3):
@@ -83,6 +83,6 @@ func _on_Exit_mouse_enter():
 	index = 3
 
 
-func _on_Fight_pressed():
+func _on_Play_pressed():
 	if (index < 2):
 		get_tree().change_scene("res://stage.tscn")
