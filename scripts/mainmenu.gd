@@ -2,10 +2,12 @@ extends Node2D
 
 
 var index = 0
+var button_separation = 86
 
 
 func _ready():
 	set_process_input(true)
+	# Singleplayer par defaut
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Singleplayer").get_global_pos().y))
 	index = 0
 	Game.versus_player = false
@@ -21,13 +23,13 @@ func _input(event):
 		if(index != 0):
 			index -= 1
 			var x = get_node("Selected").get_pos().x
-			var y = get_node("Selected").get_pos().y - 65
+			var y = get_node("Selected").get_pos().y - button_separation
 			get_node("Selected").set_pos(Vector2(x,y))
 	if (event.is_action("crouch_p2") and event.is_pressed()):
-		if(index != 3):
+		if(index != 4):
 			index += 1
 			var x = get_node("Selected").get_pos().x
-			var y = get_node("Selected").get_pos().y + 65
+			var y = get_node("Selected").get_pos().y + button_separation
 			get_node("Selected").set_pos(Vector2(x,y))
 
 	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed()):
@@ -38,8 +40,10 @@ func _input(event):
 			_on_Multiplayer_released()
 			_on_Play_pressed()
 		if (index == 2):
+			_on_Options_released()
+		if (index == 3):
 			_on_Credits_released()
-		if(index == 3):
+		if (index == 4):
 			_on_Exit_released()
 
 
@@ -51,11 +55,18 @@ func _on_Multiplayer_released():
 	_on_Multiplayer_mouse_enter()
 
 
+func _on_Options_released():
+	_on_Options_mouse_enter()
+	print("Options")
+
+
 func _on_Credits_released():
+	_on_Credits_mouse_enter()
 	print("Credits")
 
 
 func _on_Exit_released():
+	_on_Exit_mouse_enter()
 	get_tree().quit()
 
 
@@ -73,14 +84,19 @@ func _on_Multiplayer_mouse_enter():
 	Game.versus_bot = false
 
 
+func _on_Options_mouse_enter():
+	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Options").get_global_pos().y))
+	index = 2
+
+
 func _on_Credits_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Credits").get_global_pos().y))
-	index = 2
+	index = 3
 
 
 func _on_Exit_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Exit").get_global_pos().y))
-	index = 3
+	index = 4
 
 
 func _on_Play_pressed():

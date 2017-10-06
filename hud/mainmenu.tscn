@@ -244,8 +244,8 @@ size_flags/vertical = 2
 margin/left = 56.0
 margin/top = 201.0
 margin/right = 1003.0
-margin/bottom = 665.0
-custom_constants/separation = 50
+margin/bottom = 1245.0
+custom_constants/separation = 110
 alignment = 0
 
 [node name="Singleplayer" type="Button" parent="VBoxContainer"]
@@ -279,9 +279,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 157.0
+margin/top = 217.0
 margin/right = 947.0
-margin/bottom = 264.0
+margin/bottom = 324.0
 custom_styles/hover = SubResource( 6 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
@@ -296,6 +296,30 @@ text = "MULTIPLAYER"
 flat = true
 align = 0
 
+[node name="Options" type="Button" parent="VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 434.0
+margin/right = 947.0
+margin/bottom = 541.0
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "OPTIONS"
+flat = true
+align = 0
+
 [node name="Credits" type="Button" parent="VBoxContainer"]
 
 focus/ignore_mouse = false
@@ -303,9 +327,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 314.0
+margin/top = 651.0
 margin/right = 947.0
-margin/bottom = 421.0
+margin/bottom = 758.0
 custom_styles/hover = SubResource( 11 )
 custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
@@ -327,9 +351,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 471.0
+margin/top = 868.0
 margin/right = 947.0
-margin/bottom = 578.0
+margin/bottom = 975.0
 custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 17 )
 custom_styles/focus = SubResource( 18 )
@@ -401,15 +425,16 @@ texture = ExtResource( 2 )
 
 [node name="Play" type="Button" parent="."]
 
+editor/display_folded = true
 rect/scale = Vector2( 0.4, 0.4 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 817.0
-margin/top = 496.0
-margin/right = 1172.0
-margin/bottom = 851.0
+margin/left = 808.0
+margin/top = 547.0
+margin/right = 1163.0
+margin/bottom = 660.0
 custom_styles/hover = SubResource( 25 )
 custom_styles/pressed = SubResource( 26 )
 custom_styles/focus = SubResource( 27 )
@@ -438,6 +463,10 @@ autoplay = "AnimationFight"
 [connection signal="mouse_enter" from="VBoxContainer/Multiplayer" to="." method="_on_Multiplayer_mouse_enter"]
 
 [connection signal="released" from="VBoxContainer/Multiplayer" to="." method="_on_Multiplayer_released"]
+
+[connection signal="mouse_enter" from="VBoxContainer/Options" to="." method="_on_Options_mouse_enter"]
+
+[connection signal="released" from="VBoxContainer/Options" to="." method="_on_Options_released"]
 
 [connection signal="mouse_enter" from="VBoxContainer/Credits" to="." method="_on_Credits_mouse_enter"]
 
