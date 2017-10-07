@@ -499,7 +499,7 @@ visibility_mode = 1
 
 [node name="Analog" parent="ui" instance=ExtResource( 38 )]
 
-transform/pos = Vector2( 110, 540 )
+transform/pos = Vector2( 140, 540 )
 listenerNodePath = "/root/stage/Player/Player1"
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
