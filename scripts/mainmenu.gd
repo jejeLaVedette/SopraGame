@@ -12,6 +12,7 @@ func _ready():
 	index = 0
 	Game.versus_player = false
 	Game.versus_bot = true
+	get_tree().set_auto_accept_quit(false)
 
 
 func _input(event):

@@ -95,6 +95,12 @@ func _input(event):
 		get_tree().change_scene("res://hud/mainmenu.tscn")
 
 
+func _notification(what):
+	#Control Android
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		get_tree().change_scene("res://hud/mainmenu.tscn")
+
+
 func _fixed_process(delta):
 	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
 	if (get_node(".").has_node(node_player1) and get_node(".").has_node(node_player2)):
