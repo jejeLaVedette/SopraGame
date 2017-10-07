@@ -17,6 +17,8 @@ var path_node_exist = false
 var pathfollow_node = null
 var sprite_node = null
 var tex_sprite = preload("res://images/bullet.png")
+var sky = preload("res://images/sky.png")
+var sky_rain = preload("res://images/sky_rain.png")
 var script_player2 = preload ("res://scripts/player2.gd")
 var script_bot = preload ("res://scripts/bot.gd")
 var sprite_speed = 16
@@ -156,7 +158,7 @@ func _fixed_process(delta):
 	# Fatality
 	if (Game.fatality_timer != 0 ):
 		# Environment
-		get_node("Cloud").show()
+		get_node("Sky").set_texture(sky_rain)
 		Game.spawn_gatlinggun = true
 		Game.spawn_healthpack = true
 		var timer_thunder_max = 2
@@ -171,8 +173,7 @@ func _fixed_process(delta):
 				var posx = randi()%300+600
 				get_node("Fatality/Thunder").move_local_x(posx)
 				var image_idx = randi()%2+1
-#				var full_path_image = ("res://images/thunder" + str(image_idx) + ".png")
-				var full_path_image = "res://images/thunder1.png"
+				var full_path_image = ("res://images/thunder" + str(image_idx) + ".png")
 				var texture_thunder = load(full_path_image)
 				get_node("Fatality/Thunder").set_texture(texture_thunder)
 			get_node("Fatality/Thunder").show()
@@ -188,7 +189,7 @@ func _fixed_process(delta):
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
-		get_node("Cloud").hide()
+		get_node("Sky").set_texture(sky)
 
 
 func fatality_animation_1():

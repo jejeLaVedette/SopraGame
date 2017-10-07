@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://images/sky.png" type="Texture" id=2]
@@ -30,58 +30,6 @@ COLOR = tex(TEXTURE, uv-vec2(0.005));",
 [sub_resource type="CanvasItemMaterial" id=2]
 
 shader/shader = SubResource( 1 )
-shader/shading_mode = 0
-
-[sub_resource type="CanvasItemShader" id=3]
-
-_code = {
-"fragment": "float ha( float n ) {return fract(sin(n)*758);}
-
-float no( vec3 x ) {
-	vec3 p = floor(x);
-	vec3 f = fract(x); 
-	float n = p.x + p.y*57.0 + p.z*800.0;
-	float res = mix(mix(mix( ha(n+  0.0), ha(n+  1.0),f.x), mix( ha(n+ 57.0), ha(n+ 58.0),f.x),f.y),
-	mix(mix( ha(n+800.0), ha(n+801.0),f.x), mix( ha(n+857.0), ha(n+858.0),f.x),f.y),f.z);
-	return res;}
-
-float fbm( vec3 p ) {
-	float f = 0.3*cos(TIME*0.03);
-	f += 0.50000*no( p );
-	p = p*2.02;
-	f -= 0.25000*no( p );
-	p = p*2.03;
-	f += 0.12500*no( p );
-	p = p*2.01;
-	f += 0.06250*no( p );
-	p = p*2.04;
-	f -= 0.03125*no( p );
-	return f/0.984375;}
-
-float cloud(vec3 p) {
-	p-=fbm(vec3(p.x,p.y,0.0)*0.27)*2.27;
-	float a = 0.0;
-	a-=fbm(p*3.0)*2.2-1.1;
-	if (a<0.0) { a = 0.0; a = a * a; }
-	return a; }
-
-vec2 position = vec2(1) - UV;
-position.y+=0.2;
-vec2 coord= vec2((position.x-0.5)/position.y,1.0/(position.y-0.3));
-coord += TIME*0.1+1000.0;
-float q = cloud(vec3(coord*1.0,0.222));
-vec3 col = vec3(0.3,0.3,0.5) + vec3(0.5*q,0.5*q,0.5*q);
-COLOR = vec4( col, 0.5);",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
-
-[sub_resource type="CanvasItemMaterial" id=4]
-
-shader/shader = SubResource( 3 )
 shader/shading_mode = 0
 
 [sub_resource type="Animation" id=5]
@@ -117,25 +65,6 @@ material/material = SubResource( 2 )
 transform/pos = Vector2( 641.426, 654.119 )
 transform/scale = Vector2( 4.56223, 2.02824 )
 texture = ExtResource( 2 )
-
-[node name="Cloud" type="TextureFrame" parent="."]
-
-visibility/visible = false
-material/material = SubResource( 4 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -347.0
-margin/top = -166.0
-margin/right = 1651.0
-margin/bottom = 1344.0
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Ground" type="Node" parent="."]
 
