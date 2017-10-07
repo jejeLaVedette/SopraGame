@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=1]
+[gd_scene load_steps=59 format=1]
 
 [ext_resource path="res://scripts/player1.gd" type="Script" id=1]
 [ext_resource path="res://images/player1/playeridle.png" type="Texture" id=2]
@@ -35,10 +35,9 @@
 [ext_resource path="res://images/fire_particle.png" type="Texture" id=33]
 [ext_resource path="res://images/smokeparticle.png" type="Texture" id=34]
 [ext_resource path="res://player1.tres" type="Animation" id=35]
-[ext_resource path="res://images/osb_left.png" type="Texture" id=36]
-[ext_resource path="res://images/osb_right.png" type="Texture" id=37]
-[ext_resource path="res://images/osb_jump.png" type="Texture" id=38]
-[ext_resource path="res://images/osb_fire.png" type="Texture" id=39]
+[ext_resource path="res://images/osb_fire.png" type="Texture" id=36]
+[ext_resource path="res://images/osb_fire_pressed.png" type="Texture" id=37]
+[ext_resource path="res://analog.xml" type="PackedScene" id=38]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -484,54 +483,12 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="move_left_p1" type="TouchScreenButton" parent="ui"]
-
-transform/pos = Vector2( 18.7783, 523.726 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 36 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = true
-action = "move_left_p1"
-visibility_mode = 1
-
-[node name="move_right_p1" type="TouchScreenButton" parent="ui"]
-
-transform/pos = Vector2( 159.861, 525.469 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 37 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = true
-action = "move_right_p1"
-visibility_mode = 1
-
-[node name="jump_p1" type="TouchScreenButton" parent="ui"]
-
-transform/pos = Vector2( 869.196, 516.488 )
-transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 38 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = "jump_p1"
-visibility_mode = 1
-
 [node name="shoot_p1" type="TouchScreenButton" parent="ui"]
 
-transform/pos = Vector2( 869.847, 401.695 )
+transform/pos = Vector2( 850, 493 )
 transform/scale = Vector2( 1.49157, 1.46265 )
-normal = ExtResource( 39 )
-pressed = null
+normal = ExtResource( 36 )
+pressed = ExtResource( 37 )
 bitmask = null
 shape = null
 shape_centered = true
@@ -539,6 +496,11 @@ shape_visible = true
 passby_press = false
 action = "shoot_p1"
 visibility_mode = 1
+
+[node name="Analog" parent="ui" instance=ExtResource( 38 )]
+
+transform/pos = Vector2( 110, 540 )
+listenerNodePath = "/root/stage/Player/Player1"
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 

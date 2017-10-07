@@ -35,6 +35,31 @@ var floor_h_velocity = 0.0
 var node_path_ammo = "/root/stage/HUD/Control/AmmoPlayer1"
 var player
 
+var move_left_analog
+var move_right_analog
+var move_up_analog
+var move_down_analog
+
+func analog_force_change(inForce, inAnalog):
+	if (inForce.x < 0):
+		move_left_analog = true
+		move_right_analog = false
+	elif (inForce.x > 0):
+		move_left_analog = false
+		move_right_analog = true
+	else:
+		move_left_analog = false
+		move_right_analog = false
+
+	if (inForce.y < -0.5):
+		move_down_analog = true
+		move_up_analog = false
+	elif (inForce.y > 0.5):
+		move_down_analog = false
+		move_up_analog = true
+	else:
+		move_down_analog = false
+		move_up_analog = false
 
 func _integrate_forces(s):
 	if (Game.health_p1 > 0 and not Game.fatality_running):
@@ -46,10 +71,18 @@ func _integrate_forces(s):
 
 		# Get the controls
 		var move_left = Input.is_action_pressed("move_left_p1")
+		if (move_left_analog):
+			move_left = move_left_analog
 		var move_right = Input.is_action_pressed("move_right_p1")
+		if (move_right_analog):
+			move_right = move_right_analog
 		var jump = Input.is_action_pressed("jump_p1")
-		var shoot = Input.is_action_pressed("shoot_p1")
+		if (move_up_analog):
+			jump = move_up_analog
 		var crouch = Input.is_action_pressed("crouch_p1")
+		if (move_down_analog):
+			crouch = move_down_analog
+		var shoot = Input.is_action_pressed("shoot_p1")
 
 		# Deapply prev floor velocity
 		lv.x -= floor_h_velocity
