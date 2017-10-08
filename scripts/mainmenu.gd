@@ -35,7 +35,7 @@ func _input(event):
 
 	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed()):
 		if (index == 0):
-			_on_SinglePlayer_released()
+			_on_Singleplayer_released()
 			_on_Play_pressed()
 		if (index == 1):
 			_on_Multiplayer_released()
@@ -102,4 +102,4 @@ func _on_Exit_mouse_enter():
 
 func _on_Play_pressed():
 	if (index < 2):
-		get_tree().change_scene("res://stage.tscn")
+		Game.goto_scene("res://stage.tscn")

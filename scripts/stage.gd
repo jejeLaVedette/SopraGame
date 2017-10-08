@@ -42,6 +42,7 @@ var timer_drone_appear
 var timer_drone = false
 var drone_attack = false
 var scale_player = 0.5
+var current_scene
 
 
 func _ready():
@@ -65,7 +66,7 @@ func _input(event):
 	var retry = event.is_action_pressed("retry")
 	var exit_game = event.is_action_pressed("exit_game")
 	if (retry):
-		get_tree().reload_current_scene()
+		Game.goto_scene("res://stage.tscn")
 		Game.round_current += 1
 		Game.timer = 0
 		Game.spawn_healthpack = false
@@ -92,13 +93,13 @@ func _input(event):
 			Game.ultimate_running_p2 = false
 
 	if (exit_game):
-		get_tree().change_scene("res://hud/mainmenu.tscn")
+		Game.goto_scene("res://hud/mainmenu.tscn")
 
 
 func _notification(what):
 	#Control Android
 	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
-		get_tree().change_scene("res://hud/mainmenu.tscn")
+		Game.goto_scene("res://hud/mainmenu.tscn")
 
 
 func _fixed_process(delta):

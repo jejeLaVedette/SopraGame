@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=1]
+[gd_scene load_steps=60 format=1]
 
 [ext_resource path="res://scripts/player1.gd" type="Script" id=1]
 [ext_resource path="res://images/player1/playeridle.png" type="Texture" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://images/osb_fire.png" type="Texture" id=36]
 [ext_resource path="res://images/osb_fire_pressed.png" type="Texture" id=37]
 [ext_resource path="res://analog.xml" type="PackedScene" id=38]
+[ext_resource path="res://images/retry.png" type="Texture" id=39]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -501,6 +502,19 @@ visibility_mode = 1
 
 transform/pos = Vector2( 140, 540 )
 listenerNodePath = "/root/stage/Player/Player1"
+
+[node name="retry" type="TouchScreenButton" parent="ui"]
+
+transform/pos = Vector2( 496, 575 )
+normal = ExtResource( 39 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = "retry"
+visibility_mode = 1
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 
