@@ -47,7 +47,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=29]
+[sub_resource type="StyleBoxEmpty" id=7]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -68,7 +68,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=30]
+[sub_resource type="StyleBoxEmpty" id=10]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -339,10 +339,10 @@ margin/top = 217.0
 margin/right = 947.0
 margin/bottom = 324.0
 custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 29 )
+custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 30 )
+custom_styles/normal = SubResource( 10 )
 custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true

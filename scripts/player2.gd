@@ -85,7 +85,7 @@ func _integrate_forces(s):
 					get_node(node_ammo).hide()
 					if (Game.ammo_p2 == 0):
 						get_node("Reloading_Timer").start()
-						get_node(node_path_ammo). get_node("ReloadingPlayer2").show()
+						get_node(node_path_ammo).get_node("ReloadingPlayer2").show()
 				shoot_time = 0
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
@@ -217,10 +217,7 @@ func _integrate_forces(s):
 
 		# Update siding
 		if (new_siding_right != siding_right):
-			if (new_siding_right):
-				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
-			else:
-				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
+			get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
 			siding_right = new_siding_right
 
 		if (Game.gatlinggun_p2):
@@ -302,13 +299,9 @@ func die_p2():
 		get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))
 
 
-func _on_Timer_timeout():
-	pass
-
-
 func _on_Reloading_Timer_timeout():
 	get_node("Reloading_Timer").stop()
-	get_node(node_path_ammo). get_node("ReloadingPlayer2").hide()
+	get_node(node_path_ammo).get_node("ReloadingPlayer2").hide()
 	Game.ammo_p2 = Game.SHOOT_MAX
 	for node_index in range(Game.SHOOT_MAX):
 		node_index += 1

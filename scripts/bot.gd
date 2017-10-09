@@ -16,18 +16,15 @@ var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
 var linear_velocity_x = 800
 var linear_velocity_y = -100
-var distanceHorizontalTir = 550
-var distanceVerticalTir = 160
 var move_left = true
 var move_right = false
-var jump
-var jumpBot
+var jump = false
 var shoot = false
-var crouch
-var nb_essai_bot = 0
-
-var rc_left = null
-var rc_right = null
+var crouch = false
+var node_player1 = "/root/stage/Player/Player1"
+var rc_body = null
+var distance_min = 500
+var distance_player
 
 var WALK_ACCEL = 800.0
 var WALK_DEACCEL = 800.0
@@ -44,22 +41,21 @@ var MAX_SHOOT_POSE_TIME = 0.3
 var bullet = preload("res://bullet2.tscn")
 var fatality_hud = preload("res://fatality.tscn")
 var floor_h_velocity = 0.0
+var node_path_ammo = "/root/stage/HUD/Control/AmmoPlayer2"
 var player
-var new_siding_right
+
 
 func _integrate_forces(s):
-	rc_left = get_node("NodeBot/raycast_left")
-	rc_right = get_node("NodeBot/raycast_right")
-	rc_left.set_enabled(true)
-	rc_right.set_enabled(true)
+	rc_body = get_node("NodeBot/raycast_body")
+	rc_body.set_enabled(true)
+	rc_body.set_scale(Vector2(direction, 1))
 
-	if (Game.health_p2 > 0 and not Game.fatality_running):
+	if (Game.health_p2 > 0 and not Game.fatality_running and not Game.fatality_executed and get_node("/root/stage/Player").has_node("Player1")):
 		var lv = s.get_linear_velocity()
 		var step = s.get_step()
 
 		var new_anim = anim
-		new_siding_right = siding_right
-		var wall_side = 0.0
+		var new_siding_right = siding_right
 
 		# Deapply prev floor velocity
 		lv.x -= floor_h_velocity
@@ -74,48 +70,36 @@ func _integrate_forces(s):
 			if (ci.dot(Vector2(0, -1)) > 0.6):
 				found_floor = true
 				floor_index = x
-			var cc = s.get_contact_collider_object(x)
-			var dp = s.get_contact_local_normal(x)
 
-			if (dp.x > 0.9):
-				wall_side = -1.0
-			elif (dp.x < -0.9):
-				wall_side = 1.0
+		var position_player1_x = get_node(node_player1).get_global_pos().x
+		var position_bot_x = get_node(".").get_global_pos().x
+		var position_player1_y = get_node(node_player1).get_global_pos().y
+		var position_bot_y = get_node(".").get_global_pos().y
 
-		var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
-		var currentPositionY = get_node(".").get_global_pos().y
-		var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-		var currentPositionX = get_node(".").get_global_pos().x
-		
-		if (wall_side != 0 and wall_side != direction):
-			print(nb_essai_bot)
-			if(positionJoueurY<currentPositionY and not _porter_de_tir() and nb_essai_bot < 6):
-				jump=true
-				jumpBot=true
-				nb_essai_bot+=1
-			else :
-				nb_essai_bot=0
-				direction = -direction
-				move_left = not move_left
-				move_right = not move_right
+		if (position_bot_x > position_player1_x):
+			distance_player = position_bot_x - position_player1_x
+			direction = 1
+			move_left = true
+			move_right = false
+		if (position_bot_x < position_player1_x):
+			distance_player = position_player1_x - position_bot_x
+			direction = -1
+			move_left = false
+			move_right = true
 
-		# Si il y a du vide alors on fait demi tour
-		if (direction > 0 and not rc_left.is_colliding() and rc_right.is_colliding()):
-			if(positionJoueurX < currentPositionX and not _porter_de_tir()):
-				jump=true
-				jumpBot=true
-			else :
-				direction = -direction
-				move_left = false
-				move_right = true
-		elif (direction < 0 and not rc_right.is_colliding() and rc_left.is_colliding()):
-			if(positionJoueurX > currentPositionX and not _porter_de_tir()):
-				jump=true
-				jumpBot=true
-			else :
-				direction = -direction
-				move_right = false
-				move_left = true
+		if (distance_player < distance_min):
+			shoot = true
+			if (position_bot_x < position_player1_x):
+				new_siding_right = true
+			else:
+				new_siding_right = false
+			move_left = false
+			move_right = false
+
+		if (rc_body.is_colliding() or jumping):
+			jump = true
+		else:
+			jump = false
 
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
@@ -131,11 +115,17 @@ func _integrate_forces(s):
 				linear_velocity_y = -(randi()%150+50)
 			else:
 				GatlingGun_Tempo = GatlingGun_Modulo
+				if (Game.ammo_p2 > 0):
+					Game.ammo_p2 -= 1
+					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p2+1)
+					get_node(node_ammo).hide()
+					if (Game.ammo_p2 == 0):
+						get_node("Reloading_Timer").start()
+						get_node(node_path_ammo).get_node("ReloadingPlayer2").show()
 				shoot_time = 0
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
 				linear_velocity_y = -100
-				lv.x=0
 
 			if (siding_right):
 				birot = 0
@@ -143,7 +133,7 @@ func _integrate_forces(s):
 				birot = 180
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
-			if(modulo == 0 and not Game.fatality_ready):
+			if(modulo == 0 and not Game.fatality_ready and (Game.ammo_p2 > 0 or Game.gatlinggun_p2)):
 				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(-vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(-direction, -6.0)
 				bi.set_pos(pos)
@@ -263,10 +253,8 @@ func _integrate_forces(s):
 
 		# Update siding
 		if (new_siding_right != siding_right):
-			if (new_siding_right):
-				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
-			else:
-				get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
+			rc_body.set_pos(Vector2(rc_body.get_pos().x - (2*abs(rc_body.get_pos().x)*direction), rc_body.get_pos().y))
+			get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
 			siding_right = new_siding_right
 
 		if (Game.gatlinggun_p2):
@@ -284,7 +272,8 @@ func _integrate_forces(s):
 			get_node("anim").play(anim)
 
 		shooting = shoot
-		shoot=false
+		if (shoot_time > MAX_SHOOT_POSE_TIME):
+			shooting = false
 
 		# Apply floor velocity
 		if (found_floor):
@@ -296,40 +285,7 @@ func _integrate_forces(s):
 		s.set_linear_velocity(lv)
 	elif (Game.fatality_running):
 		s.set_linear_velocity(Vector2(0,0))
-	
-	if jumpBot:
-		jump=false
-		jumpBot=false
 
-
-func _on_Timer_timeout():
-	if (not Game.fatality_executed):
-		#On tire dans la direction du player
-		if(_porter_de_tir()):
-			var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-			var currentPositionX = get_node(".").get_global_pos().x
-			if (positionJoueurX < currentPositionX):
-				if (move_right):
-					direction = -direction
-					move_right=false
-					move_left=true
-			else:
-				if (move_left):
-					direction = -direction
-					move_right=true
-					move_left=false
-	
-			shoot = true
-
-func _porter_de_tir():
-	var positionJoueurX = get_node("/root/stage/Player/Player1").get_global_pos().x
-	var currentPositionX = get_node(".").get_global_pos().x
-	var positionJoueurY = get_node("/root/stage/Player/Player1").get_global_pos().y
-	var currentPositionY = get_node(".").get_global_pos().y
-	
-	if((abs(positionJoueurX-currentPositionX)<distanceHorizontalTir) and (abs(positionJoueurY-currentPositionY)<distanceVerticalTir)):
-		return true
-	return false
 
 func _ready():
 	player = ResourceLoader.load("res://player2.tscn")
@@ -380,3 +336,13 @@ func die_p2():
 		get_node("anim").play("defeat")
 		get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.7))
 		get_node("CollisionPolygon2D").set_pos(Vector2(-5*direction, 20))
+
+
+func _on_Reloading_Timer_timeout():
+	get_node("Reloading_Timer").stop()
+	get_node(node_path_ammo).get_node("ReloadingPlayer2").hide()
+	Game.ammo_p2 = Game.SHOOT_MAX
+	for node_index in range(Game.SHOOT_MAX):
+		node_index += 1
+		var node_ammo = node_path_ammo + "/AmmoSprite" + str(node_index)
+		get_node(node_ammo).show()
