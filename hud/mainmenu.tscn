@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=1]
+[gd_scene load_steps=33 format=1]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://images/menu_background.png" type="Texture" id=2]
-[ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://images/button_background.png" type="Texture" id=3]
+[ext_resource path="res://polices/goodtimes.fnt" type="BitmapFont" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -46,7 +47,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="StyleBoxEmpty" id=29]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -67,7 +68,7 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=30]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -234,6 +235,61 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Button_Background1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 239, 225 )
+transform/scale = Vector2( 1.44, 1 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button_Background2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 239, 310 )
+transform/scale = Vector2( 1.44, 1 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button_Background3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 239, 395 )
+transform/scale = Vector2( 1.44, 1 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button_Background4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 239, 480 )
+transform/scale = Vector2( 1.44, 1 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button_Background5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 239, 565 )
+transform/scale = Vector2( 1.44, 1 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Button_Background6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 899, 565 )
+transform/scale = Vector2( 0.75, 1 )
+texture = ExtResource( 3 )
+flip_h = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 
 rect/scale = Vector2( 0.4, 0.4 )
@@ -263,7 +319,7 @@ custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
@@ -283,11 +339,11 @@ margin/top = 217.0
 margin/right = 947.0
 margin/bottom = 324.0
 custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
+custom_styles/pressed = SubResource( 29 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
-custom_fonts/font = ExtResource( 3 )
+custom_styles/normal = SubResource( 30 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
@@ -311,7 +367,7 @@ custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 15 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
@@ -335,7 +391,7 @@ custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 15 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
@@ -359,7 +415,7 @@ custom_styles/pressed = SubResource( 17 )
 custom_styles/focus = SubResource( 18 )
 custom_styles/disabled = SubResource( 19 )
 custom_styles/normal = SubResource( 20 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
@@ -378,7 +434,7 @@ margin/left = 0.0
 margin/top = 21.0
 margin/right = 1024.0
 margin/bottom = 128.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 10
@@ -393,7 +449,6 @@ __meta__ = {
 
 [node name="Selected" type="Label" parent="."]
 
-editor/display_folded = true
 material/material = SubResource( 22 )
 rect/scale = Vector2( 0.4, 0.4 )
 focus/ignore_mouse = true
@@ -404,7 +459,7 @@ margin/left = 10.0
 margin/top = 200.0
 margin/right = 93.0
 margin/bottom = 307.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 10
@@ -419,9 +474,9 @@ __meta__ = {
 [node name="Shader" type="Sprite" parent="Selected"]
 
 material/material = SubResource( 24 )
-transform/pos = Vector2( 772.5, 54.9999 )
+transform/pos = Vector2( 627.767, 54.9985 )
 transform/rot = -0.000568611
-transform/scale = Vector2( 41.25, 5.07759 )
+transform/scale = Vector2( 32.2042, 5.07759 )
 texture = ExtResource( 2 )
 
 [node name="Play" type="Button" parent="."]
@@ -439,7 +494,7 @@ margin/bottom = 660.0
 custom_styles/hover = SubResource( 25 )
 custom_styles/pressed = SubResource( 26 )
 custom_styles/focus = SubResource( 27 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
