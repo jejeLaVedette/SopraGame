@@ -73,7 +73,7 @@ func _input(event):
 		Game.goto_scene("res://hud/mainmenu.tscn")
 		Game.number_victory_p1 = 0
 		Game.number_victory_p2 = 0
-		Game.round_current = 0
+		Game.round_current = 1
 
 
 func _notification(what):
