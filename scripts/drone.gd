@@ -22,7 +22,7 @@ func _fixed_process(delta):
 
 
 func _on_TimerBullet_timeout():
-	if (Game.drone_straffing and get_node("Drone").is_visible() and get_node(".").get_parent().get_node("TimerDrone").get_time_left() > 1):
+	if (Game.drone_straffing and get_node("Drone").is_visible() and get_node(".").get_parent().get_node("TimerDrone").get_time_left() > 1.5):
 		var rotation = 240
 		var x = -1
 		for i in range(3):

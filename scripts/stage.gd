@@ -68,38 +68,21 @@ func _input(event):
 	if (retry):
 		Game.goto_scene("res://stage.tscn")
 		Game.round_current += 1
-		Game.timer = 0
-		Game.spawn_healthpack = false
-		Game.spawn_gatlinggun = false
-		Game.gatlinggun_p1 = false
-		Game.gatlinggun_p2 = false
-		Game.defeat_p1 = false
-		Game.defeat_p2 = false
-		Game.health_p1 = Game.health_limit
-		Game.health_p2 = Game.health_limit
-		Game.fatality_timer = 0
-		Game.fatality_ready = false
-		Game.fatality_executed = false
-		Game.fatality_running = false
-		Game.ammo_p1 = Game.SHOOT_MAX
-		randomize()
-		for i in range(0, Game.spawn_timer_array.size()):
-			Game.spawn_timer_array[i] = randi()%12+2
-		if (Game.ultimate_running_p1):
-			Game.ultimate_p1 = 0
-			Game.ultimate_running_p1 = false
-		if (Game.ultimate_running_p2):
-			Game.ultimate_p2 = 0
-			Game.ultimate_running_p2 = false
 
 	if (exit_game):
 		Game.goto_scene("res://hud/mainmenu.tscn")
+		Game.number_victory_p1 = 0
+		Game.number_victory_p2 = 0
+		Game.round_current = 0
 
 
 func _notification(what):
 	#Control Android
 	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
 		Game.goto_scene("res://hud/mainmenu.tscn")
+		Game.number_victory_p1 = 0
+		Game.number_victory_p2 = 0
+		Game.round_current = 1
 
 
 func _fixed_process(delta):
@@ -192,6 +175,8 @@ func _fixed_process(delta):
 		else:
 			get_node("Fatality/Thunder").hide()
 			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,1)))
+		if (Game.gatlinggun_p1 or Game.gatlinggun_p2):
+			fatality_function_name = "fatality_animation_gatlinggun"
 		call(fatality_function_name)
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
@@ -387,6 +372,100 @@ func fatality_animation_2():
 		if (pathfollow_node.get_unit_offset() > 1):
 			fatality1_shoot += 1
 			get_node(node_target).get_node("AnimatedSprite").set_frame(30)
+			get_node(node_target).get_node("anim").stop(true)
+			pathfollow_node.set_unit_offset(0)
+			if (fatality1_shoot == 6):
+				sprite_node.queue_free()
+				get_node("Fatality/SpotLight").set_pos(Vector2(position_target.x, position_target.y - 260))
+				get_node("Fatality/SpotLight").show()
+				get_node("Fatality/SpotLight/TimerSpotLight").start()
+				Game.fatality_timer = 6
+				Game.fatality_ready = false
+				Game.fatality_running = false
+
+	if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
+		# le perdant s'envole vers les cieux
+		node_target_opacity -= 0.005
+		get_node(node_target).move_local_y(-2)
+		get_node(node_target).set_opacity(node_target_opacity)
+		get_node(node_target).get_node("AnimatedSprite").set_frame(30)
+
+
+func fatality_animation_gatlinggun():
+	sprite_speed = 36
+	if (Game.fatality_ready and Game.fatality_executed and not path_node_exist):
+		# Recuperation position des players
+		if (Game.health_p1 <= 0):
+			position_shooter = get_node(node_player2).get_global_pos()
+			direction_shooter = get_node(node_player2).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player2
+			position_target = get_node(node_player1).get_global_pos()
+			node_target = node_player1
+		elif (Game.health_p2 <= 0):
+			position_shooter = get_node(node_player1).get_global_pos()
+			direction_shooter = get_node(node_player1).get_node("AnimatedSprite").get_scale().x
+			node_shooter = node_player1
+			position_target = get_node(node_player2).get_global_pos()
+			node_target = node_player2
+
+		# Desactivation collision de la cible
+		get_node(node_target).set_layer_mask(0)
+		get_node(node_target).set_collision_mask(0)
+
+		# Orientation des sprites du tireur et de la cible
+		var deplacement_x = position_target.x - position_shooter.x
+		var deplacement_y = position_target.y - position_shooter.y
+		if (deplacement_x < 0):
+			direction = 1
+			if (Game.health_p2 <= 0):
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
+			elif (Game.health_p1 <= 0):
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
+		else:
+			direction = -1
+			if (Game.health_p2 <= 0):
+				get_node(node_player1).get_node("AnimatedSprite").set_scale(Vector2(scale_player, scale_player))
+			elif (Game.health_p1 <= 0):
+				get_node(node_player2).get_node("AnimatedSprite").set_scale(Vector2(-scale_player, scale_player))
+
+		curve1 = Curve2D.new()
+		path_node = Path2D.new()
+		pathfollow_node = PathFollow2D.new()
+		sprite_node = Sprite.new()
+		# Trajectoire des tirs
+		path_node.set_pos(position_shooter)
+
+		# Position du gun du tireur
+		path1.append(Vector2(-60*direction, 0))
+		# Position de la tete de la cible
+		path1.append(Vector2(deplacement_x, deplacement_y-22))
+
+		for point in path1:
+			curve1.add_point(point)
+		path_node.set_curve(curve1)
+		sprite_node.set_texture(tex_sprite)
+
+		# Ajout sprite bullet aux trajectoires
+		get_node(".").add_child(path_node)
+		path_node.add_child(pathfollow_node)
+		pathfollow_node.add_child(sprite_node)
+		pathfollow_node.set_pos(Vector2(0, 0))
+		pathfollow_node.set_loop(false)
+		pathfollow_node.set_rotate(true)
+		pathfollow_node.set_offset(0)
+		sprite_node.set_pos(Vector2(0, 0))
+		sprite_node.set_scale(Vector2(0.5, 0.5))
+		path_node_exist = true
+
+	if (Game.fatality_executed and Game.fatality_timer <= 5):
+		get_node(node_shooter).get_node("anim").play("gatlinggun")
+		Game.fatality_timer = 1
+		pathfollow_node.set_offset(pathfollow_node.get_offset() + sprite_speed)
+
+		# Quand la balle finit sa trajectoire, soit un nouveau tir, soit fin de la fatality
+		if (pathfollow_node.get_unit_offset() > 1):
+			fatality1_shoot += 1
+			get_node(node_target).get_node("AnimatedSprite").set_frame(29)
 			get_node(node_target).get_node("anim").stop(true)
 			pathfollow_node.set_unit_offset(0)
 			if (fatality1_shoot == 6):

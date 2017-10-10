@@ -68,6 +68,29 @@ func _ready():
 
 
 func goto_scene(path): # game requests to switch to this scene
+	Game.timer = 0
+	Game.spawn_healthpack = false
+	Game.spawn_gatlinggun = false
+	Game.gatlinggun_p1 = false
+	Game.gatlinggun_p2 = false
+	Game.defeat_p1 = false
+	Game.defeat_p2 = false
+	Game.health_p1 = Game.health_limit
+	Game.health_p2 = Game.health_limit
+	Game.fatality_timer = 0
+	Game.fatality_ready = false
+	Game.fatality_executed = false
+	Game.fatality_running = false
+	Game.ammo_p1 = Game.SHOOT_MAX
+	randomize()
+	for i in range(0, Game.spawn_timer_array.size()):
+		Game.spawn_timer_array[i] = randi()%12+2
+	if (Game.ultimate_running_p1):
+		Game.ultimate_p1 = 0
+		Game.ultimate_running_p1 = false
+	if (Game.ultimate_running_p2):
+		Game.ultimate_p2 = 0
+		Game.ultimate_running_p2 = false
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null: # check for errors
 		show_error()
