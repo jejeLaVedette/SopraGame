@@ -7,6 +7,7 @@ var zoom_max = 1.5
 var camera_x_min = 300
 var camera_x_max = 1060
 var coeffzoomfinal = 0.5
+var camera_pos_y
 var timer_thunder = 0
 onready var hud_scene = preload("res://hud/main.tscn")
 var curve1 = null
@@ -86,42 +87,33 @@ func _notification(what):
 
 
 func _fixed_process(delta):
-	# si les deux joueurs sont présents, alors on bouge la caméra et le zoom en fonction de leur position
+	# Gestion Camera
+	camera_pos_y = get_node("Camera2D").get_pos().y
 	if (get_node(".").has_node(node_player1) and get_node(".").has_node(node_player2)):
 		var p1 = get_node(node_player1)
 		var p2 = get_node(node_player2)
-		var newpos = (p1.get_global_pos() + p2.get_global_pos()) * 0.5
+		var newpos = Vector2((p1.get_global_pos().x + p2.get_global_pos().x)* 0.5, camera_pos_y)
 		var distance = p1.get_global_pos().distance_to(p2.get_global_pos()) * 2
 		var zoom_factor = distance * 0.005
-		var zoom = Vector2(1,1) * zoom_factor / 4
-		if (zoom.x > zoom_max or zoom.y > zoom_max):
+		var zoom = Vector2(0.5, 0.5) * zoom_factor / 8
+		if (zoom.x > zoom_max):
 			zoom.x = zoom_max
-			zoom.y = zoom_max
-			# Centre de l'écran
-			newpos = Vector2(670, 690)
 		if (newpos.x > camera_x_max):
-			newpos = Vector2(camera_x_max, newpos.y)
+			newpos = Vector2(camera_x_max, camera_pos_y)
 		elif (newpos.x < camera_x_min):
-			newpos = Vector2(camera_x_min, newpos.y)
+			newpos = Vector2(camera_x_min, camera_pos_y)
 		get_node("Camera2D").set_global_pos(newpos)
-		if (Vector2(1,1) < zoom):
-			get_node("Camera2D").set_zoom(zoom)
 	else:
 		if(get_node(".").has_node(node_player1)):
 			node_shooter = node_player1
 		elif(get_node(".").has_node(node_player2)):
 			node_shooter = node_player2
-		var newpos = (get_node(node_shooter).get_global_pos())
+		var newpos = Vector2(get_node(node_shooter).get_global_pos().x, camera_pos_y)
 		if (newpos.x > camera_x_max):
-			newpos = Vector2(camera_x_max, newpos.y)
+			newpos = Vector2(camera_x_max, camera_pos_y)
 		elif (newpos.x < camera_x_min):
-			newpos = Vector2(camera_x_min, newpos.y)
+			newpos = Vector2(camera_x_min, camera_pos_y)
 		get_node("Camera2D").set_global_pos(newpos)
-		if (get_node("Camera2D").get_zoom().x > 1):
-			zoomx = get_node("Camera2D").get_zoom().x - delta*coeffzoomfinal
-		if (get_node("Camera2D").get_zoom().y > 1):
-			zoomy = get_node("Camera2D").get_zoom().y - delta*coeffzoomfinal
-		get_node("Camera2D").set_zoom(Vector2(zoomx, zoomy))
 
 	var current_pos = get_node(node_drone).get_offset()
 	if (drone_attack and get_node(node_drone).get_unit_offset() < 1.1):
@@ -154,8 +146,7 @@ func _fixed_process(delta):
 		var timer_thunder_max = 2
 		if (timer_thunder == 0):
 			get_node("Fatality/CanvasFatality").play("CanvasModulateFatality")
-			get_node("Fatality/Particles2D Left").set_emitting(true)
-			get_node("Fatality/Particles2D Right").set_emitting(true)
+			get_node("Fatality/Rain").set_emitting(true)
 		timer_thunder += delta
 		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1):
 			if (!get_node("Fatality/Thunder").is_visible()):

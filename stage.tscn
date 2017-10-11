@@ -4,7 +4,7 @@
 [ext_resource path="res://images/sky.png" type="Texture" id=2]
 [ext_resource path="res://rooftop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://herb.tscn" type="PackedScene" id=4]
-[ext_resource path="res://images/feuille.png" type="Texture" id=5]
+[ext_resource path="res://images/rain.png" type="Texture" id=5]
 [ext_resource path="res://images/spotlight.png" type="Texture" id=6]
 [ext_resource path="res://moving_platform.tscn" type="PackedScene" id=7]
 [ext_resource path="res://drone.tscn" type="PackedScene" id=8]
@@ -52,7 +52,7 @@ tracks/0/keys = {
 
 bake_interval = 5.0
 _data = {
-"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 120, 300, 0, 0, 0, 0, 280, 430, -108.794, 5.88076, -11.7615, 11.7615, 674.223, 590.736 )
+"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 120, 300, 0, 0, 0, 0, 229.819, 468.061, -231.535, 10.0719, -11.7615, 11.7615, 576.561, 671.55 )
 }
 
 [node name="stage" type="Node"]
@@ -65,6 +65,9 @@ material/material = SubResource( 2 )
 transform/pos = Vector2( 641.426, 654.119 )
 transform/scale = Vector2( 4.56223, 2.02824 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Ground" type="Node" parent="."]
 
@@ -103,20 +106,20 @@ visibility/visible = false
 transform/pos = Vector2( 0, 517 )
 transform/scale = Vector2( 2, 2 )
 
-[node name="Particles2D Left" type="Particles2D" parent="Fatality"]
+[node name="Rain" type="Particles2D" parent="Fatality"]
 
-transform/pos = Vector2( 323.008, 53.2858 )
+transform/pos = Vector2( 671.904, 273.509 )
 transform/scale = Vector2( 0.3, 0.3 )
-config/amount = 32
+config/amount = 1000
 config/lifetime = 10.0
 config/emitting = false
 config/process_mode = 1
-config/half_extents = Vector2( 1400, 0 )
+config/half_extents = Vector2( 3000, 0 )
 config/texture = ExtResource( 5 )
-params/direction = 30.0
+params/direction = 0.0
 params/spread = 10.0
-params/linear_velocity = 400.0
-params/spin_velocity = 2.0
+params/linear_velocity = 1024.0
+params/spin_velocity = 0.0
 params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
 params/gravity_strength = 9.8
@@ -129,35 +132,6 @@ params/final_size = 1.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-randomness/spin_velocity = 1.0
-
-[node name="Particles2D Right" type="Particles2D" parent="Fatality"]
-
-transform/pos = Vector2( 1031.16, 59.9665 )
-transform/scale = Vector2( 0.3, 0.3 )
-config/amount = 32
-config/lifetime = 10.0
-config/emitting = false
-config/process_mode = 1
-config/half_extents = Vector2( 1400, 0 )
-config/texture = ExtResource( 5 )
-params/direction = 320.0
-params/spread = 10.0
-params/linear_velocity = 400.0
-params/spin_velocity = 2.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 9.8
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 1.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-randomness/spin_velocity = 1.0
 
 [node name="SpotLight" type="Light2D" parent="Fatality"]
 
@@ -210,11 +184,8 @@ cycle = 5.0
 
 [node name="Enemies" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="Path2D" type="Path2D" parent="Enemies"]
 
-editor/display_folded = true
 curve = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
@@ -253,11 +224,11 @@ editor/display_folded = true
 
 [node name="Player1" parent="Player" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 225.949, 822.824 )
+transform/pos = Vector2( 233.315, 792.131 )
 
 [node name="Player2" parent="Player" instance=ExtResource( 10 )]
 
-transform/pos = Vector2( 1161.27, 826.249 )
+transform/pos = Vector2( 1113.39, 680.149 )
 
 [node name="rooftop_down" type="Sprite" parent="."]
 
@@ -278,8 +249,7 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-transform/pos = Vector2( 710.338, 796.888 )
-transform/scale = Vector2( 6.91374, 4.82815 )
+transform/pos = Vector2( 710, 711 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -296,9 +266,6 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
