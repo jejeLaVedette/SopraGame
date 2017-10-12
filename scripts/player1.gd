@@ -291,7 +291,11 @@ func _fixed_process(delta):
 	get_node("/root/stage/HUD/Control/HealthPlayer1").set_value(Game.health_p1)
 	get_node("/root/stage/HUD/Control/UltimatePlayer1").set_value(Game.ultimate_p1)
 	if (Game.health_p1 > 0):
-		Game.health_p1 += delta * 2
+		if (Game.health_p1 > Game.health_limit ):
+			Game.health_p1 = Game.health_limit
+		else:
+			Game.health_p1 += delta * 2
+
 		if (Game.health_p2 > 0 and not Game.gatlinggun_p1):
 			Game.ultimate_p1 += delta * 5
 
