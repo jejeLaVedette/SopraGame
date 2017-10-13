@@ -14,7 +14,7 @@ func _process(delta):
 		get_node("Fatality").set_opacity(opacity)
 	elif (Game.fatality_executed):
 		get_node("Fatality").set_text("DARTALITY")
-		get_node("Fatality").set_opacity(0.5)
+		get_node("Fatality").set_opacity(1)
 
 
 func _on_Timer_timeout():
