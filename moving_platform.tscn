@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://scripts/moving_platform.gd" type="Script" id=1]
-[ext_resource path="res://images/moving_platform.png" type="Texture" id=2]
+[ext_resource path="res://images/ipn.png" type="Texture" id=2]
+[ext_resource path="res://images/rope.png" type="Texture" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -13, -5, 81, -5, 84, -2, 84, 4, -19, 4, -19, -2 )
+points = Vector2Array( -139, -10, 144, -9, 144, 10, -139, 6 )
 
 [node name="moving_platform" type="Node2D"]
 
@@ -44,20 +45,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="platform"]
+[node name="ipn" type="Sprite" parent="platform"]
 
-transform/pos = Vector2( 50, -25 )
-transform/scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="platform"]
 
 build_mode = 0
-polygon = Vector2Array( -13, -5, 81, -5, 84, -2, 84, 4, -19, 4, -19, -2 )
+polygon = Vector2Array( -139, -10, 144, -9, 144, 10, -139, 6 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+
+[node name="RopeLeft" type="Sprite" parent="platform"]
+
+transform/pos = Vector2( -124, -189 )
+transform/rot = 20.0
+transform/scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="RopeRight" type="Sprite" parent="platform"]
+
+transform/pos = Vector2( 102, -188 )
+transform/rot = -20.0
+transform/scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+flip_h = true
 
 

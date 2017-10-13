@@ -5,9 +5,10 @@
 [sub_resource type="CanvasItemShader" id=1]
 
 _code = {
-"fragment": "vec2 ST = UV;
+"fragment": "uniform float frequence = 4;
+vec2 ST = UV;
 float dist = distance(ST, vec2(0.5, 0.8));
-ST.x += sin(4*TIME)*pow(dist, 4 + 3*sin(TIME))/16;
+ST.x += sin(frequence*TIME)*pow(dist, 4 + 3*sin(TIME))/6;
 COLOR = tex(TEXTURE, ST);",
 "fragment_ofs": 0,
 "light": "",
@@ -20,6 +21,7 @@ COLOR = tex(TEXTURE, ST);",
 
 shader/shader = SubResource( 1 )
 shader/shading_mode = 0
+shader_param/frequence = 8.0
 
 [node name="herb" type="Sprite"]
 

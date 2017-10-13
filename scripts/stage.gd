@@ -459,7 +459,7 @@ func fatality_animation_gatlinggun():
 			get_node(node_target).get_node("AnimatedSprite").set_frame(29)
 			get_node(node_target).get_node("anim").stop(true)
 			pathfollow_node.set_unit_offset(0)
-			if (fatality1_shoot == 6):
+			if (fatality1_shoot == 12):
 				sprite_node.queue_free()
 				get_node("Fatality/SpotLight").set_pos(Vector2(position_target.x, position_target.y - 260))
 				get_node("Fatality/SpotLight").show()

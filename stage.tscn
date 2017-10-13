@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://images/sky.png" type="Texture" id=2]
@@ -7,12 +7,11 @@
 [ext_resource path="res://images/rain.png" type="Texture" id=5]
 [ext_resource path="res://images/spotlight.png" type="Texture" id=6]
 [ext_resource path="res://moving_platform.tscn" type="PackedScene" id=7]
-[ext_resource path="res://drone.tscn" type="PackedScene" id=8]
-[ext_resource path="res://player1.tscn" type="PackedScene" id=9]
-[ext_resource path="res://player2.tscn" type="PackedScene" id=10]
-[ext_resource path="res://images/rooftop_down.png" type="Texture" id=11]
-[ext_resource path="res://images/rooftop_wall.png" type="Texture" id=12]
-[ext_resource path="res://images/light.png" type="Texture" id=13]
+[ext_resource path="res://ipn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://drone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://images/light.png" type="Texture" id=12]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -52,7 +51,7 @@ tracks/0/keys = {
 
 bake_interval = 5.0
 _data = {
-"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 120, 300, 0, 0, 0, 0, 229.819, 468.061, -231.535, 10.0719, -11.7615, 11.7615, 576.561, 671.55 )
+"points": Vector2Array( 0, 0, 35.3699, 137.398, -130, 20, 0, 0, 0, 0, 168.67, 335.208, -231.535, 10.0719, -11.7615, 11.7615, 673.07, 435.179 )
 }
 
 [node name="stage" type="Node"]
@@ -71,16 +70,13 @@ __meta__ = {
 
 [node name="Ground" type="Node" parent="."]
 
+editor/display_folded = true
+
 [node name="rooftop" parent="Ground" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 698.813, 687.263 )
 
 [node name="herb" parent="Ground" instance=ExtResource( 4 )]
-
-transform/pos = Vector2( 716.279, 772.158 )
-transform/scale = Vector2( 0.2, 0.2 )
-
-[node name="herb1" parent="Ground" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 553.055, 850.664 )
 transform/scale = Vector2( 0.5, 0.5 )
@@ -167,22 +163,19 @@ autostart = false
 
 [node name="Props" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="moving_platform" parent="Props" instance=ExtResource( 7 )]
 
-transform/pos = Vector2( 125, 610 )
-motion = Vector2( 0, -160 )
+transform/pos = Vector2( 376.705, 631.385 )
+motion = Vector2( 10, -100 )
 cycle = 7.0
 
-[node name="moving_platform1" parent="Props" instance=ExtResource( 7 )]
+[node name="IPN" parent="Props" instance=ExtResource( 8 )]
 
-transform/pos = Vector2( 1318, 618 )
-transform/scale = Vector2( -1, 1 )
-motion = Vector2( 0, -100 )
-cycle = 5.0
+transform/pos = Vector2( 707.132, 646.34 )
 
 [node name="Enemies" type="Node" parent="."]
+
+editor/display_folded = true
 
 [node name="Path2D" type="Path2D" parent="Enemies"]
 
@@ -202,7 +195,7 @@ cubic_interp = true
 loop = false
 lookahead = 4.0
 
-[node name="Drone" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource( 8 )]
+[node name="Drone" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource( 9 )]
 
 [node name="TimerDrone" type="Timer" parent="Enemies/Path2D/PathFollow2D"]
 
@@ -222,30 +215,13 @@ autostart = false
 
 editor/display_folded = true
 
-[node name="Player1" parent="Player" instance=ExtResource( 9 )]
+[node name="Player1" parent="Player" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 233.315, 792.131 )
 
-[node name="Player2" parent="Player" instance=ExtResource( 10 )]
+[node name="Player2" parent="Player" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 1113.39, 680.149 )
-
-[node name="rooftop_down" type="Sprite" parent="."]
-
-transform/pos = Vector2( 698.813, 687.263 )
-texture = ExtResource( 11 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="rooftop_wall" type="Sprite" parent="."]
-
-transform/pos = Vector2( 698.3, 870 )
-transform/scale = Vector2( 0.99, 1 )
-texture = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -266,6 +242,9 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
@@ -284,7 +263,7 @@ transform/pos = Vector2( 112.417, 827.78 )
 transform/scale = Vector2( -205.51, -236.24 )
 enabled = true
 editor_only = false
-texture = ExtResource( 13 )
+texture = ExtResource( 12 )
 offset = Vector2( 0, 0 )
 scale = 1.0
 color = Color( 0.214844, 0.214844, 0.214844, 1 )
