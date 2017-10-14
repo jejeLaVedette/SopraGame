@@ -168,8 +168,7 @@ func _fixed_process(delta):
 			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,1)))
 		if (Game.gatlinggun_p1 or Game.gatlinggun_p2):
 			fatality_function_name = "fatality_animation_gatlinggun"
-#		call(fatality_function_name)
-		fatality_animation_2()
+		call(fatality_function_name)
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
