@@ -82,6 +82,7 @@ func goto_scene(path): # game requests to switch to this scene
 	Game.fatality_executed = false
 	Game.fatality_running = false
 	Game.ammo_p1 = Game.SHOOT_MAX
+	Game.ammo_p2 = Game.SHOOT_MAX
 	randomize()
 	for i in range(0, Game.spawn_timer_array.size()):
 		Game.spawn_timer_array[i] = randi()%12+2

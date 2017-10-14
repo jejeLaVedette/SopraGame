@@ -168,7 +168,8 @@ func _fixed_process(delta):
 			get_node("CanvasModulate").set_color(Color(get_node("Fatality/CanvasFatality").get_animation("CanvasModulateFatality").track_get_key_value(0,1)))
 		if (Game.gatlinggun_p1 or Game.gatlinggun_p2):
 			fatality_function_name = "fatality_animation_gatlinggun"
-		call(fatality_function_name)
+#		call(fatality_function_name)
+		fatality_animation_2()
 	else:
 		get_node("CanvasModulate").set_color(Color("d2b49f"))
 		get_node("Fatality/Thunder").hide()
@@ -374,9 +375,9 @@ func fatality_animation_2():
 				Game.fatality_ready = false
 				Game.fatality_running = false
 
-	if (get_node("Fatality/SpotLight").is_visible() and node_target_opacity >= 0):
+	if (get_node("Fatality/SpotLight").is_visible()):
 		# le perdant s'envole vers les cieux
-		node_target_opacity -= 0.005
+		node_target_opacity -= 0.001
 		get_node(node_target).move_local_y(-2)
 		get_node(node_target).set_opacity(node_target_opacity)
 		get_node(node_target).get_node("AnimatedSprite").set_frame(30)

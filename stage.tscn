@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/stage.gd" type="Script" id=1]
 [ext_resource path="res://images/sky.png" type="Texture" id=2]
@@ -6,12 +6,13 @@
 [ext_resource path="res://herb.tscn" type="PackedScene" id=4]
 [ext_resource path="res://images/rain.png" type="Texture" id=5]
 [ext_resource path="res://images/spotlight.png" type="Texture" id=6]
-[ext_resource path="res://moving_platform.tscn" type="PackedScene" id=7]
-[ext_resource path="res://ipn.tscn" type="PackedScene" id=8]
-[ext_resource path="res://drone.tscn" type="PackedScene" id=9]
-[ext_resource path="res://player1.tscn" type="PackedScene" id=10]
-[ext_resource path="res://player2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://images/light.png" type="Texture" id=12]
+[ext_resource path="res://images/white_particle.png" type="Texture" id=7]
+[ext_resource path="res://moving_platform.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ipn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://drone.tscn" type="PackedScene" id=10]
+[ext_resource path="res://player1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://player2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://images/light.png" type="Texture" id=13]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -83,8 +84,6 @@ transform/scale = Vector2( 0.5, 0.5 )
 
 [node name="Fatality" type="Node" parent="."]
 
-editor/display_folded = true
-
 [node name="CanvasFatality" type="AnimationPlayer" parent="Fatality"]
 
 playback/process_mode = 1
@@ -132,8 +131,8 @@ params/anim_initial_pos = 0.0
 [node name="SpotLight" type="Light2D" parent="Fatality"]
 
 visibility/visible = false
-visibility/opacity = 0.5
-transform/pos = Vector2( 820, 530 )
+transform/pos = Vector2( 739, 562 )
+transform/scale = Vector2( 4, 4 )
 enabled = true
 editor_only = false
 texture = ExtResource( 6 )
@@ -154,10 +153,38 @@ shadow/buffer_size = 2048
 shadow/esm_multiplier = 80.0
 shadow/item_mask = 1
 
+[node name="Feather" type="Particles2D" parent="Fatality/SpotLight"]
+
+transform/pos = Vector2( 0.0814514, 70.1572 )
+transform/scale = Vector2( 0.25, 0.25 )
+config/amount = 20
+config/lifetime = 10.0
+config/process_mode = 1
+config/half_extents = Vector2( 50, 0 )
+config/texture = ExtResource( 7 )
+params/direction = 180.0
+params/spread = 10.0
+params/linear_velocity = 40.0
+params/spin_velocity = 1.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/spin_velocity = 1.0
+color/color = Color( 1, 1, 1, 0.475412 )
+
 [node name="TimerSpotLight" type="Timer" parent="Fatality/SpotLight"]
 
 process_mode = 1
-wait_time = 2.0
+wait_time = 4.0
 one_shot = true
 autostart = false
 
@@ -165,13 +192,13 @@ autostart = false
 
 editor/display_folded = true
 
-[node name="moving_platform" parent="Props" instance=ExtResource( 7 )]
+[node name="moving_platform" parent="Props" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 376.705, 631.385 )
 motion = Vector2( 10, -100 )
 cycle = 7.0
 
-[node name="IPN" parent="Props" instance=ExtResource( 8 )]
+[node name="IPN" parent="Props" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 707.132, 646.34 )
 
@@ -197,7 +224,7 @@ cubic_interp = true
 loop = false
 lookahead = 4.0
 
-[node name="Drone" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource( 9 )]
+[node name="Drone" parent="Enemies/Path2D/PathFollow2D" instance=ExtResource( 10 )]
 
 [node name="TimerDrone" type="Timer" parent="Enemies/Path2D/PathFollow2D"]
 
@@ -217,11 +244,11 @@ autostart = false
 
 editor/display_folded = true
 
-[node name="Player1" parent="Player" instance=ExtResource( 10 )]
+[node name="Player1" parent="Player" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 233.315, 792.131 )
 
-[node name="Player2" parent="Player" instance=ExtResource( 11 )]
+[node name="Player2" parent="Player" instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 1113.39, 680.149 )
 
@@ -265,7 +292,7 @@ transform/pos = Vector2( 112.417, 827.78 )
 transform/scale = Vector2( -205.51, -236.24 )
 enabled = true
 editor_only = false
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 offset = Vector2( 0, 0 )
 scale = 1.0
 color = Color( 0.214844, 0.214844, 0.214844, 1 )
