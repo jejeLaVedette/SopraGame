@@ -4,7 +4,7 @@ var zoom_factor=1
 var zoomx = 1
 var zoomy = 1
 var zoom_max = 1.5
-var camera_x_min = 300
+var camera_x_min = 400
 var camera_x_max = 1060
 var coeffzoomfinal = 0.5
 var camera_pos_y
