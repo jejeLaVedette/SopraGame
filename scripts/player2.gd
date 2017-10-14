@@ -82,13 +82,6 @@ func _integrate_forces(s):
 				linear_velocity_y = -(randi()%150+50)
 			else:
 				GatlingGun_Tempo = GatlingGun_Modulo
-				if (Game.ammo_p2 > 0):
-					Game.ammo_p2 -= 1
-					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p2+1)
-					get_node(node_ammo).hide()
-					if (Game.ammo_p2 == 0):
-						get_node("Reloading_Timer").start()
-						get_node(node_path_ammo).get_node("ReloadingPlayer2").show()
 				shoot_time = 0
 				vecteur_bullet_x = 15
 				linear_velocity_x = 800
@@ -101,6 +94,13 @@ func _integrate_forces(s):
 
 			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
 			if(modulo == 0 and not Game.fatality_ready and (Game.ammo_p2 > 0 or Game.gatlinggun_p2)):
+				if (not Game.gatlinggun_p2):
+					Game.ammo_p2 -= 1
+					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p2+1)
+					get_node(node_ammo).hide()
+					if (Game.ammo_p2 == 0):
+						get_node("Reloading_Timer").start()
+						get_node(node_path_ammo).get_node("ReloadingPlayer2").show()
 				var bi = bullet.instance()
 				var pos = get_pos() + Vector2(-vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(-direction, -6.0)
 				bi.set_pos(pos)
