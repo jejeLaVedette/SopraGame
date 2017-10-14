@@ -51,6 +51,10 @@ func _integrate_forces(s):
 		var shoot = Input.is_action_pressed("shoot_p2")
 		var crouch = Input.is_action_pressed("crouch_p2")
 
+		if (get_node(node_path_ammo).get_node("ReloadingPlayer2").is_visible()):
+			jump = false
+			crouch = false
+
 		# Deapply prev floor velocity
 		lv.x -= floor_h_velocity
 		floor_h_velocity = 0.0
@@ -70,7 +74,6 @@ func _integrate_forces(s):
 		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_p2):
 			if (Game.gatlinggun_p2):
 				crouch = null
-				jump = null
 				shoot = null
 				GatlingGun_Tempo += 1
 				vecteur_bullet_x = 30
@@ -178,7 +181,12 @@ func _integrate_forces(s):
 				else:
 					new_anim = "run"
 			# Check crouch
-			if (crouch):
+			if (Game.ammo_p2 == 0):
+				new_anim = "reloading"
+				get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.8))
+				get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
+				lv.x = 0
+			elif (crouch):
 				new_anim = "crouch"
 				get_node("CollisionPolygon2D").set_scale(Vector2(2*direction, 0.8))
 				get_node("CollisionPolygon2D").set_pos(Vector2(15*direction, 10))
@@ -225,6 +233,8 @@ func _integrate_forces(s):
 			get_node("AnimatedSprite/Sparks").show()
 			get_node("AnimatedSprite/Smoke").set_emitting(true)
 			get_node("AnimatedSprite/Smoke").show()
+			if (on_floor):
+				lv.x += direction*10
 		else:
 			get_node("AnimatedSprite/Sparks").hide()
 			get_node("AnimatedSprite/Smoke").hide()
@@ -269,9 +279,11 @@ func _fixed_process(delta):
 		if (Game.gatlinggun_p2 and GatlingGun_Timer < 3):
 			GatlingGun_Timer += delta
 			WALK_MAX_VELOCITY = 1
+			JUMP_VELOCITY = 230
 		else:
 			Game.gatlinggun_p2 = false
 			WALK_MAX_VELOCITY = 200
+			JUMP_VELOCITY = 460
 	else:
 		Game.fatality_timer += delta
 		get_node(".").set_sleeping(true)
