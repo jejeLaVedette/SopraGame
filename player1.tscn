@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=1]
+[gd_scene load_steps=63 format=1]
 
 [ext_resource path="res://scripts/player1.gd" type="Script" id=1]
 [ext_resource path="res://images/player1/playeridle.png" type="Texture" id=2]
@@ -41,7 +41,6 @@
 [ext_resource path="res://images/osb_fire_pressed.png" type="Texture" id=39]
 [ext_resource path="res://analog.xml" type="PackedScene" id=40]
 [ext_resource path="res://images/retry.png" type="Texture" id=41]
-[ext_resource path="res://images/white_particle.png" type="Texture" id=42]
 
 [sub_resource type="RayShape2D" id=1]
 
@@ -243,7 +242,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=22]
 
 resource/name = "reloading"
 length = 1.0
@@ -260,7 +259,7 @@ tracks/0/keys = {
 "values": [ 31, 32 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=23]
 
 length = 1.75
 loop = true
@@ -276,7 +275,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=24]
 
 length = 1.75
 loop = true
@@ -435,9 +434,9 @@ anims/idle = SubResource( 14 )
 anims/idle_weapon = SubResource( 15 )
 anims/jumping = SubResource( 16 )
 anims/jumping_weapon = SubResource( 17 )
-anims/reloading = SubResource( 18 )
-anims/run = SubResource( 19 )
-anims/run_weapon = SubResource( 20 )
+anims/reloading = SubResource( 22 )
+anims/run = SubResource( 23 )
+anims/run_weapon = SubResource( 24 )
 anims/standing_weapon_ready = ExtResource( 37 )
 playback/active = true
 playback/speed = 2.0
@@ -498,6 +497,7 @@ autostart = false
 
 [node name="ui" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 0
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -534,34 +534,6 @@ shape_visible = true
 passby_press = false
 action = "retry"
 visibility_mode = 1
-
-[node name="Particles2D" type="Particles2D" parent="."]
-
-visibility/visible = false
-transform/pos = Vector2( 2.13083, 27.0267 )
-config/amount = 16
-config/lifetime = 8.0
-config/process_mode = 1
-config/half_extents = Vector2( 50, 0 )
-config/texture = ExtResource( 42 )
-params/direction = 180.0
-params/spread = 10.0
-params/linear_velocity = 40.0
-params/spin_velocity = 1.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 0.0
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 1.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-randomness/spin_velocity = 1.0
-color/color = Color( 1, 1, 1, 0.475412 )
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
 
