@@ -100,6 +100,15 @@ func _integrate_forces(s):
 		else:
 			jump = false
 
+		# Ramassage des darts
+		for body in get_colliding_bodies():
+			if (body.has_method("_on_bullet_body_enter_shape") and body.is_pickable()):
+				body.queue_free()
+				if (Game.ammo_p2 < Game.SHOOT_MAX):
+					Game.ammo_p2 += 1
+					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p2)
+					get_node(node_ammo).show()
+
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
 		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_p2):
@@ -138,7 +147,6 @@ func _integrate_forces(s):
 				get_parent().add_child(bi)
 				bi.get_node("Sprite").set_rotd(birot)
 				bi.set_linear_velocity(Vector2(-linear_velocity_x*direction, linear_velocity_y))
-				PS2D.body_add_collision_exception(bi.get_rid(), get_rid()) # Make bullet and this not collide
 			elif (Game.fatality_ready and not Game.fatality_executed and found_floor):
 				Game.fatality_executed = true
 				Game.fatality_running = true

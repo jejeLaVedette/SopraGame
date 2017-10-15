@@ -36,18 +36,18 @@ func _fixed_process(delta):
 			get_node(".").queue_free()
 	PS2D.body_add_collision_exception(get_node("/root/stage/Ground/rooftop/Sideleft").get_rid(), get_rid())
 
+
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 	if (body.has_method("damage") and isAlreadyColliding == false):
 		body.damage(Game.bullet_damage)
 		if(Game.health_p1 > 0):
 			Game.ultimate_p2 += 15
 		bodyEnnemi = true
-		#On retire la colission
-		add_collision_exception_with(body)
 
 
 func _on_bullet_body_exit_shape( body_id, body, body_shape, local_shape ):
-	isAlreadyColliding = true;
+	isAlreadyColliding = true
+	get_node(".").set_pickable(true)
 
 
 func _on_Timer_timeout():
