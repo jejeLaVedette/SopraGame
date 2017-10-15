@@ -41,7 +41,6 @@ texture = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
 
-visibility/visible = false
 transform/pos = Vector2( -739, -319 )
 build_mode = 0
 polygon = Vector2Array( 592, 310, 886, 310, 886, 327, 592, 327 )
@@ -60,6 +59,16 @@ transform/pos = Vector2( 90, -181 )
 transform/scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )
 flip_h = true
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+
+transform/pos = Vector2( 0, 55 )
+transform/scale = Vector2( 4.59375, 2 )
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 
 [node name="PinLeft" type="PinJoint2D" parent="."]
 

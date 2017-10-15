@@ -131,7 +131,7 @@ func _fixed_process(delta):
 		if (not timer_drone):
 			timer_drone = true
 			randomize()
-			var wait_timer = randi()%5+3
+			var wait_timer = randi()%5+5
 			get_node(node_drone).get_node("TimerDrone").set_wait_time(wait_timer)
 			get_node(node_drone).get_node("TimerDrone").start()
 	else:
