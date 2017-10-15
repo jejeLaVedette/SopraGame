@@ -3,7 +3,8 @@ extends Node2D
 
 var index = 0
 var button_separation = 86
-
+var credits = ["Elfide\nDavid", "JeJeLaVedette\nJerome"]
+var index_credits = 0
 
 func _ready():
 	set_process_input(true)
@@ -58,12 +59,12 @@ func _on_Multiplayer_released():
 
 func _on_Options_released():
 	_on_Options_mouse_enter()
-	print("Options")
+	get_node("Popup_Options").show()
 
 
 func _on_Credits_released():
 	_on_Credits_mouse_enter()
-	print("Credits")
+	get_node("Popup_Credits/AnimationPlayer").play("Popup_Credits")
 
 
 func _on_Exit_released():
@@ -103,3 +104,22 @@ func _on_Exit_mouse_enter():
 func _on_Play_pressed():
 	if (index < 2):
 		Game.goto_scene("res://stage.tscn")
+
+
+func _on_Popup_Options_pressed():
+	get_node("Popup_Options").hide()
+
+
+func _on_Popup_Credits_pressed():
+	get_node("Popup_Credits/AnimationPlayer").seek(0, true)
+	index_credits = 0
+	get_node("Popup_Credits/AnimationPlayer").play("Popdown_Credits")
+
+
+func credits():
+	get_node("Popup_Credits/AnimationPlayer").play("Credits")
+	get_node("Popup_Credits/Label").set_text(credits[index_credits])
+	if (index_credits < (credits.size()-1)):
+		index_credits += 1
+	else:
+		index_credits = 0
