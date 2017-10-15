@@ -11,7 +11,6 @@ var direction = 1
 var GatlingGun_Timer = 0
 var GatlingGun_Tempo = 0
 var GatlingGun_Modulo = 6
-var ultimate_timer_p2 = 0
 var vecteur_bullet_x = 15
 var vecteur_bullet_y = 0
 var linear_velocity_x = 800
@@ -112,12 +111,9 @@ func _integrate_forces(s):
 				Game.fatality_executed = true
 				Game.fatality_running = true
 
-			if(Game.ultimate_p2 >= Game.ultimate_limit):
-				ultimate_timer_p2 += 1
-				if(ultimate_timer_p2 > 5):
-					Game.ultimate_p2 = 0
-					ultimate_timer_p2 = 0
-					Game.ultimate_running_p2 = false
+			if(Game.ultimate_p2 >= Game.ultimate_limit and not Game.ultimate_running_p2):
+				Game.ultimate_running_p2 = true
+				get_node("Ultimate_Timer").start()
 		else:
 			shoot_time += step
 
@@ -323,3 +319,8 @@ func _on_Reloading_Timer_timeout():
 		node_index += 1
 		var node_ammo = node_path_ammo + "/AmmoSprite" + str(node_index)
 		get_node(node_ammo).show()
+
+
+func _on_Ultimate_Timer_timeout():
+	Game.ultimate_p2 = 0
+	Game.ultimate_running_p2 = false

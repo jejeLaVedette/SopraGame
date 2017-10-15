@@ -44,6 +44,7 @@ var timer_drone = false
 var drone_attack = false
 var scale_player = 0.5
 var current_scene
+var timer_thunder_max = 2
 
 
 func _ready():
@@ -143,12 +144,11 @@ func _fixed_process(delta):
 		get_node("Sky").set_texture(sky_rain)
 		Game.spawn_gatlinggun = true
 		Game.spawn_healthpack = true
-		var timer_thunder_max = 2
 		if (timer_thunder == 0):
 			get_node("Fatality/CanvasFatality").play("CanvasModulateFatality")
 			get_node("Fatality/Rain").set_emitting(true)
 		timer_thunder += delta
-		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1):
+		if (timer_thunder >= timer_thunder_max and timer_thunder <= timer_thunder_max + 1.5):
 			if (!get_node("Thunder").is_visible()):
 				randomize()
 				var posx = randi()%1000+100

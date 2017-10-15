@@ -242,7 +242,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=18]
 
 resource/name = "reloading"
 length = 1.0
@@ -259,7 +259,7 @@ tracks/0/keys = {
 "values": [ 31, 32 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=19]
 
 length = 1.75
 loop = true
@@ -275,7 +275,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=20]
 
 length = 1.75
 loop = true
@@ -434,9 +434,9 @@ anims/idle = SubResource( 14 )
 anims/idle_weapon = SubResource( 15 )
 anims/jumping = SubResource( 16 )
 anims/jumping_weapon = SubResource( 17 )
-anims/reloading = SubResource( 22 )
-anims/run = SubResource( 23 )
-anims/run_weapon = SubResource( 24 )
+anims/reloading = SubResource( 18 )
+anims/run = SubResource( 19 )
+anims/run_weapon = SubResource( 20 )
 anims/standing_weapon_ready = ExtResource( 37 )
 playback/active = true
 playback/speed = 2.0
@@ -495,6 +495,13 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 
+[node name="Ultimate_Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 editor/display_folded = true
@@ -536,5 +543,7 @@ action = "retry"
 visibility_mode = 1
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
+
+[connection signal="timeout" from="Ultimate_Timer" to="." method="_on_Ultimate_Timer_timeout"]
 
 

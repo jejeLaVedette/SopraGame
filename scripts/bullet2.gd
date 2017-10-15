@@ -20,8 +20,7 @@ func _ready():
 func _fixed_process(delta):
 	time_explode += delta
 	var direction = get_node(".").get_linear_velocity().x
-	if(Game.ultimate_p2 >= Game.ultimate_limit and first_contact):
-		Game.ultimate_running_p2 = true
+	if(Game.ultimate_running_p2 and first_contact):
 		if(time_explode > 0.48 and time_explode < 0.5):
 			for i in range(3):
 				if (direction < 0):
@@ -35,7 +34,7 @@ func _fixed_process(delta):
 				be.set_linear_velocity(Vector2(x, y).rotated(deg2rad(rotation+rotation_inverse)))
 				PS2D.body_add_collision_exception(be.get_rid(), get_rid())
 			get_node(".").queue_free()
-
+	PS2D.body_add_collision_exception(get_node("/root/stage/Ground/rooftop/Sideleft").get_rid(), get_rid())
 
 func _on_bullet_body_enter_shape( body_id, body, body_shape, local_shape ):
 	if (body.has_method("damage") and isAlreadyColliding == false):

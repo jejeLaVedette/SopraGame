@@ -224,6 +224,8 @@ transform/pos = Vector2( 707.132, 646.34 )
 
 [node name="Enemies" type="Node" parent="."]
 
+editor/display_folded = true
+
 [node name="Path2D" type="Path2D" parent="Enemies"]
 
 curve = SubResource( 4 )

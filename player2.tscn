@@ -492,6 +492,8 @@ _update_shape_index = 6
 
 [node name="NodeBot" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="raycast_body" type="RayCast2D" parent="NodeBot"]
 
 transform/pos = Vector2( -20, 0 )
@@ -507,8 +509,16 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 
+[node name="Ultimate_Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
 [node name="ui" type="CanvasLayer" parent="."]
 
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -528,5 +538,7 @@ action = "retry"
 visibility_mode = 1
 
 [connection signal="timeout" from="Reloading_Timer" to="." method="_on_Reloading_Timer_timeout"]
+
+[connection signal="timeout" from="Ultimate_Timer" to="." method="_on_Ultimate_Timer_timeout"]
 
 
