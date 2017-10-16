@@ -59,12 +59,12 @@ func _on_Multiplayer_released():
 
 func _on_Options_released():
 	_on_Options_mouse_enter()
-	get_node("Popup_Options").show()
+	get_node("AnimationPlayer").play("Popup_Options")
 
 
 func _on_Credits_released():
 	_on_Credits_mouse_enter()
-	get_node("Popup_Credits/AnimationPlayer").play("Popup_Credits")
+	get_node("AnimationPlayer").play("Popup_Credits")
 
 
 func _on_Exit_released():
@@ -107,17 +107,22 @@ func _on_Play_pressed():
 
 
 func _on_Popup_Options_pressed():
-	get_node("Popup_Options").hide()
+	get_node("AnimationPlayer").seek(0, true)
+	get_node("AnimationPlayer").play("Popdown_Options")
 
 
 func _on_Popup_Credits_pressed():
-	get_node("Popup_Credits/AnimationPlayer").seek(0, true)
+	get_node("AnimationPlayer").seek(0, true)
 	index_credits = 0
-	get_node("Popup_Credits/AnimationPlayer").play("Popdown_Credits")
+	get_node("AnimationPlayer").play("Popdown_Credits")
+
+
+func options():
+	get_node("AnimationPlayer").play("Options")
 
 
 func credits():
-	get_node("Popup_Credits/AnimationPlayer").play("Credits")
+	get_node("AnimationPlayer").play("Credits")
 	get_node("Popup_Credits/Label").set_text(credits[index_credits])
 	if (index_credits < (credits.size()-1)):
 		index_credits += 1
