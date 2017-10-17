@@ -7,6 +7,7 @@ var credits = ["Elfide\nDavid", "JeJeLaVedette\nJerome"]
 var index_credits = 0
 
 func _ready():
+	get_node("Version").set_text(Game.version)
 	set_process_input(true)
 	# Singleplayer par defaut
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Singleplayer").get_global_pos().y))
@@ -123,7 +124,7 @@ func options():
 
 func credits():
 	get_node("AnimationPlayer").play("Credits")
-	get_node("Popup_Credits/Label").set_text(credits[index_credits])
+	get_node("Popup_Credits/Credits").set_text(credits[index_credits])
 	if (index_credits < (credits.size()-1)):
 		index_credits += 1
 	else:

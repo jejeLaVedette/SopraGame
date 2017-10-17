@@ -56,9 +56,11 @@ var wait_frames
 var time_max = 100 # msec
 var current_scene
 
+# Version
+var version = "OfficeFight [0.1.0]"
 
 func _ready():
-	print("OfficeFight [0.1.0]")
+	print(Game.version)
 	randomize()
 	# Remplissage du tableau des objets à spawn par des temps aléatoires
 	for i in range(0, spawn_timer_array.size()):
