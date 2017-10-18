@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=1]
+[gd_scene load_steps=45 format=1]
 
 [ext_resource path="res://scripts/mainmenu.gd" type="Script" id=1]
 [ext_resource path="res://images/menu_background.png" type="Texture" id=2]
@@ -184,10 +184,12 @@ shader/shading_mode = 0
 shader_param/amplitude = 60.0
 shader_param/vitesse = 1.5
 
-[sub_resource type="CanvasItemShader" id=25]
+[sub_resource type="CanvasItemShader" id=42]
 
 _code = {
-"fragment": "COLOR.rgb = COLOR.gbr;",
+"fragment": "uniform float disable = 0;
+COLOR.rgb=COLOR.gbr;
+if (disable == 1) {COLOR.rgb = vec3(0.5);}",
 "fragment_ofs": 0,
 "light": "",
 "light_ofs": 0,
@@ -195,10 +197,11 @@ _code = {
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=26]
+[sub_resource type="CanvasItemMaterial" id=43]
 
-shader/shader = SubResource( 25 )
+shader/shader = SubResource( 42 )
 shader/shading_mode = 0
+shader_param/disable = 0.0
 
 [sub_resource type="StyleBoxEmpty" id=27]
 
@@ -220,22 +223,6 @@ content_margin/left = -1.0
 content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
-
-[sub_resource type="Animation" id=30]
-
-length = 0.8
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:visibility/opacity")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = {
-"times": FloatArray( 0, 0.4 ),
-"transitions": FloatArray( 1, 1 ),
-"update": 1,
-"values": [ 1.0, 0.5 ]
-}
 
 [sub_resource type="StyleBoxTexture" id=31]
 
@@ -391,6 +378,16 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Block_Button_Background:visibility/visible")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = {
+"times": FloatArray( 1 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=39]
 
@@ -487,6 +484,16 @@ tracks/8/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("Block_Button_Background:visibility/visible")
+tracks/9/interp = 1
+tracks/9/imported = false
+tracks/9/keys = {
+"times": FloatArray( 1 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=40]
 
@@ -544,6 +551,16 @@ tracks/4/keys = {
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Block_Button_Background:visibility/visible")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=41]
@@ -653,6 +670,16 @@ tracks/9/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("Block_Button_Background:visibility/visible")
+tracks/10/interp = 1
+tracks/10/imported = false
+tracks/10/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="MainMenu" type="Node2D"]
 
@@ -676,7 +703,7 @@ __meta__ = {
 
 [node name="Button_Background1" type="Sprite" parent="Background"]
 
-transform/pos = Vector2( 253, 223.172 )
+transform/pos = Vector2( 253, 225 )
 transform/scale = Vector2( 1.1, 1 )
 texture = ExtResource( 3 )
 __meta__ = {
@@ -746,6 +773,7 @@ alignment = 0
 
 [node name="Singleplayer" type="Button" parent="VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -764,12 +792,31 @@ toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
 shortcut = null
-text = "SINGLEPLAYER"
 flat = false
 align = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Singleplayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 857.0
+margin/bottom = 107.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "SINGLEPLAYER"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Multiplayer" type="Button" parent="VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -788,12 +835,31 @@ toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
 shortcut = null
-text = "MULTIPLAYER"
 flat = true
 align = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Multiplayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 857.0
+margin/bottom = 107.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "MULTIPLAYER"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Options" type="Button" parent="VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -812,12 +878,31 @@ toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
 shortcut = null
-text = "OPTIONS"
 flat = true
 align = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Options"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 857.0
+margin/bottom = 107.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "OPTIONS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Credits" type="Button" parent="VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -836,12 +921,31 @@ toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
 shortcut = null
-text = "CREDITS"
 flat = true
 align = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Credits"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 857.0
+margin/bottom = 107.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "CREDITS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Exit" type="Button" parent="VBoxContainer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -860,32 +964,27 @@ toggle_mode = false
 click_on_press = true
 enabled_focus_mode = 0
 shortcut = null
-text = "EXIT"
 flat = true
 align = 0
 
-[node name="Title" type="Label" parent="."]
+[node name="Label" type="Label" parent="VBoxContainer/Exit"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 21.0
-margin/right = 1024.0
-margin/bottom = 128.0
+margin/top = 0.0
+margin/right = 857.0
+margin/bottom = 107.0
 custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.2 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 10
-text = "OfficeFIght"
-align = 1
+text = "EXIT"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Selected" type="Label" parent="."]
 
@@ -923,8 +1022,7 @@ texture = ExtResource( 2 )
 [node name="Play" type="Button" parent="."]
 
 editor/display_folded = true
-visibility/opacity = 0.5
-material/material = SubResource( 26 )
+material/material = SubResource( 43 )
 rect/scale = Vector2( 0.4, 0.4 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -941,19 +1039,52 @@ custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "> PLAY"
 flat = true
 
-[node name="AnimationFight" type="AnimationPlayer" parent="Play"]
+[node name="Label" type="Label" parent="Play"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/AnimationFight = SubResource( 30 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "AnimationFight"
+material/use_parent = true
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 170.0
+margin/top = 28.0
+margin/right = 597.0
+margin/bottom = 135.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "> PLAY"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Block_Button_Background" type="Button" parent="."]
+
+visibility/visible = false
+visibility/opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1024.0
+margin/bottom = 640.0
+custom_styles/hover = SubResource( 31 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 34 )
+custom_styles/normal = SubResource( 35 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Popup_Credits" type="Button" parent="."]
 
@@ -1189,6 +1320,29 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
+
+[node name="Title" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 21.0
+margin/right = 1024.0
+margin/bottom = 128.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 10
+text = "OfficeFIght"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Version" type="Label" parent="."]
 

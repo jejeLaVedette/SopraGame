@@ -1,10 +1,10 @@
 extends Node2D
 
-
 var index = 0
 var button_separation = 86
 var credits = ["Elfide\nDavid", "JeJeLaVedette\nJerome"]
 var index_credits = 0
+
 
 func _ready():
 	get_node("Version").set_text(Game.version)
@@ -28,12 +28,16 @@ func _input(event):
 			var x = get_node("Selected").get_pos().x
 			var y = get_node("Selected").get_pos().y - button_separation
 			get_node("Selected").set_pos(Vector2(x,y))
+		if(index < 2):
+			get_node("Play").get_material().set_shader_param("disable", 0)
 	if (event.is_action("crouch_p2") and event.is_pressed()):
 		if(index != 4):
 			index += 1
 			var x = get_node("Selected").get_pos().x
 			var y = get_node("Selected").get_pos().y + button_separation
 			get_node("Selected").set_pos(Vector2(x,y))
+		if(index > 1):
+			get_node("Play").get_material().set_shader_param("disable", 1)
 
 	if ((event.is_action("shoot_p2") or event.is_action("retry")) and event.is_pressed()):
 		if (index == 0):
@@ -75,6 +79,7 @@ func _on_Exit_released():
 
 func _on_Singleplayer_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Singleplayer").get_global_pos().y))
+	get_node("Play").get_material().set_shader_param("disable", 0)
 	index = 0
 	Game.versus_player = false
 	Game.versus_bot = true
@@ -82,6 +87,7 @@ func _on_Singleplayer_mouse_enter():
 
 func _on_Multiplayer_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Multiplayer").get_global_pos().y))
+	get_node("Play").get_material().set_shader_param("disable", 0)
 	index = 1
 	Game.versus_player = true
 	Game.versus_bot = false
@@ -89,16 +95,19 @@ func _on_Multiplayer_mouse_enter():
 
 func _on_Options_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Options").get_global_pos().y))
+	get_node("Play").get_material().set_shader_param("disable", 1)
 	index = 2
 
 
 func _on_Credits_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Credits").get_global_pos().y))
+	get_node("Play").get_material().set_shader_param("disable", 1)
 	index = 3
 
 
 func _on_Exit_mouse_enter():
 	get_node("Selected").set_pos(Vector2(get_node("Selected").get_pos().x, get_node("VBoxContainer/Exit").get_global_pos().y))
+	get_node("Play").get_material().set_shader_param("disable", 1)
 	index = 4
 
 
