@@ -157,7 +157,7 @@ func _integrate_forces(s):
 					get_node("Ultimate_Timer").start()
 			else:
 				shoot_time = 0
-				if (get_node("RayCastKick").get_collider().has_method("damage")):
+				if (get_node("RayCastKick").get_collider().has_method("damage") and Game.health_p2 > 0):
 					get_node("RayCastKick").get_collider().damage(Game.bullet_damage)
 		else:
 			shoot_time += step
@@ -221,7 +221,10 @@ func _integrate_forces(s):
 					new_anim = "idle"
 			else:
 				if (shoot_time < MAX_SHOOT_POSE_TIME):
-					new_anim = "run_weapon"
+					if (! get_node("RayCastKick").is_colliding()):
+						new_anim = "run_weapon"
+					else:
+						new_anim = "kick"
 				else:
 					new_anim = "run"
 			# Check crouch
@@ -257,12 +260,18 @@ func _integrate_forces(s):
 
 			if (lv.y < 0):
 				if (shoot_time < MAX_SHOOT_POSE_TIME):
-					new_anim = "jumping_weapon"
+					if (! get_node("RayCastKick").is_colliding()):
+						new_anim = "jumping_weapon"
+					else:
+						new_anim = "kick"
 				else:
 					new_anim = "jumping"
 			else:
 				if (shoot_time < MAX_SHOOT_POSE_TIME):
-					new_anim = "falling_weapon"
+					if (! get_node("RayCastKick").is_colliding()):
+						new_anim = "falling_weapon"
+					else:
+						new_anim = "kick"
 				else:
 					new_anim = "falling"
 				vecteur_bullet_y = 15
