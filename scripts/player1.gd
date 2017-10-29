@@ -112,48 +112,53 @@ func _integrate_forces(s):
 		# A good idea when impementing characters of all kinds,
 		# compensates for physics imprecission, as well as human reaction delay.
 		if (shoot and not shooting and Game.round_started) || (Game.gatlinggun_p1):
-			if (Game.gatlinggun_p1):
-				crouch = null
-				shoot = null
-				GatlingGun_Tempo += 1
-				vecteur_bullet_x = 30
-				vecteur_bullet_y = 30
-				linear_velocity_x = 1000
-				linear_velocity_y = -(randi()%150+50)
+			if (! get_node("RayCastKick").is_colliding()):
+				if (Game.gatlinggun_p1):
+					crouch = null
+					shoot = null
+					GatlingGun_Tempo += 1
+					vecteur_bullet_x = 30
+					vecteur_bullet_y = 30
+					linear_velocity_x = 1000
+					linear_velocity_y = -(randi()%150+50)
+				else:
+					GatlingGun_Tempo = GatlingGun_Modulo
+					shoot_time = 0
+					vecteur_bullet_x = 15
+					linear_velocity_x = 800
+					linear_velocity_y = -100
+	
+				if (siding_left):
+					birot = 180
+				else:
+					birot = 0
+	
+				var modulo = GatlingGun_Tempo % GatlingGun_Modulo
+				if(modulo == 0 and not Game.fatality_ready and (Game.ammo_p1 > 0 or Game.gatlinggun_p1)):
+					if (not Game.gatlinggun_p1):
+						Game.ammo_p1 -= 1
+						var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p1+1)
+						get_node(node_ammo).hide()
+						if (Game.ammo_p1 == 0):
+							get_node("Reloading_Timer").start()
+							get_node(node_path_ammo).get_node("ReloadingPlayer1").show()
+					var bi = bullet.instance()
+					var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(direction, -6.0)
+					bi.set_pos(pos)
+					get_parent().add_child(bi)
+					bi.get_node("Sprite").set_rotd(birot)
+					bi.set_linear_velocity(Vector2(linear_velocity_x*direction, linear_velocity_y))
+				elif (Game.fatality_ready and not Game.fatality_executed and found_floor):
+					Game.fatality_executed = true
+					Game.fatality_running = true
+	
+				if(Game.ultimate_p1 >= Game.ultimate_limit and not Game.ultimate_running_p1):
+					Game.ultimate_running_p1 = true
+					get_node("Ultimate_Timer").start()
 			else:
-				GatlingGun_Tempo = GatlingGun_Modulo
 				shoot_time = 0
-				vecteur_bullet_x = 15
-				linear_velocity_x = 800
-				linear_velocity_y = -100
-
-			if (siding_left):
-				birot = 180
-			else:
-				birot = 0
-
-			var modulo = GatlingGun_Tempo % GatlingGun_Modulo
-			if(modulo == 0 and not Game.fatality_ready and (Game.ammo_p1 > 0 or Game.gatlinggun_p1)):
-				if (not Game.gatlinggun_p1):
-					Game.ammo_p1 -= 1
-					var node_ammo = node_path_ammo + "/AmmoSprite" + str(Game.ammo_p1+1)
-					get_node(node_ammo).hide()
-					if (Game.ammo_p1 == 0):
-						get_node("Reloading_Timer").start()
-						get_node(node_path_ammo).get_node("ReloadingPlayer1").show()
-				var bi = bullet.instance()
-				var pos = get_pos() + Vector2(vecteur_bullet_x*direction, vecteur_bullet_y) + get_node("bullet_shoot").get_pos()*Vector2(direction, -6.0)
-				bi.set_pos(pos)
-				get_parent().add_child(bi)
-				bi.get_node("Sprite").set_rotd(birot)
-				bi.set_linear_velocity(Vector2(linear_velocity_x*direction, linear_velocity_y))
-			elif (Game.fatality_ready and not Game.fatality_executed and found_floor):
-				Game.fatality_executed = true
-				Game.fatality_running = true
-
-			if(Game.ultimate_p1 >= Game.ultimate_limit and not Game.ultimate_running_p1):
-				Game.ultimate_running_p1 = true
-				get_node("Ultimate_Timer").start()
+				if (get_node("RayCastKick").get_collider().has_method("damage")):
+					get_node("RayCastKick").get_collider().damage(Game.bullet_damage)
 		else:
 			shoot_time += step
 
@@ -208,7 +213,10 @@ func _integrate_forces(s):
 				new_anim = "jumping"
 			elif (abs(lv.x) < 0.1):
 				if (shoot_time < MAX_SHOOT_POSE_TIME):
-					new_anim = "idle_weapon"
+					if (! get_node("RayCastKick").is_colliding()):
+						new_anim = "idle_weapon"
+					else:
+						new_anim = "kick"
 				else:
 					new_anim = "idle"
 			else:
@@ -262,6 +270,8 @@ func _integrate_forces(s):
 		# Update siding
 		if (new_siding_left != siding_left):
 			get_node("AnimatedSprite").set_scale(Vector2(0.5*direction, 0.5))
+			get_node("RayCastKick").set_pos(Vector2(get_node("RayCastKick").get_pos().x*(-1), get_node("RayCastKick").get_pos().y))
+			get_node("RayCastKick").set_cast_to(Vector2(get_node("RayCastKick").get_cast_to().x*(-1), get_node("RayCastKick").get_cast_to().y))
 			siding_left = new_siding_left
 
 		if (Game.gatlinggun_p1):
