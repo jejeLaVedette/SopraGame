@@ -156,9 +156,10 @@ func _integrate_forces(s):
 					Game.ultimate_running_p1 = true
 					get_node("Ultimate_Timer").start()
 			else:
-				shoot_time = 0
-				if (get_node("RayCastKick").get_collider().has_method("damage") and Game.health_p2 > 0):
-					get_node("RayCastKick").get_collider().damage(Game.bullet_damage)
+				if (!get_node("anim").get_current_animation() == "kick"):
+					shoot_time = 0
+					if (get_node("RayCastKick").get_collider().has_method("damage") and Game.health_p2 > 0):
+						get_node("RayCastKick").get_collider().damage(Game.bullet_damage)
 		else:
 			shoot_time += step
 
